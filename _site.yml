@@ -1,0 +1,17 @@
+name: "Phylogenetics"
+output_dir: '.'
+# let's you build your sites navigation
+output:
+  #prettydoc::html_pretty:
+  html_document:
+    theme: paper # other nice themes: cosmo, simplex, paper, spacelab, lumen, yeti
+    lib_dir: site_libs
+    self_contained: no
+navbar:
+  left:
+    - text: "Phylogenetics"
+      href: index.html
+    - text: "Schedule"
+      href: schedule.html
+    - text: "Projects"
+      href: projects.html

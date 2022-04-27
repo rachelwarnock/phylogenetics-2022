@@ -1,0 +1,12 @@
+---
+title: "Projects"
+output: html_document
+---
+
+\
+
+# Datasets
+
+Here we will posts ideas and links to empirical datasets that you can use for your own project. 
+
+You're also welcome to use your own data or any other datasets that catch you eye in the literature.
