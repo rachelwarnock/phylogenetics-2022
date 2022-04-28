@@ -32,11 +32,11 @@ Course material will be uploaded here throughout the semester!
 library(kableExtra)
 #urls <- c("slides/day-01.html",NA,NA,"slides/day-01.html#26",NA,NA,"slides/revisiting-statistics.pdf")
 
-urls <- c(NA,NA)
+urls <- c("exercise-01.html",NA)
 
-dt <- data.frame(schedule = c("Course introduction"),
-                 topics = c("tree thinking, parsimony, statistical consistency"))
-#dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt <- data.frame(schedule = c("Slides", "Exercise"),
+                 topics = c("tree thinking, parsimony, statistical consistency", "tree building using parsimony"))
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[1], ")")
 #dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
 #dt$schedule[7] <- paste0("[", dt$schedule[7], "](", urls[7], ")")
 kbl(dt) %>%
