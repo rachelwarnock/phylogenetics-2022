@@ -30,7 +30,6 @@ Course material will be uploaded here throughout the semester!
 
 ```{r, echo = FALSE}
 library(kableExtra)
-#urls <- c("slides/day-01.html",NA,NA,"slides/day-01.html#26",NA,NA,"slides/revisiting-statistics.pdf")
 
 urls <- c("slides/class01.pdf","exercise-01.html")
 
@@ -38,8 +37,70 @@ dt <- data.frame(schedule = c("Slides", "Exercise"),
                  topics = c("tree thinking, parsimony, statistical consistency", "tree building using parsimony"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-#dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
-#dt$schedule[7] <- paste0("[", dt$schedule[7], "](", urls[7], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+# Week 2 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("","exercise-02.html","","exercise-03.html")
+
+dt <- data.frame(schedule = c("Slides 1", "Exercise 1","Slides 2", "Exercise 2"),
+                 topics = c("maximum likelihood, substitution models", 
+                            "tree building using maximum likelihood",
+                            "Introduction to RevBayes",
+                            "the Rev langauge"))
+#dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+#dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+#Further reading:
+#* RevBayes
+#* Graphical modelling
+
+```
+
+Don't forget next weeks exercises!!
+
+# Week 3 materials
+
+**No class**
+
+This week Laura and Rachel are off on adventure so there will be no class. During this time we'd like you to watch the following 4 video lectures by [**Paul Lewis**](https://plewis.github.io/) and answer a set of questions we have prepared. Paul Lewis has made numerous important contributions to the field of statistical phylogenetics, as well as producing excellent tools and materials for learning about phylogenetic theory.
+The videos we'll use were developed as part of the [phyloseminar](http://phyloseminar.org) series. 
+
+The videos will take about 3.5 hours to watch. Read the questions before you watch each video and write down your answers -- we'll go over these in week 4. Remember **the goal is not to understand everything**! 
+Also make note of any questions you have after watching these and we'll try to answer them.
+
+**Questions will be uploaded 06.05.22**
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("https://www.youtube.com/watch?v=1r4z0YJq580", "https://www.youtube.com/watch?v=UsLeY0wZr4Y", "https://www.youtube.com/watch?v=4PWlnNsfz90&t=45s", "https://www.youtube.com/watch?v=TLtOS--YwkU",
+          "")
+
+dt <- data.frame(videos = c("Part 1", "Part 2", "Part 3a", "Part 3b"),
+                 topics = c("trees and likelihood", "trees likelihood and rate heterogenity", "Intro Bayesian phylogenetics", "Intro Bayesian phylogenetics"),
+                 questions = c("", "", "", ""))
+
+dt$videos[1] <- paste0("[", dt$videos[1], "](", urls[1], ")")
+#dt$questions[1] <- paste0("[", dt$questions[1], "](", urls[5], ")")
+dt$videos[2] <- paste0("[", dt$videos[2], "](", urls[2], ")")
+
+dt$videos[3] <- paste0("[", dt$videos[3], "](", urls[3], ")")
+
+dt$videos[4] <- paste0("[", dt$videos[4], "](", urls[4], ")")
+
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 
@@ -48,6 +109,8 @@ kbl(dt) %>%
 #* [Learning statistics with R: Chapter 1 and Chapter 11](https://learningstatisticswithr.com/book/why-do-we-learn-statistics.html)
 #* [tinystats.github.io/teacups-giraffes-and-statistics](https://tinystats.github.io/teacups-giraffes-and-statistics/)
 ```
+
+
 
 
 

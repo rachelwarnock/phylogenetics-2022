@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>exercise-02.knit</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Phylogenetics</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<p><br />
+</p>
+<div id="tree-building-using-maximum-likelihood" class="section level1">
+<h1>Tree building using maximum likelihood</h1>
+<p>In this exercise we’ll estimate trees using maximum likelihood and look at the impact of different substitution models.</p>
+<p>For this we’ll use the <code>phangorn</code> package again and a data set of primates sequences. The sequences are a short fragment of the mitochondrial genome. You can download the data from <a href="data/primates-data.nex">here</a>.</p>
+<p>As before start by opening the file and converting the data into the right format for <code>phangorn</code>.</p>
+<pre class="r"><code># read in the character matrix in ape 
+dat = ape::read.nexus.data(file = &quot;data/primates-data.nex&quot;)
+
+# &amp; convert to phanghorn object
+dat = phangorn::phyDat(dat, type = &quot;DNA&quot;)</code></pre>
+<p>As before we need to generate a starting tree using neighbour joining.</p>
+<pre class="r"><code># create a neighbour joining starting tree
+dm = phangorn::dist.hamming(dat)
+starting_tree = phangorn::NJ(dm)</code></pre>
+<p><em>Side note: for those interested from last time, for two sequences the <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a> is simply the proportion of sites at which they differ. It’s therefore one of the simplest ways to approximate evolutionary distances and generate a starting tree. But remember this approach won’t account for convergent evolution or homoplasy.</em></p>
+<p>The <code>phangorn</code> function <code>pml</code> (pml = phylogenetic maximum likelihood) calculates the likelihood of a tree given the data under a model specified by the user. We’ll start with the simplest model of sequence evolution, the Jukes-Cantor (JC) model.</p>
+<pre class="r"><code># calculate the likelihood of the tree given the data
+fitJC = phangorn::pml(starting_tree, data=dat, model = &quot;JC&quot;)
+fitJC</code></pre>
+<blockquote>
+<p>What do you notice about the base frequencies?</p>
+</blockquote>
+<p>Then we’ll use the function <code>optim.pml</code> to find the tree with the best likelihood score under the Jukes-Cantor model. This function takes the tree and the starting values obtaining using the <code>pml</code> function and explores the tree space by switching around the branches. The argument <code>optNni = TRUE</code> tells the function to optimize the tree topology (i.e. find the tree with the highest likelihood), as well as the branch lengths and the model parameters. The parameters of the JC model are fixed, so the model parameters won’t actually change in this case.</p>
+<pre class="r"><code># estimate the tree using ML
+fitJC_opt = phangorn::optim.pml(fitJC, model = &quot;JC&quot;, optNni = TRUE)
+fitJC_opt</code></pre>
+<p>As the ML algorithm proceeds it outputs information about the progress. You can see how the likelihood changes as the tree topology and the branch lengths (edge weights) are updated. You should also see that the likelihood is improving, i.e. getting larger.</p>
+<p>The function outputs a list with a bunch of values that might be of interest, including the tree.</p>
+<pre class="r"><code>fitJC_opt$tree</code></pre>
+<p>Next we’ll do the same with the GTR substitution model.</p>
+<pre class="r"><code>fitGTR = phangorn::pml(starting_tree, data=dat, model = &quot;GTR&quot;)
+fitGTR_opt = phangorn::optim.pml(fitGTR, model = &quot;GTR&quot;, optNni = TRUE)
+fitGTR_opt</code></pre>
+<blockquote>
+<p>What differences do you notice in the output?</p>
+</blockquote>
+<p>Let’s look at the trees. Remember that by default trees generated based on a substitution model will be unrooted. First, let’s root the tree using the Lemur.</p>
+<pre class="r"><code># identify the outgroup
+outgroup = &quot;Lemur&quot;
+
+# root the tree
+JC_tree_rooted = ape::root(fitJC_opt$tree, outgroup = outgroup, resolve.root = TRUE)
+GTR_tree_rooted = ape::root(fitGTR_opt$tree, outgroup = outgroup, resolve.root = TRUE)
+
+# plot the trees
+plot(JC_tree_rooted)
+plot(GTR_tree_rooted)</code></pre>
+<blockquote>
+<p>Do you notice any differences in the topology or branch lengths? Which one is correct?</p>
+</blockquote>
+<p>Since we have the maximum likelihood estimate under both models, we can use a straightforward model testing to identify the best fitting model.</p>
+<pre class="r"><code>AIC(fitJC_opt, fitGTR_opt)</code></pre>
+<blockquote>
+<p>How would you interpret these results? <a href="https://www.scribbr.com/statistics/akaike-information-criterion/">Hint</a></p>
+</blockquote>
+<div id="output-a-tree-from-r" class="section level2">
+<h2>Output a tree from R</h2>
+<p>To output a tree from R and save it we can use the <code>ape</code> function <code>write.tree</code>. This outputs the tree in Newick format.</p>
+<pre class="r"><code># write to screen
+ape::write.tree(tree)</code></pre>
+<pre class="r"><code># write to file
+ape::write.tree(tree, file = &quot;my-tree.nex&quot;)</code></pre>
+</div>
+<div id="other-resources-for-buidling-trees-using-maximum-likelihood" class="section level2">
+<h2>Other resources for buidling trees using maximum likelihood</h2>
+<p><code>phangorn</code> is a very useful package but you won’t often see published trees generated using this package. There are other more specialized software packages for tree building using maximum likelihood. Some of these feature additional substitution models or have been optimized for the analysis of large data sets. The analysis in this exercise is very fast because our data set has a small number of species and characters (only 150) – most DNA data sets are <em>much</em> larger than this. Two currently alternative likelihood based programs for tree building are <a href="https://cme.h-its.org/exelixis/web/software/raxml/">RAxML</a> and <a href="http://www.iqtree.org/">IQTREE</a>.</p>
+<p>A complete script for this exercise can be downloaded <a href="scripts/ML_example.R">here</a>.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -32,7 +32,7 @@ Download the character data from [here](data/Frankie-data.nex). Nexus is a commo
 Next we'll read the data and convert it into the format used by phangorn.
 
 ```{r data, eval=TRUE}
-# read in a character matrix in ape 
+# read in the character matrix in ape 
 dat = ape::read.nexus.data(file = "data/Frankie-data.nex")
 
 # identify character states
@@ -46,7 +46,7 @@ Next we need to provide `phangorn` with a starting tree.
 We can do this using an approach called **neighbour-joining**. This simply calculates the evolutionary distance between the taxa in your matrix (using the `dist.hamming` function) and then groups taxa together based on their relative distances (using the `NJ` function).
 
 ```{r starting, eval=TRUE}
-# create neighbour joining starting tree
+# create a neighbour joining starting tree
 dm = phangorn::dist.hamming(dat)
 tree = phangorn::NJ(dm)
 ```
@@ -61,7 +61,7 @@ mp = phangorn::optim.parsimony(tree, dat)
 > How would you interpret the number output by this function?
 
 Finally, we'll can specify an outgroup to root the tree. 
-We'll use the fungus Laccaria because we know this is more distantly related to all other taxa in our tree than they are to eachother.
+We'll use the fungus *Laccaria* because we know this is more distantly related to all other taxa in our tree than they are to eachother.
 
 ```{r plot, eval=TRUE}
 # identify the outgroup

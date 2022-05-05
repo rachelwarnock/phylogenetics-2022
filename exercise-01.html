@@ -277,7 +277,7 @@ $(document).ready(function () {
 install.packages(&quot;phangorn&quot;)</code></pre>
 <p><code>ape</code> is a very widely used phyologenetics package that contains (among many others) functions for reading, writing and plotting phylogenetic trees and data. <code>phangorn</code> is a package that contains functions for straightforward tree building.</p>
 <p>Download the character data from <a href="data/Frankie-data.nex">here</a>. Nexus is a common format used to store phylogenetic character data. Next we’ll read the data and convert it into the format used by phangorn.</p>
-<pre class="r"><code># read in a character matrix in ape 
+<pre class="r"><code># read in the character matrix in ape 
 dat = ape::read.nexus.data(file = &quot;data/Frankie-data.nex&quot;)
 
 # identify character states
@@ -286,7 +286,7 @@ chars = unique(unlist(unique(dat)))
 # &amp; convert to phanghorn object
 dat = phangorn::phyDat(dat, type = &quot;USER&quot;, levels = chars)</code></pre>
 <p>Next we need to provide <code>phangorn</code> with a starting tree. We can do this using an approach called <strong>neighbour-joining</strong>. This simply calculates the evolutionary distance between the taxa in your matrix (using the <code>dist.hamming</code> function) and then groups taxa together based on their relative distances (using the <code>NJ</code> function).</p>
-<pre class="r"><code># create neighbour joining starting tree
+<pre class="r"><code># create a neighbour joining starting tree
 dm = phangorn::dist.hamming(dat)
 tree = phangorn::NJ(dm)</code></pre>
 <p>Then we’ll use the <code>phangorn</code> function <code>optim.parsimony</code> to find the most parsimonious tree.</p>
@@ -296,7 +296,7 @@ mp = phangorn::optim.parsimony(tree, dat)</code></pre>
 <blockquote>
 <p>How would you interpret the number output by this function?</p>
 </blockquote>
-<p>Finally, we’ll can specify an outgroup to root the tree. We’ll use the fungus Laccaria because we know this is more distantly related to all other taxa in our tree than they are to eachother.</p>
+<p>Finally, we’ll can specify an outgroup to root the tree. We’ll use the fungus <em>Laccaria</em> because we know this is more distantly related to all other taxa in our tree than they are to eachother.</p>
 <pre class="r"><code># identify the outgroup
 outgroup = &quot;Laccaria&quot;
 

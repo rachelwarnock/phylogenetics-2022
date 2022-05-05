@@ -1,0 +1,33 @@
+---
+title: ''
+output: html_document
+---
+
+## Questions on (Paul Lewis phyloseminar) part 1 (rename)
+
+> something about unconstrained trees?
+
+> How would you describe the terms **conditional probability** and **likelihood** in your own words?
+
+> Why do we calculate likelihoods on a log scale?
+
+> Why do we need to take into account the frequency at which we observe each character state? e.g. the frequency of A, T, G, or C in the case of DNA data.
+Use the [Transition probability tool](https://plewis.github.io/applets/jc-transition-probabilities/) to explore this further. 
+
+> Can you describe the gist of the pruning algorithm?
+
+(I need to revise these too!)
+(things I need to describe in week 2 -)
+(the concept of having to calculate the probability of the observed data)
+(state frequencies)
+(substitution models, JC)
+(expected substitutions per site, equilibrium frequencies)
+(the molecular clock?)
+(expected subs. per site)
+(ATGC are different, codons)
+
+## Notes
+- we won't really encountered multifurcating or unresolved trees in this course. This is because... they're not output by any programs really
+- summary trees (splits)
+- newick strings
+- pruning algorithm:  https://lukejharmon.github.io/pcm/chapter8_fitdiscrete/

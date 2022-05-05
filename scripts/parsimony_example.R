@@ -7,7 +7,7 @@ chars = unique(unlist(unique(dat)))
 # & convert to phanghorn object
 dat = phangorn::phyDat(dat, type = "USER", levels = chars)
 
-# create neighbour joining starting tree
+# create a neighbour joining starting tree
 dm = phangorn::dist.hamming(dat)
 tree = phangorn::NJ(dm)
 
