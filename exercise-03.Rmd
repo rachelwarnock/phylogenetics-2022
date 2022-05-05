@@ -66,7 +66,7 @@ b := 3 * a
 
 > Explore what happens when you change the value of `a` and experiment with different formulas / operators.
 
-## Stocastic variables
+## Stochastic variables
 
 Stochastic variables are described with respect to some underlying probability distribution and are specified using the tilde `~` assignment. For example, we might want to say that variable `c` is a normally distributed random variable.
 
@@ -111,9 +111,9 @@ Last thing for today - let's compare the Q matrix and the transition probabiliti
 Q <- fnJC(2)
 Q
 # calculate the transition probabilities after 0.1 units of time
-Q.getTranisitionProbabilities(0.1)
+Q.getTransitionProbabilities(0.1)
 # calculate the transition probabilities after 0.1 units of time
-Q.getTranisitionProbabilities(100) # 0.1 units
+Q.getTransitionProbabilities(100) # 0.1 units
 ```
 
 ### Further reading

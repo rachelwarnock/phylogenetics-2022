@@ -48,17 +48,15 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("","exercise-02.html","","exercise-03.html")
+urls <- c("slides/class02.pdf","exercise-02.html","exercise-03.html")
 
-dt <- data.frame(schedule = c("Slides 1", "Exercise 1","Slides 2", "Exercise 2"),
+dt <- data.frame(schedule = c("Slides", "Exercise 1", "Exercise 2"),
                  topics = c("maximum likelihood, substitution models", 
                             "tree building using maximum likelihood",
-                            "Introduction to RevBayes",
-                            "the Rev langauge"))
-#dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+                            "Introduction to RevBayes and the Rev language"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-#dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
-dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")

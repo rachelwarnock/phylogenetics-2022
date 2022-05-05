@@ -35,6 +35,9 @@ plot(GTR_tree_rooted)
 starting_tree_rooted = ape::root(starting_tree, outgroup = outgroup, resolve.root = TRUE)
 plot(starting_tree_rooted)
 
+# compare the models using the AIC
+AIC(fitJC_opt, fitGTR_opt)
+
 # write to screen
 ape::write.tree(tree)
 # write to file
