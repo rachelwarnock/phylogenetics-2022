@@ -3,31 +3,22 @@ title: ''
 output: html_document
 ---
 
-## Questions on (Paul Lewis phyloseminar) part 1 (rename)
+## Questions on Paul Lewis phylogenetics primer part 1 -- Trees and likelihood
 
-> something about unconstrained trees?
 
-> How would you describe the terms **conditional probability** and **likelihood** in your own words?
+> 1. In your own words, how would you describe the terms **conditional probability** and **likelihood**?
 
-> Why do we calculate likelihoods on a log scale?
+> 2. Why do we calculate likelihoods on a log scale?
 
-> Why do we need to take into account the frequency at which we observe each character state? e.g. the frequency of A, T, G, or C in the case of DNA data.
-Use the [Transition probability tool](https://plewis.github.io/applets/jc-transition-probabilities/) to explore this further. 
+> 3. How does the probability of transitioning from one character state to another (e.g. from A to T) change over time? You can use the [Transition probability tool](https://plewis.github.io/applets/jc-transition-probabilities/) to explore this further. 
 
-> Can you describe the gist of the pruning algorithm?
-
-(I need to revise these too!)
-(things I need to describe in week 2 -)
-(the concept of having to calculate the probability of the observed data)
-(state frequencies)
-(substitution models, JC)
-(expected substitutions per site, equilibrium frequencies)
-(the molecular clock?)
-(expected subs. per site)
-(ATGC are different, codons)
+> 4. **Felsenstein’s pruning algorithm** 
+    a. What do we need this for? / What do we calculate using this?
+    b. Can you describe the gist of Felsenstein’s pruning algorithm? (advanced)
 
 ## Notes
-- we won't really encountered multifurcating or unresolved trees in this course. This is because... they're not output by any programs really
-- summary trees (splits)
-- newick strings
-- pruning algorithm:  https://lukejharmon.github.io/pcm/chapter8_fitdiscrete/
+
+*For a good description of Felsenstein's pruning algorithm check out [Section 8.8](https://lukejharmon.github.io/pcm/chapter8_fitdiscrete/#section-8.8-appendix-felsensteins-pruning-algorithm) of this great online book [Phylogenetic Comparative Methods](https://lukejharmon.github.io/pcm/) by Luke Harmon.*
+
+*We won't really encounter multifurcating trees in the rest of this course. This is because they're not directly output by any of the software we'll use. However, we'll talk about how to represent uncertainty in the trees we generate.*
+
