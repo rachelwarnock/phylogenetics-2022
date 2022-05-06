@@ -1,0 +1,27 @@
+---
+title: ''
+output: html_document
+---
+
+## Questions on Paul Lewis phylogenetics primer part 1 -- Substitution models
+
+**Note: we won’t revisit codon models during this course so (if you want) you can skip the last 15 minutes of this lecture. These models are used rarely in the context of paleobiology. But if you have the time, they are cool!**
+
+
+
+> 1. What are the assumptions of the following substitution models? Consider the rate of change between character states and the state frequencies.
+  a. JC
+  b. K80
+  c. F81
+  d. HKY
+  e. GTR
+
+
+> 2. Can you briefly describe the following three approaches that account for rate variation among characters? Don’t worry about the details, just try to provide the general idea.
+  a. Site specific rates
+  b. Invariant sites model
+  c. Discrete Gamma model
+
+
+> 3. For a given substitution model, what do the values in the Q matrix and the P matrix represent?
+
