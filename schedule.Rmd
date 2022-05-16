@@ -85,11 +85,11 @@ Also make note of any questions you have after watching these and we'll try to a
 library(kableExtra)
 
 urls <- c("https://www.youtube.com/watch?v=1r4z0YJq580", "https://www.youtube.com/watch?v=UsLeY0wZr4Y", "https://www.youtube.com/watch?v=4PWlnNsfz90&t=45s", "https://www.youtube.com/watch?v=TLtOS--YwkU",
-          "questions-01.html", "questions-02.html", "questions-03.html")
+          "questions-01.html", "questions-02.html", "questions-03.html","questions-04.html")
 
 dt <- data.frame(videos = c("Part 1", "Part 2", "Part 3a", "Part 3b"),
                  topics = c("trees and likelihood", "trees likelihood and rate heterogenity", "Intro Bayesian phylogenetics", "Intro Bayesian phylogenetics"),
-                 questions = c("Questions 1", "Questions 2", "Questions 3", ""))
+                 questions = c("Questions 1", "Questions 2", "Questions 3", "Questions 4"))
 
 dt$videos[1] <- paste0("[", dt$videos[1], "](", urls[1], ")")
 dt$questions[1] <- paste0("[", dt$questions[1], "](", urls[5], ")")
@@ -98,6 +98,7 @@ dt$questions[2] <- paste0("[", dt$questions[2], "](", urls[6], ")")
 dt$videos[3] <- paste0("[", dt$videos[3], "](", urls[3], ")")
 dt$questions[3] <- paste0("[", dt$questions[3], "](", urls[7], ")")
 dt$videos[4] <- paste0("[", dt$videos[4], "](", urls[4], ")")
+dt$questions[4] <- paste0("[", dt$questions[4], "](", urls[8], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
@@ -108,6 +109,23 @@ kbl(dt) %>%
 #* [tinystats.github.io/teacups-giraffes-and-statistics](https://tinystats.github.io/teacups-giraffes-and-statistics/)
 ```
 
+# Week 4 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/class04.pdf","exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Follow up on Paul Lewis lectures", 
+                            "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
 
 
 

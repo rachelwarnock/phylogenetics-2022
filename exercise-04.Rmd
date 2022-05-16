@@ -1,0 +1,45 @@
+---
+title: ''
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\
+
+# Bayesian tree inferences using RevBayes
+
+In this exercise we'll estimate of a tree of XXX, you can download this XXX
+
+## How to organise your code
+
+RevStudio
+
+I prefer to edit my scripts using a text editor. You can use ... 
+
+## Read in the data and define helper variables
+
+First we need to read in the data.
+
+```{r calculator, eval=FALSE}
+4 + 10
+```
+
+```{r hidden_notes, eval=FALSE, echo=FALSE}
+
+```
+
+## The uniform tree prior
+
+## The Jukes-Cantor substitution model
+
+## MCMC settings
+
+## The Jukes-Cantor substitution model
+
+### Further reading
+
+Here's a more [comprehensive intro](https://revbayes.github.io/tutorials/intro/rev) to the Rev language.
+

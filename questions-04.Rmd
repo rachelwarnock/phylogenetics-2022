@@ -1,0 +1,27 @@
+---
+title: ''
+output: html_document
+---
+
+## Questions on Paul Lewis phylogenetics primer part 3b -- Introduction to Bayesian statistics
+
+The content of this talk is fairly advanced but some of it will come in handy for subsequent parts of the course.
+
+> 1. How are steps chosen in an MCMC analysis?
+
+> 2. Give an example of a parameter you would estimate under each of the following prior distributions and try to state why?
+  a. Gamma distribution
+  b. Lognormal distribution
+  c. Beta distribution
+  d. Dirichlet distribution
+
+> 3. Why do we sometimes need to calculate the marginal likelihood?
+
+> 4. What is the difference between a hierarchical model and a non-hierarchical model?
+
+> 5. Briefly explain how stepping stones can be used to calculate the marginal likelihood (advanced).
+
+## Notes
+
+*Congratulations you've reached the end of some pretty advanced talks! Don't worry if you didn't understand everything, we'll go over everything together in class!*
+

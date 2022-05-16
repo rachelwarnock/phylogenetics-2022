@@ -19,5 +19,5 @@ This is probably the most important of the four parts. The most important points
 
 ## Notes
 
-*In this talk, Paul says that most times you don’t need to worry about the proposal distributions because available software experiments with the proposals at the beginning of your MCMC run (this process is called tuning) and tries to optimize the best proposal size for your model/data. This is true, however, in practice, as the data sets become larger and the models become more complex, we sometimes need to pay attention to these, as convergence can be challenging.*
+*In this talk, Paul says that most times you don’t need to worry about the proposal distributions because available software experiments with the proposals at the beginning of your MCMC run (this process is called tuning) and tries to optimize the best proposal size for your model/data. This is true, however, in practice, as data sets become larger and models become more complex, we sometimes need to pay attention to these, as convergence can be challenging.*
 
