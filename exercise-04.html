@@ -307,6 +307,7 @@ monitors = VectorMonitors()</code></pre>
 <li>and we need to specify a substitution model</li>
 </ol>
 <p>First we’ll set up the uniform tree prior in <code>main.Rev</code>. The following specifies a uniform prior on the <strong>tree topology</strong> - this means that all possible tree configurations have the <em>same probability</em> under the prior. The tree is a <a href="exercise-03.html#stochastic">stochastic</a> variable.</p>
+<pre class="r"><code>topology ~ dnUniformTopology(taxa)</code></pre>
 <p>For every parameter we want to sample during MCMC we need to define one or more appropriate moves for that parameter. The function <code>moves.append()</code> adds specific moves to our <code>moves</code> vector.</p>
 <pre class="r"><code>moves.append( mvNNI(topology, weight = num_taxa) ) # nearest neighbour interchange
 moves.append( mvSPR(topology, weight = num_taxa/10.0) ) # subtree pruning and regrafting</code></pre>

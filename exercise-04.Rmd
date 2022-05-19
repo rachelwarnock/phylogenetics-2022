@@ -74,7 +74,7 @@ out_group <- clade("Galeopterus_variegatus") # define the outgroup so we can roo
 topology ~ dnUniformTopology(taxa, outgroup = out_group)
 ```
 
-```{r tree_prior2, eval=FALSE, echo=FALSE}
+```{r tree_prior2, eval=FALSE}
 topology ~ dnUniformTopology(taxa)
 ```
 
