@@ -26,7 +26,7 @@ Once you have it up and running, see if you can produce any sensible output usin
 #Graphical models
 ```
 
-## Constant variables
+## Constant variables {#constant}
 
 Constant variables have a fixed value and are specified using the left arrow `<-` assignment.
 
@@ -40,7 +40,7 @@ Note that in R the `=` and `<-` assignment can almost always be used interchange
 
 To clear the value of a variable you can use `clear(a)`.
 
-## Deterministic variables
+## Deterministic variables {#deterministic}
 
 Deterministic variables are linked to the value of other variables and specified using the colon-equal `:=` assignment.
 
@@ -66,7 +66,7 @@ b := 3 * a
 
 > Explore what happens when you change the value of `a` and experiment with different formulas / operators.
 
-## Stochastic variables
+## Stochastic variables {#stochastic}
 
 Stochastic variables are described with respect to some underlying probability distribution and are specified using the tilde `~` assignment. For example, we might want to say that variable `c` is a normally distributed random variable.
 

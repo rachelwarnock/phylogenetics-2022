@@ -270,32 +270,146 @@ $(document).ready(function () {
 </p>
 <div id="bayesian-tree-inferences-using-revbayes" class="section level1">
 <h1>Bayesian tree inferences using RevBayes</h1>
-<p>In this exercise we’ll estimate of a tree of XXX, you can download this XXX</p>
+<p>In this exercise we’ll estimate of a tree of primates using a slightly longer alignment than the one we used before - you can download this from <a href="data/primates_and_galeopterus_cytb.nex">here</a>.</p>
+<p>We’ll use a straightforward Bayesian approach and a standard set of substitutions models.</p>
+<p>Before beginning, you might want to recap the distinction between <a href="exercise-03.html#constant">constant</a>, <a href="exercise-03.html#stochastic">stochastic</a> and <a href="exercise-03.html#deterministic">deterministic</a> variables.</p>
+<p><strong>Other software</strong></p>
+<p>For this tutorial you’ll also need to install the software <a href="http://beast.community/tracer">Tracer</a> and <a href="https://github.com/rambaut/figtree/releases">FigTree</a>.</p>
 <div id="how-to-organise-your-code" class="section level2">
 <h2>How to organise your code</h2>
-<p>RevStudio</p>
-<p>I prefer to edit my scripts using a text editor. You can use …</p>
+<p>If you want you can use RevStudio, which is similar to RStudio but designed for RevBayes.</p>
+<p>I personally prefer to edit scripts using a text editor and save my files in sub-directories <span class="math inline">\(--\)</span> usually I have one for data, one for scripts and one for output. This can be useful for constructing more complex and hierarchical models in a modular fashion. You can then simply call your main script using the command <code>source()</code>, in the same way as R. We’ll see an example of this below.</p>
+<p>For this exercise you can create a folder called <code>exercise 4</code> or something. The create two sub-directories, <code>data</code> for your nexus file and another <code>scripts</code> for your code. For this tutorial we’ll create t least three scripts:</p>
+<ol style="list-style-type: decimal">
+<li><code>main.Rev</code> for reading the data, setting up the the tree model and MCMC settings</li>
+<li><code>JC.Rev</code> and <code>GTR.Rev</code> for alternative subsitution models. Edit the scripts in a text editor of your choice.</li>
+</ol>
 </div>
 <div id="read-in-the-data-and-define-helper-variables" class="section level2">
 <h2>Read in the data and define helper variables</h2>
-<p>First we need to read in the data.</p>
-<pre class="r"><code>4 + 10</code></pre>
+<p>Start with your <code>main.Rev</code> script. First we need to read in the data.</p>
+<pre class="r"><code>data &lt;- readDiscreteCharacterData(&quot;data/primates-data.nex&quot;)
+data</code></pre>
+<p>Next we need to define some varibles that will come in handy later for setting up our model.</p>
+<pre class="r"><code>num_taxa &lt;- data.ntaxa() # number of taxa
+num_branches &lt;- 2 * num_taxa - 3 # number of branches in an unrooted tree
+taxa &lt;- data.taxa() # list of taxon names</code></pre>
+<p>Note these are <a href="exercise-03.html#constant">constant</a> variables.</p>
+<p>Next we’ll define a set of variables for setting up our MCMC. Note that we use <code>=</code> instead of <code>&lt;-</code> because these variables are not part of the model. The <code>moves</code> vector is for storing our MCMC moves and the <code>monitors</code> vector is for storing the recording output.</p>
+<pre class="r"><code>moves    = VectorMoves()
+monitors = VectorMonitors()</code></pre>
 </div>
 <div id="the-uniform-tree-prior" class="section level2">
 <h2>The uniform tree prior</h2>
+<p>For setting up regular Bayesian tree inference we need to specificy two model components:</p>
+<ol style="list-style-type: decimal">
+<li>we need a prior the topology and branch lengths</li>
+<li>and we need to specify a substitution model</li>
+</ol>
+<p>First we’ll set up the uniform tree prior in <code>main.Rev</code>. The following specifies a uniform prior on the <strong>tree topology</strong> - this means that all possible tree configurations have the <em>same probability</em> under the prior. The tree is a <a href="exercise-03.html#stochastic">stochastic</a> variable.</p>
+<p>For every parameter we want to sample during MCMC we need to define one or more appropriate moves for that parameter. The function <code>moves.append()</code> adds specific moves to our <code>moves</code> vector.</p>
+<pre class="r"><code>moves.append( mvNNI(topology, weight = num_taxa) ) # nearest neighbour interchange
+moves.append( mvSPR(topology, weight = num_taxa/10.0) ) # subtree pruning and regrafting</code></pre>
+<p>The above moves (NNI and SPR) are widely used for searching tree space. You can read more about the details <a href="https://en.wikipedia.org/wiki/Tree_rearrangement">here</a>. The weight argument tells the MCMC how much time to spend using these moves, relative to all the other moves. The weights specified above are simply a useful rule of thumb.</p>
+<p>Next we need to specify a prior on the <strong>branch lengths</strong>. We’ll do this using an exponetial distribution. In the following loop, for every branch in the tree (<code>num_branches</code>) we define a stochastic node using an exponetial prior distribution, along with an appropriate move. This parameter is a continuous variable that can be any real number value &gt;0, so we’ll use a so-called scale move.</p>
+<pre class="r"><code>for (i in 1:num_branches) {
+   br_lens[i] ~ dnExponential(10.0)
+   moves.append( mvScale(br_lens[i]) )
+}</code></pre>
+<p>The tree we’re interested in and the one we use to calculate the likelihood combines the topology and branch lengths, which we can define using a <a href="exercise-03.html#deterministic">deterministic</a> variable.</p>
+<pre class="r"><code>tree := treeAssembly(topology, br_lens)
+tree</code></pre>
+<p>It might also be interesting to monitor the total tree length. We can do this by defining another deterministic node.</p>
+<pre class="r"><code>TL := sum(br_lens)</code></pre>
 </div>
 <div id="the-jukes-cantor-substitution-model" class="section level2">
 <h2>The Jukes-Cantor substitution model</h2>
+<p>Now that we’ve specified the tree prior, we’ll go ahead and set up the substitution model, starting with the Jukes-Cantor model. Let’s do this in a separate file called <code>JC.Rev</code>.</p>
+<p>We’ll define a <strong>Q matrix</strong> for 4 states (A, T, G, C) using the <code>fnJC</code> function. Under this model rates of change between states and state frequencies are equal.</p>
+<pre class="r"><code>Q &lt;- fnJC(4)
+Q</code></pre>
+<p>Next we’ll define a stochastic node representing a sequence alignment and “clamp” that variable to our sequence data.</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = &quot;DNA&quot;)
+seq.clamp(data)</code></pre>
+<p>This basically tells the program to calculate the likelihood for this data using the substitution model specified using the function arguments (i.e. calculate the likelihood using the JC model represented by the Q matrix). We don’t need to add any additional moves here because we’re not estimating any extra parameters.</p>
+<p>It might seem a bit overkill to have such a small number of code line in a separate script but as the models become more complex you’ll see why this becomes useful.</p>
+<p>Return to your main script <code>main.Rev</code> and add the following line. This tells the program to read and execute the script containing details of the substitution model.</p>
+<pre class="r"><code>source(&quot;scripts/JC.Rev&quot;)</code></pre>
 </div>
 <div id="mcmc-settings" class="section level2">
 <h2>MCMC settings</h2>
+<p>Before we run the analysis we just need to finish setting up the MCMC.</p>
+<p>Add the following line to create the variable <code>mymodel</code>. This is a special variable that gets passed to the MCMC functions. We can actually do this using any variable in our hierarchical model, I’ve just arbitrarily used <code>tree</code> here.</p>
+<pre class="r"><code>mymodel = model(tree)
+mymodel</code></pre>
+<p>If you look at the output you’ll see a list of all the parameters in your model. See if you can work out what they are.</p>
+<p>Next we’ll define a set of <strong>monitors</strong> so we can record the output. <code>printgen</code> specifies the frequency with which we output or record the parameters during the MCMC run.</p>
+<p>Finally, we’ll set up the MCMC run using the <code>mcmc</code> function, specifying our model, the vector of monitors and the vector of moves. And then we’ll run the chain for 1000 generations.</p>
+<pre class="r"><code>mymcmc = mcmc(mymodel, monitors, moves)
+mymcmc.run(generations = 1000)</code></pre>
+<p>To run this analysis in RevBayes, change directory or open the program in the directory you created for this exercise and then run the job using the <code>source</code> command.</p>
+<pre class="r"><code>source(&quot;scripts/main.Rev&quot;)</code></pre>
 </div>
-<div id="the-jukes-cantor-substitution-model-1" class="section level2">
-<h2>The Jukes-Cantor substitution model</h2>
-<div id="further-reading" class="section level3">
-<h3>Further reading</h3>
-<p>Here’s a more <a href="https://revbayes.github.io/tutorials/intro/rev">comprehensive intro</a> to the Rev language.</p>
+<div id="evaluating-the-output" class="section level2">
+<h2>Evaluating the output</h2>
+<p>During the MCMC run the program should have created the folder <code>output</code> containing the <code>.log</code> and <code>.trees</code> files. Open these in a text editor.</p>
+<blockquote>
+<p>What do you make of the contents of the log and tree files?</p>
+</blockquote>
+<p>The first thing we want to check is <strong>convergence</strong>. We can do this using the program Tracer. Open Tracer and drag and drop your <code>.log</code> file into the panel on the left or you can go to File &gt; Import Trace File. What you see should look something like this.</p>
+<p><img src="trace1.png" width="85%" style="padding:10px" /></p>
+<p>Explore the output, including the Trace panel at the top.</p>
+<blockquote>
+<p>What do the histograms represent? Do you think our analysis has reached convergence?</p>
+</blockquote>
+<p>There are some indicators that our analyses <em>haven’t</em> converged, including the ESS values which are highlighted in orange and red, and the trace plots. This means we haven’t adequately approximated the posterior parameter space.</p>
+<p>Let’s increase the chain length to 10000 and rerun the MCMC. This might take up to 15 minutes - while you’re waiting for this run, you could move on and set up the GTR substitution model.</p>
+<p>You’re already getting a flavour of how long MCMC analyses can take. It’s very common to have to run empirical analyses for millions+ generations and it can take several days.</p>
+<p>Once your longer run is complete, open the file again in Tracer. Your new output should look something like this.</p>
+<p><img src="trace2.png" width="85%" style="padding:10px" /></p>
+<blockquote>
+<p>What differences do you notice in the output?</p>
+</blockquote>
+<p>Actually, if wanted to use this output for publication, we’d still want to run the chain for longer because some parameters haven’t mixed well but let’s move one.</p>
+<p>Back in RevBayes we can also generate summary trees. We’ll use the maximum a posteriori (MAP) tree - this is the tree with the highest posterior probability. This is just one way of summarising the posterior distribution of trees.</p>
+<p>It is important to note the summary tree is not the “true” result - the entire posterior distribution (which might contain multiple trees) is the full result.</p>
+<pre class="r"><code># read the tree file back in
+treetrace = readTreeTrace(&quot;output/primates_JC.trees&quot;, treetype = &quot;non-clock&quot;)
+# generate a MAP tree
+map_tree = mapTree(treetrace,&quot;output/primates_JC_MAP.tree&quot;)</code></pre>
+<p>You can open this tree in FigTree. Root the tree along the branch leading to <code>"Galeopterus_variegatus</code> - this is our outgroup, the flying lemur. Next let’s look at the node support. Go to Node Labels &gt; Display &gt; posterior. Your output should look something like this.</p>
+<p><img src="figtree.png" width="85%" style="padding:10px" /></p>
 </div>
+<div id="the-gtr-substitution-model" class="section level2">
+<h2>The GTR substitution model</h2>
+<p>Create a file called <code>GTR.Rev</code> where we’ll set up the General Time Reversible (GTR) model.</p>
+<p>Under this model both rates of change between states and state frequencies are allowed to vary. This makes a little bit more complicated to set up - but not by much!</p>
+<p>First we need to define a prior on the exchangeability rates (= 6) and the state frequencies. We’ll do this using a Dirichlet prior, which is a useful distribution for specifying proportions.</p>
+<pre class="r"><code>alpha1 &lt;- v(1,1,1,1,1,1) # 6 for rates
+alpha2 &lt;- v(1,1,1,1) # 4 for state frequencies
+er ~ dnDirichlet(alpha1)
+freq ~ dnDirichlet(alpha2)</code></pre>
+<p><code>alpha1</code> and <code>alpha2</code> are the parameters of the Dirichlet distribution. These are used to specify two uniform Dirichlet distributions. These are stochastic variables because we want to estimate the relative rates and state frequencies during the analysis. We then set up the Q matrix as a deterministic variables, which will change through the MCMC as <code>er</code> and <code>freq</code> are updated.</p>
+<pre class="r"><code>Q := fnGTR(er, freq)
+Q</code></pre>
+<p>The rest of the set up as the same as before.</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = &quot;DNA&quot;)
+seq.clamp(data)</code></pre>
+<p>Back in your <code>main.Rev</code> script, switch out the file used to load subsitution model.</p>
+<pre class="r"><code>source(&quot;scripts/GTR.Rev&quot;)</code></pre>
+<p>Change the name of your output files (so they don’t overwrite the exisiting files) and rerun your analysis using the GTR model.</p>
+<pre class="r"><code>monitors.append( mnModel(filename = &quot;output/primates_GTR.log&quot;, printgen = 10) )
+monitors.append( mnFile(filename = &quot;output/primates_GTR.trees&quot;, printgen = 10, tree) )</code></pre>
+<p>Once your analysis is done, you can examine both log files at the same time in Tracer.</p>
+<blockquote>
+<p>What differences do you notice between the runs? Are there any additional parameters? Are these any differences between equivalent parameters?</p>
+</blockquote>
+<p>Generate a new MAP tree and then compare them.</p>
+<pre class="r"><code>treetrace = readTreeTrace(&quot;output/primates_GTR.trees&quot;, treetype = &quot;non-clock&quot;)
+map_tree = mapTree(treetrace,&quot;output/primates_GTR_MAP.tree&quot;)</code></pre>
+<blockquote>
+<p>Are there any differences between the summary trees?</p>
+</blockquote>
 </div>
 </div>
 

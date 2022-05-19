@@ -273,7 +273,7 @@ $(document).ready(function () {
 <p><a href="https://revbayes.github.io">RevBayes</a> is a flexible program that has been developed for Bayesian phylogenetics. It has it’s own command line language, similar to the R programming language, that can be used to set up a model in a Bayesian framework. We won’t run any analyses in this exercise, we’ll just explore the Rev languages and look at the syntax used to set up different types of variables.</p>
 <p>First make sure you can <a href="https://revbayes.github.io/download">download</a> and install the software. Once you have it up and running, see if you can produce any sensible output using the RevBayes terminal. For example, it can be used like a calculator in the same way as R.</p>
 <pre class="r"><code>4 + 10</code></pre>
-<div id="constant-variables" class="section level2">
+<div id="constant" class="section level2">
 <h2>Constant variables</h2>
 <p>Constant variables have a fixed value and are specified using the left arrow <code>&lt;-</code> assignment.</p>
 <pre class="r"><code>a &lt;- 4
@@ -282,7 +282,7 @@ a + b</code></pre>
 <p>Note that in R the <code>=</code> and <code>&lt;-</code> assignment can almost always be used interchangeably. This is not the case in RevBayes, where <code>=</code> can be used to define variables in your environment but these can’t then be used as part of a model. We’ll see some examples of when we might use <code>=</code> in RevBayes in future weeks.</p>
 <p>To clear the value of a variable you can use <code>clear(a)</code>.</p>
 </div>
-<div id="deterministic-variables" class="section level2">
+<div id="deterministic" class="section level2">
 <h2>Deterministic variables</h2>
 <p>Deterministic variables are linked to the value of other variables and specified using the colon-equal <code>:=</code> assignment.</p>
 <pre class="r"><code># specify constant variable a
@@ -299,7 +299,7 @@ b</code></pre>
 <p>Explore what happens when you change the value of <code>a</code> and experiment with different formulas / operators.</p>
 </blockquote>
 </div>
-<div id="stochastic-variables" class="section level2">
+<div id="stochastic" class="section level2">
 <h2>Stochastic variables</h2>
 <p>Stochastic variables are described with respect to some underlying probability distribution and are specified using the tilde <code>~</code> assignment. For example, we might want to say that variable <code>c</code> is a normally distributed random variable.</p>
 <pre class="r"><code># specify the mean and standard deviation parameters as constant variables

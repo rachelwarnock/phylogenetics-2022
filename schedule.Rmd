@@ -88,7 +88,7 @@ urls <- c("https://www.youtube.com/watch?v=1r4z0YJq580", "https://www.youtube.co
           "questions-01.html", "questions-02.html", "questions-03.html","questions-04.html")
 
 dt <- data.frame(videos = c("Part 1", "Part 2", "Part 3a", "Part 3b"),
-                 topics = c("trees and likelihood", "trees likelihood and rate heterogenity", "Intro Bayesian phylogenetics", "Intro Bayesian phylogenetics"),
+                 topics = c("trees and likelihood", "trees, likelihood and rate heterogeneity", "Intro Bayesian phylogenetics", "Intro Bayesian phylogenetics"),
                  questions = c("Questions 1", "Questions 2", "Questions 3", "Questions 4"))
 
 dt$videos[1] <- paste0("[", dt$videos[1], "](", urls[1], ")")
@@ -120,7 +120,7 @@ dt <- data.frame(schedule = c("Slides", "Exercise 4"),
                  topics = c("Follow up on Paul Lewis lectures", 
                             "Bayesian tree inference"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-#dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
