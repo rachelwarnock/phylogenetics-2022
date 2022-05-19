@@ -38,11 +38,13 @@ Edit the scripts in a text editor of your choice.
 Start with your `main.Rev` script. First we need to read in the data.
 
 ```{r data, eval=FALSE}
-data <- readDiscreteCharacterData("data/primates_and_galeopterus_cytb.next")
+data <- readDiscreteCharacterData("data/primates_and_galeopterus_cytb.nex")
 data
 ```
 
-Next we need to define some varibles that will come in handy later for setting up our model.
+**Note for windows users** you need to use a '\\'  
+
+Next we need to define some variables that will come in handy later for setting up our model.
 
 ```{r vars, eval=FALSE}
 num_taxa <- data.ntaxa() # number of taxa
@@ -170,7 +172,7 @@ If you look at the output you'll see a list of all the parameters in your model.
 Next we'll define a set of **monitors** so we can record the output. 
 `printgen` specifies the frequency with which we output or record the parameters during the MCMC run.
 
-```{r monitors, eval=FALSE, echo=FALSE}
+```{r monitors, eval=FALSE}
 # parameter printed to file
 monitors.append( mnModel(filename = "output/primates_JC.log", printgen = 10) )
 # trees printed to file

@@ -288,9 +288,10 @@ $(document).ready(function () {
 <div id="read-in-the-data-and-define-helper-variables" class="section level2">
 <h2>Read in the data and define helper variables</h2>
 <p>Start with your <code>main.Rev</code> script. First we need to read in the data.</p>
-<pre class="r"><code>data &lt;- readDiscreteCharacterData(&quot;data/primates_and_galeopterus_cytb.next&quot;)
+<pre class="r"><code>data &lt;- readDiscreteCharacterData(&quot;data/primates_and_galeopterus_cytb.nex&quot;)
 data</code></pre>
-<p>Next we need to define some varibles that will come in handy later for setting up our model.</p>
+<p><strong>Note for windows users</strong> you need to use a ‘\’</p>
+<p>Next we need to define some variables that will come in handy later for setting up our model.</p>
 <pre class="r"><code>num_taxa &lt;- data.ntaxa() # number of taxa
 num_branches &lt;- 2 * num_taxa - 3 # number of branches in an unrooted tree
 taxa &lt;- data.taxa() # list of taxon names</code></pre>
@@ -345,6 +346,12 @@ seq.clamp(data)</code></pre>
 mymodel</code></pre>
 <p>If you look at the output you’ll see a list of all the parameters in your model. See if you can work out what they are.</p>
 <p>Next we’ll define a set of <strong>monitors</strong> so we can record the output. <code>printgen</code> specifies the frequency with which we output or record the parameters during the MCMC run.</p>
+<pre class="r"><code># parameter printed to file
+monitors.append( mnModel(filename = &quot;output/primates_JC.log&quot;, printgen = 10) )
+# trees printed to file
+monitors.append( mnFile(filename = &quot;output/primates_JC.trees&quot;, printgen = 10, tree) )
+# parameter values printed to screen during the MCMC
+monitors.append( mnScreen(printgen = 100, TL) )</code></pre>
 <p>Finally, we’ll set up the MCMC run using the <code>mcmc</code> function, specifying our model, the vector of monitors and the vector of moves. And then we’ll run the chain for 1000 generations.</p>
 <pre class="r"><code>mymcmc = mcmc(mymodel, monitors, moves)
 mymcmc.run(generations = 1000)</code></pre>
