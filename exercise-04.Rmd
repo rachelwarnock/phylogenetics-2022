@@ -17,7 +17,7 @@ We'll use a straightforward Bayesian approach and a standard set of substitution
 
 Before beginning, you might want to recap the distinction between [constant](exercise-03.html#constant), [stochastic](exercise-03.html#stochastic) and [deterministic](exercise-03.html#deterministic) variables.
 
-**Other software** 
+**Other software**
 
 For this tutorial you'll also need to install the software [Tracer](http://beast.community/tracer) and [FigTree](https://github.com/rambaut/figtree/releases).
 
@@ -27,9 +27,9 @@ If you want you can use RevStudio, which is similar to RStudio but designed for 
 
 I personally prefer to edit scripts using a text editor and save my files in sub-directories $--$ usually I have one for data, one for scripts and one for output. This can be useful for constructing more complex and hierarchical models in a modular fashion. You can then simply call your main script using the command `source()`, in the same way as R. We'll see an example of this below.
 
-For this exercise you can create a folder called `exercise 4` or something. The create two sub-directories, `data` for your nexus file and another `scripts` for your code. For this tutorial we'll create t least three scripts:
+For this exercise you can create a folder called `exercise 4` or something. The create two sub-directories, `data` for your nexus file and another `scripts` for your code. For this tutorial we'll create at least three scripts:
 
-  1. `main.Rev` for reading the data, setting up the the tree model and MCMC settings 
+  1. `main.Rev` for reading the data, setting up the the tree model and MCMC settings
   2. `JC.Rev` and `GTR.Rev` for alternative subsitution models.
 Edit the scripts in a text editor of your choice.
 
@@ -41,8 +41,6 @@ Start with your `main.Rev` script. First we need to read in the data.
 data <- readDiscreteCharacterData("data/primates_and_galeopterus_cytb.nex")
 data
 ```
-
-**Note for windows users** you need to use a '\\'  
 
 Next we need to define some variables that will come in handy later for setting up our model.
 
@@ -92,6 +90,8 @@ The above moves (NNI and SPR) are widely used for searching tree space. You can 
 ```{r hidden_notes, eval=FALSE, echo=FALSE}
 # weight = num_taxa
 # weight = num_taxa/10.0
+
+#TODO add **Note for windows users**
 
 #TODO: add an explanaition of the dnPhyloCTMC 
 #TODO: you have to make the primate data still works with exercise 3 (STANDARD -> DNA)

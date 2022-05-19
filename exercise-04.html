@@ -290,7 +290,7 @@ $(document).ready(function () {
 <p>Start with your <code>main.Rev</code> script. First we need to read in the data.</p>
 <pre class="r"><code>data &lt;- readDiscreteCharacterData(&quot;data/primates_and_galeopterus_cytb.nex&quot;)
 data</code></pre>
-<p><strong>Note for windows users</strong> you need to use a ‘\’</p>
+<p><strong>Note for windows users using RevStudio</strong> you need to use a ‘\’ or unconventionally a ‘/’ to set the directory.</p>
 <p>Next we need to define some variables that will come in handy later for setting up our model.</p>
 <pre class="r"><code>num_taxa &lt;- data.ntaxa() # number of taxa
 num_branches &lt;- 2 * num_taxa - 3 # number of branches in an unrooted tree
