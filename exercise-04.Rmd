@@ -38,7 +38,7 @@ Edit the scripts in a text editor of your choice.
 Start with your `main.Rev` script. First we need to read in the data.
 
 ```{r data, eval=FALSE}
-data <- readDiscreteCharacterData("data/primates-data.nex")
+data <- readDiscreteCharacterData("data/primates_and_galeopterus_cytb.next")
 data
 ```
 
