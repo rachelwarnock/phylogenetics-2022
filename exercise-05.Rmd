@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Bayesian tree inferences using RevBayes
 
-In this exercise we'll estimate of a *time* tree of bears This means that the resulting branch lengths will represent time, instead of expected substitutions per site. The data we'll use is an alignment (1,000 bp) of cytochrome b sequences for 8 living bear species $-$ you can download this from [here](data/bears_cytb.nex). 
+In this exercise we'll estimate of a *time*tree of bears This means that the resulting branch lengths will represent time, instead of expected substitutions per site. The data we'll use is an alignment (1,000 bp) of cytochrome b sequences for 8 living bear species $-$ you can download this from [here](data/bears_cytb.nex). 
 
 For this exercise create a folder called `exercise 5`. Then create two sub-directories: `data` and `scripts`. For divergence time estimation we need three model components, so we'll create the following scripts:
 
