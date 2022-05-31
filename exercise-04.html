@@ -250,6 +250,9 @@ $(document).ready(function () {
 <li>
   <a href="projects.html">Projects</a>
 </li>
+<li>
+  <a href="exercise-05.html">Today's exercise</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -282,7 +285,7 @@ $(document).ready(function () {
 <p>For this exercise you can create a folder called <code>exercise 4</code> or something. Then create two sub-directories, <code>data</code> for your nexus file and <code>scripts</code> for your code. For this tutorial we’ll create at least three scripts:</p>
 <ol style="list-style-type: decimal">
 <li><code>main.Rev</code> for reading the data, setting up the the tree model and MCMC settings</li>
-<li><code>JC.Rev</code> and <code>GTR.Rev</code> for alternative subsitution models. Edit the scripts in a text editor of your choice.</li>
+<li><code>JC.Rev</code> and <code>GTR.Rev</code> for alternative substitution models. Edit the scripts in a text editor of your choice.</li>
 </ol>
 </div>
 <div id="read-in-the-data-and-define-helper-variables" class="section level2">
@@ -387,7 +390,7 @@ map_tree = mapTree(treetrace,&quot;output/primates_JC_MAP.tree&quot;)</code></pr
 <p>You can open this tree in FigTree. Root the tree along the branch leading to <code>"Galeopterus_variegatus</code> <span class="math inline">\(-\)</span> this is our outgroup, the flying lemur. Next let’s look at the node support. Go to Node Labels &gt; Display &gt; posterior. Your output should look something like this.</p>
 <p><img src="figtree.png" width="85%" style="padding:10px" /></p>
 </div>
-<div id="the-gtr-substitution-model" class="section level2">
+<div id="GTR" class="section level2">
 <h2>The GTR substitution model</h2>
 <p>Create a file called <code>GTR.Rev</code> where we’ll set up the General Time Reversible (GTR) model.</p>
 <p>Under this model both rates of change between states and state frequencies are allowed to vary. This makes it a little bit more complicated to set up - but not by much!</p>

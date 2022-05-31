@@ -132,3 +132,27 @@ kbl(dt) %>%
 
 
 
+
+
+# Week 5 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/class05.pdf","exercise-05.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 5"),
+                 topics = c("Follow up on Paul Lewis lectures", 
+                            "Bayesian time tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
+
+
+

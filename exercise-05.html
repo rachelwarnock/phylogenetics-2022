@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>exercise-05.knit</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Phylogenetics</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="exercise-05.html">Today's exercise</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<p><br />
+</p>
+<div id="bayesian-tree-inferences-using-revbayes" class="section level1">
+<h1>Bayesian tree inferences using RevBayes</h1>
+<p>In this exercise we’ll estimate of a <em>time</em> tree of bears This means that the resulting branch lengths will represent time, instead of expected substitutions per site. The data we’ll use is an alignment (1,000 bp) of cytochrome b sequences for 8 living bear species <span class="math inline">\(-\)</span> you can download this from <a href="data/bears_cytb.nex">here</a>.</p>
+<p>For this exercise create a folder called <code>exercise 5</code>. Then create two sub-directories: <code>data</code> and <code>scripts</code>. For divergence time estimation we need three model components, so we’ll create the following scripts:</p>
+<ol style="list-style-type: decimal">
+<li><code>main.Rev</code> for reading the data, setting up the the tree model and MCMC settings</li>
+<li><code>node_dating.Rev</code> for the time tree model.</li>
+<li><code>GTR.Rev</code> for the substitution models.</li>
+<li><code>clock_strict.Rev</code> and <code>clock_relaxed_lognormal.Rev</code> for alternative clock models. Edit the scripts in a text editor of your choice.</li>
+</ol>
+<div id="read-in-the-data-and-define-helper-variables" class="section level2">
+<h2>Read in the data and define helper variables</h2>
+<p>Start with your <code>main.Rev</code> script. As before, we’ll start by reading in the data and defining some helper variables.</p>
+<pre class="r"><code>data &lt;- readDiscreteCharacterData(&quot;data/bears_cytb.nex&quot;)</code></pre>
+<pre class="r"><code>num_taxa &lt;- data.ntaxa() # number of taxa
+num_branches &lt;- 2 * num_taxa - 2 # number of branches in an *rooted* tree
+taxa &lt;- data.taxa() # list of taxon names</code></pre>
+<p>Define a set of variables for setting up our MCMC.</p>
+<pre class="r"><code>moves    = VectorMoves()
+monitors = VectorMonitors()</code></pre>
+</div>
+<div id="time-tree-model" class="section level2">
+<h2>Time tree model</h2>
+<p>For time calibrated tree inference we need to use a tree prior that has branch lengths in units of time. We often use birth-death process tree models for this purpose.</p>
+<p>Go to your <code>node_dating.Rev</code> script to set this up.</p>
+<p>Since all the taxa included in the analysis in this exercise are living species we’ll use a birth-death model that doesn’t incorporate the fossil sampling process. Two key parameters are the speciation rate (<span class="math inline">\(\lambda\)</span>) and the extinction rate (<span class="math inline">\(\mu\)</span>) We will assume these rates are constant over time and place exponential priors on each of these.</p>
+<pre class="r"><code>speciation_rate ~ dnExponential(10)
+extinction_rate ~ dnExponential(10)</code></pre>
+<p>Each parameter is a stochastic variable drawn from a different exponential distribution with rates. Note an exponential distribution with <span class="math inline">\(\delta=10\)</span> has an expected value (mean) of <span class="math inline">\(1/\delta = 0.1\)</span>.</p>
+<p>Next specify the moves of these parameters.</p>
+<pre class="r"><code>moves.append( mvScale(speciation_rate, lambda = 0.5, tune = true, weight = 3.0) )
+moves.append( mvScale(extinction_rate, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
+<p>The argument <code>tune = true</code> here means that the MCMC will find the optimum size of the proposal for these moves during the initial part of the run.</p>
+<p><span class="math inline">\(\rho\)</span> is the third parameter in our tree model and is the probability of extant species sampling. Since we sample all extant bears, we’ll specify this probability as a constant variable <span class="math inline">\(= 1.0\)</span> using the <code>&lt;-</code> operator.</p>
+<pre class="r"><code>rho &lt;- 1.0</code></pre>
+<p>Next we add the calibration information. We’ll use the age of one of the oldest known bear fossils (<em>Zaragocyon daamsi</em>, range = 20–22.8 Ma) and a previous estimate (∼49 Ma) for the age of caniforms, which is the clade containing bears and other “dog-like” mammals. Since we don’t have any more information about the age between these bounds, we’ll use a uniform prior.</p>
+<pre class="r"><code># min and max bounds
+root_min &lt;- 22.8
+root_max &lt;- 49.0
+
+# uniform prior
+root_age ~ dnUniform(root_min, root_max)
+
+# assign a move to sample the root age
+moves.append( mvScale(root_age, lambda = 1, tune = true, weight = 5.0) )</code></pre>
+<p>Now that we’ve specified the parameters of the birth-death model and the root age prior, we can use these to define the prior distribution on the tree topology and divergence times.</p>
+<pre class="r"><code>tree ~ dnBDP(lambda = speciation_rate, mu = extinction_rate, rho = rho, rootAge = root_age, taxa = taxa)
+
+# moves to search tree space
+moves.append( mvNarrow(tree, weight = num_taxa) )
+moves.append( mvFNPR(tree, weight = num_taxa/4) )
+moves.append( mvNodeTimeSlideUniform(tree, weight = num_taxa) )
+moves.append( mvSubtreeScale(tree, weight = num_taxa/5.0) )</code></pre>
+</div>
+<div id="strict-clock-model" class="section level2">
+<h2>Strict clock model</h2>
+<p>Next we’ll specify a strict clock model to describe the rate of character change over time. This model assumes that the rate is constant over time and across all branches in our tree.</p>
+<p>Open your <code>clock_strict.Rev</code> script. We don’t know the rate of evolution, so we’ll use an exponential prior.</p>
+<pre class="r"><code>branch_rates ~ dnExponential(10.0)
+
+moves.append( mvScale(branch_rates, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
+<p>This rate will be used for all branches.</p>
+</div>
+<div id="substitution-model" class="section level2">
+<h2>Substitution model</h2>
+<p>Next we’ll specify the GTR substitution model, which describes the probability of transitioning from one character state to another.</p>
+<p><strong>Hint</strong> you can use your code or script from the <a href="exercise-04.html#GTR">previous exercise</a>.</p>
+<p>We just need to make one change from the previous exercise. We need to specify the branch rates using the argument <code>branchRates = branch_rates</code>. This tells the function that we’re using a molecular clock.</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = &quot;DNA&quot;, branchRates = branch_rates)</code></pre>
+</div>
+<div id="mcmc-settings" class="section level2">
+<h2>MCMC settings</h2>
+<p>Back in <code>main.Rev</code> add the following lines to include the tree, clock and substitution models.</p>
+<pre class="r"><code># birth death model + node calibratons
+source(&quot;scripts/node_dating.Rev&quot;)
+# clock model
+source(&quot;scripts/clock_strict.Rev&quot;)
+# substitution model
+source(&quot;scripts/GTR.Rev&quot;)</code></pre>
+<p>The MCMC set up is very similar to before. First we create the variable <code>mymodel</code> to finish the model set up.</p>
+<pre class="r"><code>mymodel = model(tree)
+mymodel</code></pre>
+<p>Then we define a set of monitors to capture the output.</p>
+<pre class="r"><code># parameters printed to file
+monitors.append( mnModel(filename = &quot;output/bears_strict.log&quot;, printgen = 50) )
+# trees printed to file
+monitors.append( mnFile(filename = &quot;output/bears_strict.trees&quot;, printgen = 50, tree) )
+# parameter values printed to screen during the MCMC
+monitors.append( mnScreen(printgen = 500, root_age) )</code></pre>
+<p>Finally, we’ll set up the MCMC run using the <code>mcmc</code> function, specifying our model, the vector of monitors and the vector of moves and run the chain for 10000 generations.</p>
+<pre class="r"><code>mymcmc = mcmc(mymodel, monitors, moves)
+mymcmc.run(generations = 50000, tuningInterval = 5000)</code></pre>
+<p>Note that this time we’ve adding the argument <code>tuningInterval = 1000</code>. This tells the chain how long to spend optimising the MCMC moves. Different datasets behave differently <span class="math inline">\(-\)</span> the above option partly automates the selection of move parameters that maximise efficiency of the MCMC.</p>
+<p>This might take a while run pretty quickly. Meanwhile, you could start setting up the relaxed clock model.</p>
+</div>
+<div id="evaluating-the-output" class="section level2">
+<h2>Evaluating the output</h2>
+<p>As before, open your <code>.log</code> file in Tracer. It should look something like this.</p>
+<p><img src="trace3.png" width="85%" style="padding:10px" /></p>
+<blockquote>
+<p>Explore the output. Can you identify the different parameters? Has the analysis converged? How would you interpret the root age output?</p>
+</blockquote>
+<p>Next let’s generate a summary tree and open it in FigTree.</p>
+<pre class="r"><code>trace = readTreeTrace(&quot;output/bears_strict.trees&quot;)
+mccTree(trace, file=&quot;output/bears_strict.mcc.tre&quot;)</code></pre>
+<p>In FigTree, select ‘Node Labels’ to show the node ages. The select ‘Node Bars’ and Display &gt; age_95%_HPD. This will show you the Bayesian Credible Intervals for each node. It should look something like this.</p>
+<p><img src="mcc_bears.png" width="85%" style="padding:10px" /></p>
+</div>
+<div id="relaxed-clock-model" class="section level2">
+<h2>Relaxed clock model</h2>
+<p>Now let’s tree running the analysis with a relaxed clock model. This family of models allows rates to vary across the tree. We’ll use the uncorrelated lognormal model, which is simple and widely used. It assumes each branch on the tree has an independent rate, drawn from a lognormal distribution.</p>
+<p>Open your <code>clock_relaxed_lognormal.Rev</code> script. Ordinarily, we don’t know the mean or the variance of the lognormal distribution, so we’ll define these as stochastic variables that will be estimated from the data.</p>
+<pre class="r"><code># prior on the mean of the lognormal distribution
+branch_rates_mean ~ dnExponential(10.0)
+# move on this parameter
+moves.append( mvScale(branch_rates_mean, lambda = 0.5, tune = true, weight = 3.0) )
+
+branch_rates_sd ~ dnExponential(10.0)
+# move on this parameter
+moves.append( mvScale(branch_rates_sd, lambda = 0.5, tune = true, weight = 3.0) )
+
+# transform the rate into a log of the branch rate mean
+ln_branch_rates_mean := ln( branch_rates_mean )
+
+# create a vector of rates for each branch
+for(i in 1:num_branches){
+    branch_rates[i] ~ dnLognormal(ln_branch_rates_mean, sd = branch_rates_sd)
+    moves.append( mvScale(branch_rates[i], lambda = 0.5, tune = true, weight = 1.0) )
+}
+
+# add moves on the branch rates vector 
+moves.append( mvVectorScale(branch_rates, lambda = 0.5, tune = true, weight = 4.0) )</code></pre>
+<p>Back in <code>main.Rev</code> switch out your clock models.</p>
+<pre class="r"><code># clock model
+source(&quot;scripts/clock_relaxed_lognormal.Rev&quot;)</code></pre>
+<p>Next we need to change the name of the output files, so we don’t overwrite the existing files.</p>
+<pre class="r"><code># parameters printed to file
+monitors.append( mnModel(filename = &quot;output/bears_relaxed.log&quot;, printgen = 10) )
+# trees printed to file
+monitors.append( mnFile(filename = &quot;output/bears_relaxed.trees&quot;, printgen = 10, tree) )</code></pre>
+<p>Once this analysis is done, open both sets of log files in Tracer. And if you select two Trace files simultaneously using the shift key, you can examine estimates for the same parameter from two separate analyses. You should see something like this.</p>
+<p><img src="trace4.png" width="85%" style="padding:10px" /></p>
+<blockquote>
+<p>What differences do you notice between the two analyses? In particular, what about the root age? Which model is more likely to be correct?</p>
+</blockquote>
+<p>Generate another summary tree for this analysis.</p>
+<blockquote>
+<p>Do you notice any differences between the trees?</p>
+</blockquote>
+</div>
+<div id="running-the-analysis-under-the-prior" class="section level2">
+<h2>Running the analysis under the prior</h2>
+<p>Finally today, we’ll run our analysis <strong>under the prior</strong>. This means we’ll examine the output excluding the likelihood, i.e., excluding any information that comes from the sequence data.</p>
+<p>Switch back to the strict clock model (it’ll run faster since this model has fewer moves). And change the output file names.</p>
+<pre class="r"><code># parameters printed to file
+monitors.append( mnModel(filename = &quot;output/bears_priors.log&quot;, printgen = 10) )
+# trees printed to file
+monitors.append( mnFile(filename = &quot;output/bears_prior.trees&quot;, printgen = 10, tree) )</code></pre>
+<p>Then all we need to do is add the argument <code>underPrior = TRUE</code> to the MCMC function.</p>
+<pre class="r"><code>mymcmc.run(generations = 50000, tuningInterval = 5000, underPrior = TRUE)</code></pre>
+<p>Examine the output in Tracer and this time look at the differences between the prior and posterior root ages.</p>
+<p>You can also take a look at the MCC tree to see the differences for other nodes.</p>
+<blockquote>
+<p>How would you intepret these differences or similarities? What information are we gaining from the sequence data? What if our prior information is incorrect?</p>
+</blockquote>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

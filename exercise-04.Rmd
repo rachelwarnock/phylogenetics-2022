@@ -30,7 +30,7 @@ I personally prefer to edit scripts using a text editor and save my files in sub
 For this exercise you can create a folder called `exercise 4` or something. Then create two sub-directories, `data` for your nexus file and  `scripts` for your code. For this tutorial we'll create at least three scripts:
 
   1. `main.Rev` for reading the data, setting up the the tree model and MCMC settings
-  2. `JC.Rev` and `GTR.Rev` for alternative subsitution models.
+  2. `JC.Rev` and `GTR.Rev` for alternative substitution models.
 Edit the scripts in a text editor of your choice.
 
 ## Read in the data and define helper variables
@@ -248,7 +248,7 @@ Your output should look something like this.
 knitr::include_graphics("figtree.png")
 ```
 
-## The GTR substitution model
+## The GTR substitution model {#GTR}
 
 Create a file called `GTR.Rev` where we'll set up the General Time Reversible (GTR) model.
 
