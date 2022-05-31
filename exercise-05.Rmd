@@ -58,7 +58,7 @@ extinction_rate ~ dnExponential(10)
 ```
 
 Each parameter is a stochastic variable drawn from a different exponential distribution with rates.
-Note an exponential distribution with $\delta=10$ has an expected value (mean) of $1/\delta = 0.1$. 
+Note an exponential distribution with $\delta$ = 10 has an expected value (mean) of $1/\delta$ = 0.1. 
 
 Next specify the moves of these parameters.
 
@@ -69,7 +69,7 @@ moves.append( mvScale(extinction_rate, lambda = 0.5, tune = true, weight = 3.0) 
 
 The argument `tune = true` here means that the MCMC will find the optimum size of the proposal for these moves during the initial part of the run. 
 
-$\rho$ is the third parameter in our tree model and is the probability of extant species sampling. Since we sample all extant bears, we’ll specify this probability as a constant variable $= 1.0$ using the `<-` operator.
+$\rho$ is the third parameter in our tree model and is the probability of extant species sampling. Since we sample all extant bears, we’ll specify this probability as a constant variable = 1.0 using the `<-` operator.
 
 ```{r rho, eval=FALSE}
 rho <- 1.0

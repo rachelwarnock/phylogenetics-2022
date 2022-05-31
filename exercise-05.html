@@ -299,12 +299,12 @@ monitors = VectorMonitors()</code></pre>
 <p>Since all the taxa included in the analysis in this exercise are living species we’ll use a birth-death model that doesn’t incorporate the fossil sampling process. Two key parameters are the speciation rate (<span class="math inline">\(\lambda\)</span>) and the extinction rate (<span class="math inline">\(\mu\)</span>) We will assume these rates are constant over time and place exponential priors on each of these.</p>
 <pre class="r"><code>speciation_rate ~ dnExponential(10)
 extinction_rate ~ dnExponential(10)</code></pre>
-<p>Each parameter is a stochastic variable drawn from a different exponential distribution with rates. Note an exponential distribution with <span class="math inline">\(\delta=10\)</span> has an expected value (mean) of <span class="math inline">\(1/\delta = 0.1\)</span>.</p>
+<p>Each parameter is a stochastic variable drawn from a different exponential distribution with rates. Note an exponential distribution with <span class="math inline">\(\delta\)</span> = 10 has an expected value (mean) of <span class="math inline">\(1/\delta\)</span> = 0.1.</p>
 <p>Next specify the moves of these parameters.</p>
 <pre class="r"><code>moves.append( mvScale(speciation_rate, lambda = 0.5, tune = true, weight = 3.0) )
 moves.append( mvScale(extinction_rate, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
 <p>The argument <code>tune = true</code> here means that the MCMC will find the optimum size of the proposal for these moves during the initial part of the run.</p>
-<p><span class="math inline">\(\rho\)</span> is the third parameter in our tree model and is the probability of extant species sampling. Since we sample all extant bears, we’ll specify this probability as a constant variable <span class="math inline">\(= 1.0\)</span> using the <code>&lt;-</code> operator.</p>
+<p><span class="math inline">\(\rho\)</span> is the third parameter in our tree model and is the probability of extant species sampling. Since we sample all extant bears, we’ll specify this probability as a constant variable = 1.0 using the <code>&lt;-</code> operator.</p>
 <pre class="r"><code>rho &lt;- 1.0</code></pre>
 <p>Next we add the calibration information. We’ll use the age of one of the oldest known bear fossils (<em>Zaragocyon daamsi</em>, range = 20–22.8 Ma) and a previous estimate (∼49 Ma) for the age of caniforms, which is the clade containing bears and other “dog-like” mammals. Since we don’t have any more information about the age between these bounds, we’ll use a uniform prior.</p>
 <pre class="r"><code># min and max bounds
