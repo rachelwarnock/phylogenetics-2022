@@ -20,11 +20,12 @@ Course material will be uploaded here throughout the semester!
 * Course introduction and Parsimony 28.04
 * Likelihood and substitution models 05.05
 * No Class (Paul Lewis's seminars) 12.05
-* Bayesian tree inference 19.05
-* Clock models 26.05
+* Bayesian tree inference 19.05 
+* Clock models 31.06
 * Tree models 02.06
 * Model selection 09.06
-* Diversification rate estimation with Joëlle Barido-Sottani 16.06
+* Diversification rate estimation with Joëlle Barido-Sottani 14.06
+* Introduction to projects 21.06
 
 # Week 1 materials
 

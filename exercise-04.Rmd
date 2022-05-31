@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Bayesian tree inferences using RevBayes
 
-In this exercise we'll estimate of a tree of primates using a slightly longer alignment than the one we used before - you can download this from [here](data/primates_and_galeopterus_cytb.nex). 
+In this exercise we'll estimate of a tree of primates using a slightly longer alignment than the one we used before $-$ you can download this from [here](data/primates_and_galeopterus_cytb.nex). 
 
 We'll use a straightforward Bayesian approach and a standard set of substitutions models. 
 
@@ -25,9 +25,9 @@ For this tutorial you'll also need to install the software [Tracer](http://beast
 
 If you want you can use RevStudio, which is similar to RStudio but designed for RevBayes.
 
-I personally prefer to edit scripts using a text editor and save my files in sub-directories $--$ usually I have one for data, one for scripts and one for output. This can be useful for constructing more complex and hierarchical models in a modular fashion. You can then simply call your main script using the command `source()`, in the same way as R. We'll see an example of this below.
+I personally prefer to edit scripts using a text editor and save my files in sub-directories $-$ usually I have one for data, one for scripts and one for output. This can be useful for constructing more complex and hierarchical models in a modular fashion. You can then simply call your main script using the command `source()`, in the same way as R. We'll see an example of this below.
 
-For this exercise you can create a folder called `exercise 4` or something. The create two sub-directories, `data` for your nexus file and another `scripts` for your code. For this tutorial we'll create at least three scripts:
+For this exercise you can create a folder called `exercise 4` or something. Then create two sub-directories, `data` for your nexus file and  `scripts` for your code. For this tutorial we'll create at least three scripts:
 
   1. `main.Rev` for reading the data, setting up the the tree model and MCMC settings
   2. `JC.Rev` and `GTR.Rev` for alternative subsitution models.
@@ -52,7 +52,7 @@ taxa <- data.taxa() # list of taxon names
 
 Note these are [constant](exercise-03.html#constant) variables.
 
-Next we'll define a set of variables for setting up our MCMC. Note that we use `=` instead of `<-` because these variables are not part of the model. The `moves` vector is for storing our MCMC moves and the `monitors` vector is for storing the recording output. 
+Next we'll define a set of variables for setting up our MCMC. Note that we use `=` instead of `<-` because these variables are not part of the model. The `moves` vector is for storing our MCMC moves and the `monitors` vector is for storing the output. 
 
 ```{r vars2, eval=FALSE}
 moves    = VectorMoves()
@@ -61,12 +61,12 @@ monitors = VectorMonitors()
 
 ## The uniform tree prior
 
-For setting up regular Bayesian tree inference we need to specificy two model components: 
+For setting up regular Bayesian tree inference we need to specify two model components: 
 
-  1. we need a prior the topology and branch lengths 
+  1. we need a prior on the topology and branch lengths 
   2. and we need to specify a substitution model
 
-First we'll set up the uniform tree prior in `main.Rev`. The following specifies a uniform prior on the **tree topology** - this means that all possible tree configurations have the *same probability* under the prior. The tree is a [stochastic](exercise-03.html#stochastic) variable.
+First we'll set up the uniform tree prior in `main.Rev`. The following specifies a uniform prior on the **tree topology** $-$ this means that all possible tree configurations have the *same probability* under the prior. The tree is a [stochastic](exercise-03.html#stochastic) variable.
 
 ```{r tree_prior, eval=FALSE, echo=FALSE}
 #TODO this doesn't work
@@ -94,9 +94,9 @@ The above moves (NNI and SPR) are widely used for searching tree space. You can 
 #TODO add **Note for windows users**
 
 #TODO: add an explanaition of the dnPhyloCTMC 
-#TODO: you have to make the primate data still works with exercise 3 (STANDARD -> DNA)
+#TODO: you have to make sure the primate data still works with exercise 3 (STANDARD -> DNA)
 #TODO: color inline files and directories, could use " "?
-
+#TODO: add the scripts
 ## Adding rate variation
 
 ### Notes
@@ -146,9 +146,9 @@ seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = "DNA")
 seq.clamp(data)
 ```
 
-This basically tells the program to calculate the likelihood for this data using the substitution model specified using the function arguments (i.e. calculate the likelihood using the JC model represented by the Q matrix). We don't need to add any additional moves here because we're not estimating any extra parameters.
+This basically tells the program to calculate the likelihood for this data using the substitution model specified using the function arguments (i.e. calculate the likelihood for our tree using the JC model represented by the Q matrix). We don't need to add any additional moves here because we're not estimating any extra parameters.
 
-It might seem a bit overkill to have such a small number of code line in a separate script but as the models become more complex you'll see why this becomes useful. 
+It might seem a bit overkill to have such a small number of code lines in a separate script but as the models become more complex you'll see why this becomes useful. 
 
 Return to your main script `main.Rev` and add the following line. This tells the program to read and execute the script containing details of the substitution model.
 
@@ -173,7 +173,7 @@ Next we'll define a set of **monitors** so we can record the output.
 `printgen` specifies the frequency with which we output or record the parameters during the MCMC run.
 
 ```{r monitors, eval=FALSE}
-# parameter printed to file
+# parameters printed to file
 monitors.append( mnModel(filename = "output/primates_JC.log", printgen = 10) )
 # trees printed to file
 monitors.append( mnFile(filename = "output/primates_JC.trees", printgen = 10, tree) )
@@ -196,7 +196,7 @@ source("scripts/main.Rev")
 
 ## Evaluating the output
 
-During the MCMC run the program should have created the folder `output` containing the `.log` and `.trees` files. Open these in a text editor. 
+During the MCMC run, the program should have created the folder `output` containing the `.log` and `.trees` files. Open these in a text editor. 
 
 >What do you make of the contents of the log and tree files?
 
@@ -214,9 +214,9 @@ Explore the output, including the Trace panel at the top.
 There are some indicators that our analyses *haven't* converged, including the ESS values which are highlighted in orange and red, and the trace plots.
 This means we haven't adequately approximated the posterior parameter space. 
 
-Let's increase the chain length to 10000 and rerun the MCMC. This might take up to 15 minutes - while you're waiting for this run, you could move on and set up the GTR substitution model. 
+Let's increase the chain length to 10000 and rerun the MCMC. This might take up to 15 minutes $-$ while you're waiting for this to run, you could move on and set up the GTR substitution model. 
 
-You're already getting a flavour of how long MCMC analyses can take. It's very common to have to run empirical analyses for millions+ generations and it can take several days.
+You're already getting a flavor for how long MCMC analyses can take. It's very common to have to run empirical analyses for millions+ generations and it can take several days for a single analysis.
 
 Once your longer run is complete, open the file again in Tracer. Your new output should look something like this.
 
@@ -226,11 +226,11 @@ knitr::include_graphics("trace2.png")
 
 > What differences do you notice in the output? 
 
-Actually, if wanted to use this output for publication, we'd still want to run the chain for longer because some parameters haven't mixed well but let's move one.
+Actually, if wanted to use this output for publication, we'd still want to run the chain for longer because some parameters haven't mixed well but let's move on for now.
 
-Back in RevBayes we can also generate summary trees. We'll use the maximum a posteriori (MAP) tree - this is the tree with the highest posterior probability. This is just one way of summarising the posterior distribution of trees. 
+Back in RevBayes we can also generate summary trees. We'll use the maximum a posteriori (MAP) tree $-$ this is the tree with the highest posterior probability. This is just one way of summarising the posterior distribution of trees. 
 
-It is important to note the summary tree is not the "true" result - the entire posterior distribution (which might contain multiple trees) is the full result. 
+It is important to note the summary tree is not the "true" result $-$ the entire posterior distribution (which might contain multiple trees) is the full result. 
 
 
 ```{r MAP, eval=FALSE}
@@ -240,7 +240,7 @@ treetrace = readTreeTrace("output/primates_JC.trees", treetype = "non-clock")
 map_tree = mapTree(treetrace,"output/primates_JC_MAP.tree")
 ```
 
-You can open this tree in FigTree. Root the tree along the branch leading to `"Galeopterus_variegatus` - this is our outgroup, the flying lemur.
+You can open this tree in FigTree. Root the tree along the branch leading to `"Galeopterus_variegatus` $-$ this is our outgroup, the flying lemur.
 Next let's look at the node support. Go to Node Labels > Display > posterior.
 Your output should look something like this.
 
@@ -252,7 +252,7 @@ knitr::include_graphics("figtree.png")
 
 Create a file called `GTR.Rev` where we'll set up the General Time Reversible (GTR) model.
 
-Under this model both rates of change between states and state frequencies are allowed to vary. This makes a little bit more complicated to set up - but not by much!
+Under this model both rates of change between states and state frequencies are allowed to vary. This makes it a little bit more complicated to set up - but not by much!
 
 First we need to define a prior on the exchangeability rates (= 6) and the state frequencies.
 We'll do this using a Dirichlet prior, which is a useful distribution for specifying proportions. 
@@ -269,23 +269,23 @@ er ~ dnDirichlet(alpha1)
 freq ~ dnDirichlet(alpha2)
 ```
 
-`alpha1` and `alpha2` are the parameters of the Dirichlet distribution. These are used to specify two uniform Dirichlet distributions. 
+`alpha1` and `alpha2` are the parameters of the two Dirichlet distributions. These are used to specify  uniform Dirichlet distributions. 
 These are stochastic variables because we want to estimate the relative rates and state frequencies during the analysis.
-We then set up the Q matrix as a deterministic variables, which will change through the MCMC as `er` and `freq` are updated.
+We then set up the Q matrix as a deterministic variable, which will change through the MCMC as `er` and `freq` are updated.
 
 ```{r Q4, eval=FALSE}
 Q := fnGTR(er, freq)
 Q
 ```
 
-The rest of the set up as the same as before.
+The rest of the set up is the same as before.
 
 ```{r Q5, eval=FALSE}
 seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = "DNA")
 seq.clamp(data)
 ```
 
-Back in your `main.Rev` script, switch out the file used to load subsitution model.
+Back in your `main.Rev` script, switch out the file used to load the subsitution model.
 
 ```{r source2, eval=FALSE}
 source("scripts/GTR.Rev")
@@ -300,7 +300,7 @@ monitors.append( mnFile(filename = "output/primates_GTR.trees", printgen = 10, t
 
 Once your analysis is done, you can examine both log files at the same time in Tracer.
 
->What differences do you notice between the runs? Are there any additional parameters? Are these any differences between equivalent parameters? 
+>What differences do you notice between the runs? Are there any additional parameters? Are there any differences between equivalent parameters? 
 
 Generate a new MAP tree and then compare them.
 
@@ -311,3 +311,4 @@ map_tree = mapTree(treetrace,"output/primates_GTR_MAP.tree")
 
 > Are there any differences between the summary trees?  
 
+A complete set of scripts for this exercise can be downloaded [here](scripts/NULL).

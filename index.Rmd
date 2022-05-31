@@ -13,7 +13,7 @@ knitr::include_graphics("tree.jpg")
 This hands on course focuses on the use of **Bayesian phylogenetics** in paleobiology. 
 You will learn about approaches used to infer trees, divergence times and evolutionary rates. 
 
-The course will take place in the summer semester **Thursdays 16:00-18:00 CET** both in person at Henke Str. and online [via Zoom](https://fau.zoom.us/j/67756970533). We should finish before 18:00 most weeks.
+The course will take place in the summer semester (mostly) **Thursdays 16:00-18:00 CET** both in person at Henke Str. and online [via Zoom](https://fau.zoom.us/j/67756970533). We should finish before 18:00 most weeks.
 
 The first half of the semester will feature a mix of lectures and tutorial material.
 Aside from week one, the course will focus on getting to grips with the software [RevBayes](https://revbayes.github.io). By the end of the course students should understand the principles of Bayesian phylogenetic inference and be able to apply this knowledge to a research question of their choosing.
