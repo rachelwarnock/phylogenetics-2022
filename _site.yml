@@ -15,5 +15,5 @@ navbar:
       href: schedule.html
     - text: "Projects"
       href: projects.html
-    - text: "Today's exercise"
+    - text: "Next exercise"
       href: exercise-05.html    
