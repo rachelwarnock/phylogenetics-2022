@@ -386,7 +386,7 @@ mymcmc.run(generations = 1000)</code></pre>
 <pre class="r"><code># read the tree file back in
 treetrace = readTreeTrace(&quot;output/primates_JC.trees&quot;, treetype = &quot;non-clock&quot;)
 # generate a MAP tree
-map_tree = mapTree(treetrace,&quot;output/primates_JC_MAP.tree&quot;)</code></pre>
+map_tree = mapTree(treetrace, &quot;output/primates_JC_MAP.tree&quot;)</code></pre>
 <p>You can open this tree in FigTree. Root the tree along the branch leading to <code>"Galeopterus_variegatus</code> <span class="math inline">\(-\)</span> this is our outgroup, the flying lemur. Next let’s look at the node support. Go to Node Labels &gt; Display &gt; posterior. Your output should look something like this.</p>
 <p><img src="figtree.png" width="85%" style="padding:10px" /></p>
 </div>
@@ -416,11 +416,11 @@ monitors.append( mnFile(filename = &quot;output/primates_GTR.trees&quot;, printg
 </blockquote>
 <p>Generate a new MAP tree and then compare them.</p>
 <pre class="r"><code>treetrace = readTreeTrace(&quot;output/primates_GTR.trees&quot;, treetype = &quot;non-clock&quot;)
-map_tree = mapTree(treetrace,&quot;output/primates_GTR_MAP.tree&quot;)</code></pre>
+map_tree = mapTree(treetrace, &quot;output/primates_GTR_MAP.tree&quot;)</code></pre>
 <blockquote>
 <p>Are there any differences between the summary trees?</p>
 </blockquote>
-<p>A complete set of scripts for this exercise can be downloaded <a href="scripts/NULL">here</a>.</p>
+<p>A complete set of scripts for this exercise can be downloaded <a href="scripts/exercise04-scripts.zip">here</a>.</p>
 </div>
 </div>
 

@@ -1,5 +1,5 @@
-#NEXUS 
-
+#NEXUS
+[Data source: https://revbayes.github.io/tutorials/dating/]
 Begin data;
 	Dimensions ntax=10 nchar=1000;
 	Format datatype=dna gap=- missing=?;

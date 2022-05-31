@@ -237,7 +237,7 @@ It is important to note the summary tree is not the "true" result $-$ the entire
 # read the tree file back in
 treetrace = readTreeTrace("output/primates_JC.trees", treetype = "non-clock")
 # generate a MAP tree
-map_tree = mapTree(treetrace,"output/primates_JC_MAP.tree")
+map_tree = mapTree(treetrace, "output/primates_JC_MAP.tree")
 ```
 
 You can open this tree in FigTree. Root the tree along the branch leading to `"Galeopterus_variegatus` $-$ this is our outgroup, the flying lemur.
@@ -306,9 +306,9 @@ Generate a new MAP tree and then compare them.
 
 ```{r MAP2, eval=FALSE}
 treetrace = readTreeTrace("output/primates_GTR.trees", treetype = "non-clock")
-map_tree = mapTree(treetrace,"output/primates_GTR_MAP.tree")
+map_tree = mapTree(treetrace, "output/primates_GTR_MAP.tree")
 ```
 
 > Are there any differences between the summary trees?  
 
-A complete set of scripts for this exercise can be downloaded [here](scripts/NULL).
+A complete set of scripts for this exercise can be downloaded [here](scripts/exercise04-scripts.zip).

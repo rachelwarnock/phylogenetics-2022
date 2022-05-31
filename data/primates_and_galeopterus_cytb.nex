@@ -1,5 +1,7 @@
 #NEXUS
 
+[Data source: https://revbayes.github.io/tutorials/ctmc/]
+
 BEGIN DATA;
 DIMENSIONS  NTAX=23 NCHAR=1102;
 FORMAT DATATYPE=DNA GAP=- MISSING=?;
@@ -31,4 +33,3 @@ Galeopterus_variegatus         ATGACCAACATCCGAAAATCCCACCCTCTCCTAAAAATTATTAACCATT
 ;
 
 END;
-

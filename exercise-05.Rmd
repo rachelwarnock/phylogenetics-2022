@@ -187,7 +187,7 @@ Next let's generate a summary tree and open it in FigTree.
 
 ```{r mcc, eval=FALSE}
 trace = readTreeTrace("output/bears_strict.trees")
-mccTree(trace, file="output/bears_strict.mcc.tre")
+mccTree(trace, file = "output/bears_strict.mcc.tre")
 ```
 
 In FigTree, select 'Node Labels' to show the node ages. The select 'Node Bars' and Display > age_95%_HPD. This will show you the Bayesian Credible Intervals for each node. It should look something like this.    
@@ -279,3 +279,4 @@ You can also take a look at the MCC tree to see the differences for other nodes.
 
 > How would you intepret these differences or similarities? What information are we gaining from the sequence data? What if our prior information is incorrect?
 
+A complete set of scripts for this exercise can be downloaded [here](scripts/exercise05-scripts.zip).
