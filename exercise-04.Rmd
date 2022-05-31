@@ -285,7 +285,7 @@ seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = "DNA")
 seq.clamp(data)
 ```
 
-Back in your `main.Rev` script, switch out the file used to load the subsitution model.
+Back in your `main.Rev` script, switch out the file used to load the substitution model.
 
 ```{r source2, eval=FALSE}
 source("scripts/GTR.Rev")

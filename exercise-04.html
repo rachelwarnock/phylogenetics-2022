@@ -405,7 +405,7 @@ Q</code></pre>
 <p>The rest of the set up is the same as before.</p>
 <pre class="r"><code>seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = &quot;DNA&quot;)
 seq.clamp(data)</code></pre>
-<p>Back in your <code>main.Rev</code> script, switch out the file used to load the subsitution model.</p>
+<p>Back in your <code>main.Rev</code> script, switch out the file used to load the substitution model.</p>
 <pre class="r"><code>source(&quot;scripts/GTR.Rev&quot;)</code></pre>
 <p>Change the name of your output files (so they don’t overwrite the exisiting files) and rerun your analysis using the GTR model.</p>
 <pre class="r"><code>monitors.append( mnModel(filename = &quot;output/primates_GTR.log&quot;, printgen = 10) )
