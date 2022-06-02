@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \
 
-# Bayesian tree inferences using RevBayes
+# Bayesian tree inference using node dating RevBayes
 
 In this exercise we'll estimate of a time tree of bears. This means that the resulting branch lengths will represent time, instead of expected substitutions per site. The data we'll use is an alignment (1,000 bp) of cytochrome b sequences for 8 living bear species $-$ you can download this from [here](data/bears_cytb.nex). 
 
@@ -105,7 +105,7 @@ moves.append( mvSubtreeScale(tree, weight = num_taxa/5.0) )
 #TODO: add a ref to dos Reis for the mx bound
 ```
 
-## Strict clock model
+## Strict clock model {#strict}
 
 Next we'll specify a strict clock model to describe the rate of character change over time. This model assumes that the rate is constant over time and across all branches in our tree. 
 
@@ -136,7 +136,7 @@ seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = "DNA", branchRates = branch_rates)
 Back in `main.Rev` add the following lines to include the tree, clock and substitution models.
 
 ```{r source, eval=FALSE}
-# birth death model + node calibratons
+# birth death model + node calibrations
 source("scripts/node_dating.Rev")
 # clock model
 source("scripts/clock_strict.Rev")
@@ -254,7 +254,7 @@ Generate another summary tree for this analysis.
 
 > Do you notice any differences between the trees?
 
-## Running the analysis under the prior
+## Running the analysis under the prior {#prior}
 
 Finally today, we'll run our analysis **under the prior**. This means we'll examine the output excluding the likelihood, i.e., excluding any information that comes from the sequence data.
 

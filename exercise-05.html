@@ -251,7 +251,7 @@ $(document).ready(function () {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="exercise-05.html">Next exercise</a>
+  <a href="exercise-06.html">Next exercise</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -271,8 +271,8 @@ $(document).ready(function () {
 
 <p><br />
 </p>
-<div id="bayesian-tree-inferences-using-revbayes" class="section level1">
-<h1>Bayesian tree inferences using RevBayes</h1>
+<div id="bayesian-tree-inference-using-node-dating-revbayes" class="section level1">
+<h1>Bayesian tree inference using node dating RevBayes</h1>
 <p>In this exercise we’ll estimate of a time tree of bears. This means that the resulting branch lengths will represent time, instead of expected substitutions per site. The data we’ll use is an alignment (1,000 bp) of cytochrome b sequences for 8 living bear species <span class="math inline">\(-\)</span> you can download this from <a href="data/bears_cytb.nex">here</a>.</p>
 <p>For this exercise create a folder called <code>exercise 5</code>. Then create two sub-directories: <code>data</code> and <code>scripts</code>. For divergence time estimation we need three model components, so we’ll create the following scripts:</p>
 <ol style="list-style-type: decimal">
@@ -325,7 +325,7 @@ moves.append( mvFNPR(tree, weight = num_taxa/4) )
 moves.append( mvNodeTimeSlideUniform(tree, weight = num_taxa) )
 moves.append( mvSubtreeScale(tree, weight = num_taxa/5.0) )</code></pre>
 </div>
-<div id="strict-clock-model" class="section level2">
+<div id="strict" class="section level2">
 <h2>Strict clock model</h2>
 <p>Next we’ll specify a strict clock model to describe the rate of character change over time. This model assumes that the rate is constant over time and across all branches in our tree.</p>
 <p>Open your <code>clock_strict.Rev</code> script. We don’t know the rate of evolution, so we’ll use an exponential prior.</p>
@@ -344,7 +344,7 @@ moves.append( mvScale(branch_rates, lambda = 0.5, tune = true, weight = 3.0) )</
 <div id="mcmc-settings" class="section level2">
 <h2>MCMC settings</h2>
 <p>Back in <code>main.Rev</code> add the following lines to include the tree, clock and substitution models.</p>
-<pre class="r"><code># birth death model + node calibratons
+<pre class="r"><code># birth death model + node calibrations
 source(&quot;scripts/node_dating.Rev&quot;)
 # clock model
 source(&quot;scripts/clock_strict.Rev&quot;)
@@ -421,7 +421,7 @@ monitors.append( mnFile(filename = &quot;output/bears_relaxed.trees&quot;, print
 <p>Do you notice any differences between the trees?</p>
 </blockquote>
 </div>
-<div id="running-the-analysis-under-the-prior" class="section level2">
+<div id="prior" class="section level2">
 <h2>Running the analysis under the prior</h2>
 <p>Finally today, we’ll run our analysis <strong>under the prior</strong>. This means we’ll examine the output excluding the likelihood, i.e., excluding any information that comes from the sequence data.</p>
 <p>Switch back to the strict clock model (it’ll run faster since this model has fewer moves). And change the output file names.</p>
