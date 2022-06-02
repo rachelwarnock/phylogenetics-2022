@@ -318,10 +318,10 @@ moves.append( mvSlide(origin_time, weight=1.0) )</code></pre>
 <pre class="r"><code>tree ~ dnFBDP(lambda = speciation_rate, mu = extinction_rate, psi = fossil_samp_rate, rho = rho, origin = origin_time, taxa = taxa)
 
 # moves to search tree space
-moves.append( mvFNPR(tree, tune = true, weight = 15.0) )
-moves.append( mvCollapseExpandFossilBranch(tree, origin_time, tune = true, weight = 6.0) )
-moves.append( mvNodeTimeSlideUniform(tree, tune = true, weight = 40.0) )
-moves.append( mvRootTimeSlideUniform(tree, origin_time, tune = true, weight = 5.0) )</code></pre>
+moves.append( mvFNPR(tree, weight = 15.0) )
+moves.append( mvCollapseExpandFossilBranch(tree, origin_time, weight = 6.0) )
+moves.append( mvNodeTimeSlideUniform(tree, weight = 40.0) )
+moves.append( mvRootTimeSlideUniform(tree, origin_time, weight = 5.0) )</code></pre>
 <p>We can create clade constraints to monitor the age of specific clades of interest. Let’s do that for the clade containing living bears.</p>
 <pre class="r"><code>clade_extant = clade(&quot;Ailuropoda_melanoleuca&quot;,&quot;Tremarctos_ornatus&quot;,&quot;Melursus_ursinus&quot;,
                     &quot;Ursus_arctos&quot;,&quot;Ursus_maritimus&quot;,&quot;Helarctos_malayanus&quot;,
@@ -346,7 +346,7 @@ for(i in 1:fossils.size())
 }
 
 # moves on fossil ages
-moves.append( mvFossilTimeSlideUniform(tree, origin_time, tune = true, weight = 5.0) )</code></pre>
+moves.append( mvFossilTimeSlideUniform(tree, origin_time, weight = 5.0) )</code></pre>
 </div>
 </div>
 <div id="strict-clock-model" class="section level2">
