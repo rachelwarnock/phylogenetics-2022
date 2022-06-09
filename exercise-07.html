@@ -11,7 +11,7 @@
 
 
 
-<title>Phylogenetics</title>
+<title>exercise-07.knit</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -265,60 +265,141 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Phylogenetics</h1>
 
 </div>
 
 
-<p><img src="tree.jpg" width="50%" style="float:right; padding:30px" /></p>
 <p><br />
 </p>
-<div id="course-description" class="section level1">
-<h1>Course description</h1>
-<p>This hands on course focuses on the use of <strong>Bayesian
-phylogenetics</strong> in paleobiology. You will learn about approaches
-used to infer trees, divergence times and evolutionary rates.</p>
-<p>The course will take place in the summer semester (mostly)
-<strong>Thursdays 16:00-18:00 CET</strong> both in person at Henke Str.
-and online <a href="https://fau.zoom.us/j/67756970533">via Zoom</a>. We
-should finish before 18:00 most weeks.</p>
-<p>The first half of the semester will feature a mix of lectures and
-tutorial material. Aside from week one, the course will focus on getting
-to grips with the software <a
-href="https://revbayes.github.io">RevBayes</a>. By the end of the course
-students should understand the principles of Bayesian phylogenetic
-inference and be able to apply this knowledge to a research question of
-their choosing. During the second half of the semester each participant
-will work on their own project on a topic of their choice. You will also
-have the opportunity to present your research and any challenges to our
-guest lectures.</p>
-<p>Course organizers: <strong>Rachel Warnock</strong> and <strong>Laura
-Mulvey</strong>.</p>
-<p>Celebrity guests: <strong>Joëlle Barido-Sottani</strong> (June 16)
-&amp; <strong>Sebastian Hoehna</strong> (July 7).</p>
-<p>There are no tasks to complete before the course begins!</p>
-<p><br />
-</p>
+<div
+id="model-adequacy-using-posterior-predictive-simulations-in-revbayes"
+class="section level1">
+<h1>Model adequacy using posterior predictive simulations in
+RevBayes</h1>
+<p>In this exercise we will use posterior predictive simulations to
+assess the fit of an evolutionary model to our data. We will test two
+substitution models, Mk and Mkv+G. The code highlighted in this tutorial
+is just to show the more important parts of a script. <strong>You do not
+need to copy and paste them into the terminal</strong>. Instead, edit
+the scripts in your editor and use <code>source(" ")</code>to read them
+into RevBayes.</p>
+<p>There are 6 rev scripts for the analysis:</p>
+<ol style="list-style-type: decimal">
+<li><code>MCMC_Simulation.Rev</code> runs an MCMC on your empirical
+dataset and samples parameters from the posterior</li>
+<li><code>PP_Simulation.Rev</code> takes the output from the first MCMC
+to simulated new datasets under the chosen model</li>
+<li><code>PP_MCMC.Rev</code> runs an MCMC for all the new datasets</li>
+<li><code>Tree_Summary.Rev</code> generates test statistics</li>
+<li><code>mk_Model.Rev</code> Mk substitution model script</li>
+<li><code>mk+GV_Model.Rev</code> Mk+GV substitution model script</li>
+</ol>
+<p>and 1 R script <code>PPS_Analsis.r</code> to summarise the
+output.</p>
+<p>You can download everything <a
+href="scripts/exercise07.zip">here</a>. Note unlike previous exercises
+in this course, you don’t need to write any scripts from scratch. Simply
+modify the existing scripts to run the analysis.</p>
+<div id="read-in-the-data-and-define-the-subsitution-model-to-test"
+class="section level3">
+<h3>Read in the data and define the subsitution model to test</h3>
+<p>Start with <code>MCMC_Simulation.rev</code> script. We first need to
+read in our data and define which substitution model we will use for the
+analysis, either Mk or Mkv+G.</p>
+<pre class="r"><code>morpho &lt;- readDiscreteCharacterData(&quot;data/Agnolin_2007a_paleobiodb.nex&quot;)
+analysis_name = &quot;model_adequacy&quot; 
+model_name = &quot;model&quot; # what model are you testing? e.g. &quot;mk&quot;
+model_file_name = &quot;scripts/&quot;+model_name+&quot;_Model.Rev&quot;</code></pre>
+<p><strong>Note</strong>: These variables are at the start of the rev
+scripts 1-4. Make sure you add the model you want to use to each
+script.</p>
+<p>This monitor samples the posterior and saves it to a file that can be
+used to simulate new datasets under the chosen model.</p>
+<pre class="r"><code>monitors.append( mnStochasticVariable(filename=&quot;output/&quot;  + model_name +  &quot;/output/&quot; + analysis_name + &quot;_posterior.var&quot;, printgen=10) )</code></pre>
 </div>
-<div id="course-evaluation" class="section level1">
-<h1>Course evaluation</h1>
-<p>At the end of the course you should produce a short report based on
-your research findings. We will shortly provide you with a template and
-guidelines. The deadline for the report is <strong>Friday 29th of
-July</strong>.</p>
-<p>Note: the full title of this course is “Models in paleobiology and
-phylogenetics (RL-V3 MPP)”.</p>
-<p><br />
-</p>
+<div id="mk-substitution-model" class="section level3">
+<h3>Mk substitution model</h3>
+<p>Helper variables and branch lengths are set up as in previous
+exercises.</p>
+<p>Specify the Jukes-Cantor substitution model applied uniformly to all
+sites. Remember the Mk model is a generalization of the Jukes-Cantor
+model.</p>
+<pre class="r"><code>Q := fnJC(4) # this matrix has 4 different character states. 
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;)</code></pre>
 </div>
-<div id="any-questions" class="section level1">
-<h1>Any questions?</h1>
-<p>Email <a href="mailto:rachel.warnock@fau.de"
-class="email">rachel.warnock@fau.de</a></p>
-<p><br />
-<br />
-</p>
-<p>Images: rawpixel.com</p>
+<div id="mkv-gamma-substitution-model" class="section level3">
+<h3>Mkv + Gamma substitution model</h3>
+<p>Set up gamma-distributed rate variation.</p>
+<pre class="r"><code>alpha_morpho ~ dnUniform( 0.0, 1E6 )
+rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+moves.append( mvScale(alpha_morpho, lambda=1, weight=2.0) )</code></pre>
+<p>To account for ascertainment bias. Change the coding to
+<code>variable</code>.</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree=phylogeny, siteRates=rates_morpho, Q=Q, type=&quot;Standard&quot;,  coding=&quot;variable&quot;)</code></pre>
+</div>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p>Once you have chosen your model you can source the first script.</p>
+<pre class="r"><code>source(&quot;scripts/1_MCMC_Simulation.Rev)</code></pre>
+</div>
+<div id="simulating-new-datasets" class="section level3">
+<h3>Simulating new datasets</h3>
+<p>We can now simulate new datasets. In this script pay attention to the
+<code>thinning</code> variable. This number controls the number of
+datasets simulated. We set it too 100 here so every 100th tree is used
+in the <code>.var</code> file. In a standard analysis you would set this
+a lot lower (e.g. 2).</p>
+<pre class="r"><code>pps.run(thinning=100)</code></pre>
+<pre class="r"><code>source(&quot;scripts/2_PP_Simulation.Rev&quot;)</code></pre>
+</div>
+<div id="mcmc-for-simulated-datasets" class="section level3">
+<h3>MCMC for simulated datasets</h3>
+<p>Next we need to run an MCMC for all of our simulated datasets. This
+function runs an MCMC for all datasets in the directory file path.</p>
+<pre class="r"><code>my_pps_mcmc = posteriorPredictiveAnalysis(mymcmc, directory)
+my_pps_mcmc.run(generations=1000)</code></pre>
+<pre class="r"><code>source(&quot;scripts/3_PP_MCMC.Rev&quot;)</code></pre>
+</div>
+<div id="generating-test-statistics" class="section level3">
+<h3>Generating test statistics</h3>
+<p>We can then generate some test statistics to assess how well each
+model fit our data. This script calculates the tree length and the
+Robinson-Foulds (RF) distance for both the empirical dataset and
+simulated datasets. RF distance is one of several ways to measure the
+distance between trees.</p>
+<pre class="r"><code>source(&quot;scripts/4_Tree_Summary.Rev&quot;)</code></pre>
+<p>Now run the whole analysis again (scripts 1-4) using the other
+morphological model. Don’t forget to change the model name in each
+one!</p>
+</div>
+<div id="producing-figures" class="section level3">
+<h3>Producing figures</h3>
+<p>Use the R script <code>PPS_Analysis.r</code>. If everything has been
+run correctly up to now, you only need to set your working directory and
+run this file.</p>
+</div>
+<div id="analysing-the-output" class="section level3">
+<h3>Analysing the output</h3>
+<p>The R script should produce a <code>Figures</code> directory
+containing 3 files:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>Boxplots.pdf</code> This figure contains boxplots of the
+effect sizes for the 4 test statistics used here. The closer the plot is
+to zero the more similar the simulated results are to the
+empirical.</p></li>
+<li><p><code>Histograms.pdf</code> This figure shows the distribution of
+tree length and Robinson Foulds distance across the simulated datasets.
+The blue line shows the empirical values and the pink broken line shows
+the mean of the simulated data.</p></li>
+<li><p><code>results.csv</code> Stores the effect sizes for each
+model.</p></li>
+</ol>
+<p><img src="trace5.png" width="85%" style="padding:10px" /></p>
+<blockquote>
+<p>Questions?</p>
+</blockquote>
+</div>
 </div>
 
 

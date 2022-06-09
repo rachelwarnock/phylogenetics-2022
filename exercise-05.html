@@ -251,7 +251,7 @@ $(document).ready(function () {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="exercise-06.html">Next exercise</a>
+  <a href="exercise-07.html">Next exercise</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -271,19 +271,33 @@ $(document).ready(function () {
 
 <p><br />
 </p>
-<div id="bayesian-tree-inference-using-node-dating-revbayes" class="section level1">
+<div id="bayesian-tree-inference-using-node-dating-revbayes"
+class="section level1">
 <h1>Bayesian tree inference using node dating RevBayes</h1>
-<p>In this exercise we’ll estimate of a time tree of bears. This means that the resulting branch lengths will represent time, instead of expected substitutions per site. The data we’ll use is an alignment (1,000 bp) of cytochrome b sequences for 8 living bear species <span class="math inline">\(-\)</span> you can download this from <a href="data/bears_cytb.nex">here</a>.</p>
-<p>For this exercise create a folder called <code>exercise 5</code>. Then create two sub-directories: <code>data</code> and <code>scripts</code>. For divergence time estimation we need three model components, so we’ll create the following scripts:</p>
+<p>In this exercise we’ll estimate of a time tree of bears. This means
+that the resulting branch lengths will represent time, instead of
+expected substitutions per site. The data we’ll use is an alignment
+(1,000 bp) of cytochrome b sequences for 8 living bear species <span
+class="math inline">\(-\)</span> you can download this from <a
+href="data/bears_cytb.nex">here</a>.</p>
+<p>For this exercise create a folder called <code>exercise 5</code>.
+Then create two sub-directories: <code>data</code> and
+<code>scripts</code>. For divergence time estimation we need three model
+components, so we’ll create the following scripts:</p>
 <ol style="list-style-type: decimal">
-<li><code>main.Rev</code> for reading the data, setting up the the tree model and MCMC settings</li>
+<li><code>main.Rev</code> for reading the data, setting up the the tree
+model and MCMC settings</li>
 <li><code>node_dating.Rev</code> for the time tree model.</li>
 <li><code>GTR.Rev</code> for the substitution models.</li>
-<li><code>clock_strict.Rev</code> and <code>clock_relaxed_lognormal.Rev</code> for alternative clock models. Edit the scripts in a text editor of your choice.</li>
+<li><code>clock_strict.Rev</code> and
+<code>clock_relaxed_lognormal.Rev</code> for alternative clock models.
+Edit the scripts in a text editor of your choice.</li>
 </ol>
-<div id="read-in-the-data-and-define-helper-variables" class="section level2">
+<div id="read-in-the-data-and-define-helper-variables"
+class="section level2">
 <h2>Read in the data and define helper variables</h2>
-<p>Start with your <code>main.Rev</code> script. As before, we’ll start by reading in the data and defining some helper variables.</p>
+<p>Start with your <code>main.Rev</code> script. As before, we’ll start
+by reading in the data and defining some helper variables.</p>
 <pre class="r"><code>data &lt;- readDiscreteCharacterData(&quot;data/bears_cytb.nex&quot;)</code></pre>
 <pre class="r"><code>num_taxa &lt;- data.ntaxa() # number of taxa
 num_branches &lt;- 2 * num_taxa - 2 # number of branches in an *rooted* tree
@@ -294,19 +308,40 @@ monitors = VectorMonitors()</code></pre>
 </div>
 <div id="time-tree-model" class="section level2">
 <h2>Time tree model</h2>
-<p>For time calibrated tree inference we need to use a tree prior that has branch lengths in units of time. We often use birth-death process tree models for this purpose.</p>
+<p>For time calibrated tree inference we need to use a tree prior that
+has branch lengths in units of time. We often use birth-death process
+tree models for this purpose.</p>
 <p>Go to your <code>node_dating.Rev</code> script to set this up.</p>
-<p>Since all the taxa included in the analysis in this exercise are living species we’ll use a birth-death model that doesn’t incorporate the fossil sampling process. Two key parameters are the speciation rate (<span class="math inline">\(\lambda\)</span>) and the extinction rate (<span class="math inline">\(\mu\)</span>) We will assume these rates are constant over time and place exponential priors on each of these.</p>
+<p>Since all the taxa included in the analysis in this exercise are
+living species we’ll use a birth-death model that doesn’t incorporate
+the fossil sampling process. Two key parameters are the speciation rate
+(<span class="math inline">\(\lambda\)</span>) and the extinction rate
+(<span class="math inline">\(\mu\)</span>) We will assume these rates
+are constant over time and place exponential priors on each of
+these.</p>
 <pre class="r"><code>speciation_rate ~ dnExponential(10)
 extinction_rate ~ dnExponential(10)</code></pre>
-<p>Each parameter is a stochastic variable drawn from a different exponential distribution with rates. Note an exponential distribution with <span class="math inline">\(\delta\)</span> = 10 has an expected value (mean) of <span class="math inline">\(1/\delta\)</span> = 0.1.</p>
+<p>Each parameter is a stochastic variable drawn from a different
+exponential distribution with rates. Note an exponential distribution
+with <span class="math inline">\(\delta\)</span> = 10 has an expected
+value (mean) of <span class="math inline">\(1/\delta\)</span> = 0.1.</p>
 <p>Next specify the moves of these parameters.</p>
 <pre class="r"><code>moves.append( mvScale(speciation_rate, lambda = 0.5, tune = true, weight = 3.0) )
 moves.append( mvScale(extinction_rate, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
-<p>The argument <code>tune = true</code> here means that the MCMC will find the optimum size of the proposal for these moves during the initial part of the run.</p>
-<p><span class="math inline">\(\rho\)</span> is the third parameter in our tree model and is the probability of extant species sampling. Since we sample all extant bears, we’ll specify this probability as a constant variable = 1.0 using the <code>&lt;-</code> operator.</p>
+<p>The argument <code>tune = true</code> here means that the MCMC will
+find the optimum size of the proposal for these moves during the initial
+part of the run.</p>
+<p><span class="math inline">\(\rho\)</span> is the third parameter in
+our tree model and is the probability of extant species sampling. Since
+we sample all extant bears, we’ll specify this probability as a constant
+variable = 1.0 using the <code>&lt;-</code> operator.</p>
 <pre class="r"><code>rho &lt;- 1.0</code></pre>
-<p>Next we add the calibration information. We’ll use the age of one of the oldest known bear fossils (<em>Zaragocyon daamsi</em>, range = 20–22.8 Ma) and a previous estimate (∼49 Ma) for the age of caniforms, which is the clade containing bears and other “dog-like” mammals. Since we don’t have any more information about the age between these bounds, we’ll use a uniform prior.</p>
+<p>Next we add the calibration information. We’ll use the age of one of
+the oldest known bear fossils (<em>Zaragocyon daamsi</em>, range =
+20–22.8 Ma) and a previous estimate (∼49 Ma) for the age of caniforms,
+which is the clade containing bears and other “dog-like” mammals. Since
+we don’t have any more information about the age between these bounds,
+we’ll use a uniform prior.</p>
 <pre class="r"><code># min and max bounds
 root_min &lt;- 22.8
 root_max &lt;- 49.0
@@ -316,7 +351,9 @@ root_age ~ dnUniform(root_min, root_max)
 
 # assign a move to sample the root age
 moves.append( mvScale(root_age, lambda = 1, tune = true, weight = 5.0) )</code></pre>
-<p>Now that we’ve specified the parameters of the birth-death model and the root age prior, we can use these to define the prior distribution on the tree topology and divergence times.</p>
+<p>Now that we’ve specified the parameters of the birth-death model and
+the root age prior, we can use these to define the prior distribution on
+the tree topology and divergence times.</p>
 <pre class="r"><code>tree ~ dnBDP(lambda = speciation_rate, mu = extinction_rate, rho = rho, rootAge = root_age, taxa = taxa)
 
 # moves to search tree space
@@ -327,8 +364,11 @@ moves.append( mvSubtreeScale(tree, weight = num_taxa/5.0) )</code></pre>
 </div>
 <div id="strict" class="section level2">
 <h2>Strict clock model</h2>
-<p>Next we’ll specify a strict clock model to describe the rate of character change over time. This model assumes that the rate is constant over time and across all branches in our tree.</p>
-<p>Open your <code>clock_strict.Rev</code> script. We don’t know the rate of evolution, so we’ll use an exponential prior.</p>
+<p>Next we’ll specify a strict clock model to describe the rate of
+character change over time. This model assumes that the rate is constant
+over time and across all branches in our tree.</p>
+<p>Open your <code>clock_strict.Rev</code> script. We don’t know the
+rate of evolution, so we’ll use an exponential prior.</p>
 <pre class="r"><code>branch_rates ~ dnExponential(10.0)
 
 moves.append( mvScale(branch_rates, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
@@ -336,21 +376,28 @@ moves.append( mvScale(branch_rates, lambda = 0.5, tune = true, weight = 3.0) )</
 </div>
 <div id="substitution-model" class="section level2">
 <h2>Substitution model</h2>
-<p>Next we’ll specify the GTR substitution model, which describes the probability of transitioning from one character state to another.</p>
-<p><strong>Hint</strong> you can use your code or script from the <a href="exercise-04.html#GTR">previous exercise</a>.</p>
-<p>We just need to make one change from the previous exercise. We need to specify the branch rates using the argument <code>branchRates = branch_rates</code>. This tells the function that we’re using a molecular clock.</p>
+<p>Next we’ll specify the GTR substitution model, which describes the
+probability of transitioning from one character state to another.</p>
+<p><strong>Hint</strong> you can use your code or script from the <a
+href="exercise-04.html#GTR">previous exercise</a>.</p>
+<p>We just need to make one change from the previous exercise. We need
+to specify the branch rates using the argument
+<code>branchRates = branch_rates</code>. This tells the function that
+we’re using a molecular clock.</p>
 <pre class="r"><code>seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = &quot;DNA&quot;, branchRates = branch_rates)</code></pre>
 </div>
 <div id="mcmc-settings" class="section level2">
 <h2>MCMC settings</h2>
-<p>Back in <code>main.Rev</code> add the following lines to include the tree, clock and substitution models.</p>
+<p>Back in <code>main.Rev</code> add the following lines to include the
+tree, clock and substitution models.</p>
 <pre class="r"><code># birth death model + node calibrations
 source(&quot;scripts/node_dating.Rev&quot;)
 # clock model
 source(&quot;scripts/clock_strict.Rev&quot;)
 # substitution model
 source(&quot;scripts/GTR.Rev&quot;)</code></pre>
-<p>The MCMC set up is very similar to before. First we create the variable <code>mymodel</code> to finish the model set up.</p>
+<p>The MCMC set up is very similar to before. First we create the
+variable <code>mymodel</code> to finish the model set up.</p>
 <pre class="r"><code>mymodel = model(tree)
 mymodel</code></pre>
 <p>Then we define a set of monitors to capture the output.</p>
@@ -360,29 +407,49 @@ monitors.append( mnModel(filename = &quot;output/bears_strict.log&quot;, printge
 monitors.append( mnFile(filename = &quot;output/bears_strict.trees&quot;, printgen = 50, tree) )
 # parameter values printed to screen during the MCMC
 monitors.append( mnScreen(printgen = 500, root_age) )</code></pre>
-<p>Finally, we’ll set up the MCMC run using the <code>mcmc</code> function, specifying our model, the vector of monitors and the vector of moves and run the chain for 10000 generations.</p>
+<p>Finally, we’ll set up the MCMC run using the <code>mcmc</code>
+function, specifying our model, the vector of monitors and the vector of
+moves and run the chain for 10000 generations.</p>
 <pre class="r"><code>mymcmc = mcmc(mymodel, monitors, moves)
 mymcmc.run(generations = 50000, tuningInterval = 5000)</code></pre>
-<p>Note that this time we’ve adding the argument <code>tuningInterval = 1000</code>. This tells the chain how long to spend optimising the MCMC moves. Different datasets behave differently <span class="math inline">\(-\)</span> the above option partly automates the selection of move parameters that maximise efficiency of the MCMC.</p>
-<p>This might take a while run pretty quickly. Meanwhile, you could start setting up the relaxed clock model.</p>
+<p>Note that this time we’ve adding the argument
+<code>tuningInterval = 1000</code>. This tells the chain how long to
+spend optimising the MCMC moves. Different datasets behave differently
+<span class="math inline">\(-\)</span> the above option partly automates
+the selection of move parameters that maximise efficiency of the
+MCMC.</p>
+<p>This might take a while run pretty quickly. Meanwhile, you could
+start setting up the relaxed clock model.</p>
 </div>
 <div id="evaluating-the-output" class="section level2">
 <h2>Evaluating the output</h2>
-<p>As before, open your <code>.log</code> file in Tracer. It should look something like this.</p>
+<p>As before, open your <code>.log</code> file in Tracer. It should look
+something like this.</p>
 <p><img src="trace3.png" width="85%" style="padding:10px" /></p>
 <blockquote>
-<p>Explore the output. Can you identify the different parameters? Has the analysis converged? How would you interpret the root age output?</p>
+<p>Explore the output. Can you identify the different parameters? Has
+the analysis converged? How would you interpret the root age output?</p>
 </blockquote>
 <p>Next let’s generate a summary tree and open it in FigTree.</p>
 <pre class="r"><code>trace = readTreeTrace(&quot;output/bears_strict.trees&quot;)
 mccTree(trace, file = &quot;output/bears_strict.mcc.tre&quot;)</code></pre>
-<p>In FigTree, select ‘Node Labels’ to show the node ages. The select ‘Node Bars’ and Display &gt; age_95%_HPD. This will show you the Bayesian Credible Intervals for each node. It should look something like this.</p>
+<p>In FigTree, select ‘Node Labels’ to show the node ages. The select
+‘Node Bars’ and Display &gt; age_95%_HPD. This will show you the
+Bayesian Credible Intervals for each node. It should look something like
+this.</p>
 <p><img src="mcc_bears.png" width="85%" style="padding:10px" /></p>
 </div>
 <div id="relaxed-clock-model" class="section level2">
 <h2>Relaxed clock model</h2>
-<p>Now let’s tree running the analysis with a relaxed clock model. This family of models allows rates to vary across the tree. We’ll use the uncorrelated lognormal model, which is simple and widely used. It assumes each branch on the tree has an independent rate, drawn from a lognormal distribution.</p>
-<p>Open your <code>clock_relaxed_lognormal.Rev</code> script. Ordinarily, we don’t know the mean or the variance of the lognormal distribution, so we’ll define these as stochastic variables that will be estimated from the data.</p>
+<p>Now let’s tree running the analysis with a relaxed clock model. This
+family of models allows rates to vary across the tree. We’ll use the
+uncorrelated lognormal model, which is simple and widely used. It
+assumes each branch on the tree has an independent rate, drawn from a
+lognormal distribution.</p>
+<p>Open your <code>clock_relaxed_lognormal.Rev</code> script.
+Ordinarily, we don’t know the mean or the variance of the lognormal
+distribution, so we’ll define these as stochastic variables that will be
+estimated from the data.</p>
 <pre class="r"><code># prior on the mean of the lognormal distribution
 branch_rates_mean ~ dnExponential(10.0)
 # move on this parameter
@@ -406,15 +473,21 @@ moves.append( mvVectorScale(branch_rates, lambda = 0.5, tune = true, weight = 4.
 <p>Back in <code>main.Rev</code> switch out your clock models.</p>
 <pre class="r"><code># clock model
 source(&quot;scripts/clock_relaxed_lognormal.Rev&quot;)</code></pre>
-<p>Next we need to change the name of the output files, so we don’t overwrite the existing files.</p>
+<p>Next we need to change the name of the output files, so we don’t
+overwrite the existing files.</p>
 <pre class="r"><code># parameters printed to file
 monitors.append( mnModel(filename = &quot;output/bears_relaxed.log&quot;, printgen = 10) )
 # trees printed to file
 monitors.append( mnFile(filename = &quot;output/bears_relaxed.trees&quot;, printgen = 10, tree) )</code></pre>
-<p>Once this analysis is done, open both sets of log files in Tracer. And if you select two Trace files simultaneously using the shift key, you can examine estimates for the same parameter from two separate analyses. You should see something like this.</p>
+<p>Once this analysis is done, open both sets of log files in Tracer.
+And if you select two Trace files simultaneously using the shift key,
+you can examine estimates for the same parameter from two separate
+analyses. You should see something like this.</p>
 <p><img src="trace4.png" width="85%" style="padding:10px" /></p>
 <blockquote>
-<p>What differences do you notice between the two analyses? In particular, what about the root age? Which model is more likely to be correct?</p>
+<p>What differences do you notice between the two analyses? In
+particular, what about the root age? Which model is more likely to be
+correct?</p>
 </blockquote>
 <p>Generate another summary tree for this analysis.</p>
 <blockquote>
@@ -423,20 +496,30 @@ monitors.append( mnFile(filename = &quot;output/bears_relaxed.trees&quot;, print
 </div>
 <div id="prior" class="section level2">
 <h2>Running the analysis under the prior</h2>
-<p>Finally today, we’ll run our analysis <strong>under the prior</strong>. This means we’ll examine the output excluding the likelihood, i.e., excluding any information that comes from the sequence data.</p>
-<p>Switch back to the strict clock model (it’ll run faster since this model has fewer moves). And change the output file names.</p>
+<p>Finally today, we’ll run our analysis <strong>under the
+prior</strong>. This means we’ll examine the output excluding the
+likelihood, i.e., excluding any information that comes from the sequence
+data.</p>
+<p>Switch back to the strict clock model (it’ll run faster since this
+model has fewer moves). And change the output file names.</p>
 <pre class="r"><code># parameters printed to file
 monitors.append( mnModel(filename = &quot;output/bears_priors.log&quot;, printgen = 10) )
 # trees printed to file
 monitors.append( mnFile(filename = &quot;output/bears_prior.trees&quot;, printgen = 10, tree) )</code></pre>
-<p>Then all we need to do is add the argument <code>underPrior = TRUE</code> to the MCMC function.</p>
+<p>Then all we need to do is add the argument
+<code>underPrior = TRUE</code> to the MCMC function.</p>
 <pre class="r"><code>mymcmc.run(generations = 50000, tuningInterval = 5000, underPrior = TRUE)</code></pre>
-<p>Examine the output in Tracer and this time look at the differences between the prior and posterior root ages.</p>
-<p>You can also take a look at the MCC tree to see the differences for other nodes.</p>
+<p>Examine the output in Tracer and this time look at the differences
+between the prior and posterior root ages.</p>
+<p>You can also take a look at the MCC tree to see the differences for
+other nodes.</p>
 <blockquote>
-<p>How would you intepret these differences or similarities? What information are we gaining from the sequence data? What if our prior information is incorrect?</p>
+<p>How would you intepret these differences or similarities? What
+information are we gaining from the sequence data? What if our prior
+information is incorrect?</p>
 </blockquote>
-<p>A complete set of scripts for this exercise can be downloaded <a href="scripts/exercise05-scripts.zip">here</a>.</p>
+<p>A complete set of scripts for this exercise can be downloaded <a
+href="scripts/exercise05-scripts.zip">here</a>.</p>
 </div>
 </div>
 

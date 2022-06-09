@@ -166,4 +166,21 @@ kbl(dt) %>%
 
 ```
 
+eek 6 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/class07.pdf","exercise-07.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 7"),
+                 topics = c("Morphological evolution, model testing and model adequacy", 
+                            "Model adequacy in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
 

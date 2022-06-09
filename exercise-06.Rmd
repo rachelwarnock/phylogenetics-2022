@@ -152,7 +152,7 @@ moves.append( mvFossilTimeSlideUniform(tree, origin_time, weight = 5.0) )
 
 ## Strict clock model
 
-For simplicity we'll a strict clock model to describe the rate of character change over time, assuming the rate is constant over time and across all branches in our tree. **Hint**: you can use your clock script from the [previous exercise](exercise-04.html#strict).
+For simplicity we'll use a strict clock model to describe the rate of character change over time, assuming the rate is constant over time and across all branches in our tree. **Hint**: you can use your clock script from the [previous exercise](exercise-04.html#strict).
 
 Open your `clock_strict_morpho.Rev` script. We don't know the rate of evolution, so as before we'll use an exponential prior. 
 
