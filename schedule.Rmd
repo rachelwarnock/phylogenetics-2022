@@ -166,7 +166,7 @@ kbl(dt) %>%
 
 ```
 
-eek 6 materials
+# Week 7 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
