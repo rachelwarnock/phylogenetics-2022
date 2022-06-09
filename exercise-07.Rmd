@@ -130,19 +130,19 @@ The R script should produce a `Figures` directory containing 3 files:
 
 1. `Boxplots.pdf` This figure contains boxplots of the effect sizes for the 4 test statistics used here. The closer the plot is to zero the more similar the simulated results are to the empirical.
 
-```{r, echo=FALSE, out.width="50%",  out.extra='style="padding:10px"'}
+```{r, echo=FALSE, out.width="70%",  out.extra='style="padding:10px"'}
 knitr::include_graphics("Boxplots.png")
 ```
  
 2. `Histograms.pdf` This figure shows the distribution of tree length and Robinson Foulds distance across the simulated datasets. The blue line shows the empirical values and the pink broken line shows the mean of the simulated data. 
 
-```{r, echo=FALSE, out.width="50%",  out.extra='style="padding:10px"'}
+```{r, echo=FALSE, out.width="70%",  out.extra='style="padding:10px"'}
 knitr::include_graphics("Histrograms.png")
 ```
 
 3. `results.csv` Stores the effect sizes for each model.
 
-```{r, echo=FALSE, out.width="65%",  out.extra='style="padding:10px"'}
+```{r, echo=FALSE, out.width="50%",  out.extra='style="padding:10px"'}
 knitr::include_graphics("results.png")
 ```
 
