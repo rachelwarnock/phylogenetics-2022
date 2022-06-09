@@ -25,6 +25,8 @@ There are 6 rev scripts for the analysis:
 
 and 1 R script `PPS_Analsis.r` to summarise the output.
 
+The data used here is a morphological matrix Brontornis taxa, an extinct genus of giant flightless birds from Argentina. There are 12 taxa and 51 characters.
+
 You can download everything [here](scripts/exercise07.zip). Note unlike previous exercises in this course, you don't need to write any scripts from scratch. Simply modify the existing scripts to run the analysis.
 
 ### Read in the data and define the subsitution model to test 
@@ -127,16 +129,25 @@ If everything has been run correctly up to now, you only need to set your workin
 The R script should produce a `Figures` directory containing 3 files:
 
 1. `Boxplots.pdf` This figure contains boxplots of the effect sizes for the 4 test statistics used here. The closer the plot is to zero the more similar the simulated results are to the empirical.
+
+```{r, echo=FALSE, out.width="85%",  out.extra='style="padding:10px"'}
+knitr::include_graphics("Boxplots.pdf")
+```
  
-2. `Histograms.pdf` This figure shows the distribution of tree length and Robinson Foulds distance across the simulated datasets. The blue line shows the empirical values and the pink broken line shows the mean of the simulated data.
+2. `Histograms.pdf` This figure shows the distribution of tree length and Robinson Foulds distance across the simulated datasets. The blue line shows the empirical values and the pink broken line shows the mean of the simulated data. 
+
+```{r, echo=FALSE, out.width="85%",  out.extra='style="padding:10px"'}
+knitr::include_graphics("Histrograms.pdf")
+```
 
 3. `results.csv` Stores the effect sizes for each model.
 
 ```{r, echo=FALSE, out.width="85%",  out.extra='style="padding:10px"'}
-knitr::include_graphics("trace5.png")
+knitr::include_graphics("results.png")
 ```
 
-> Questions?
+### Next Tasks
+Try simulating more datasets in the anaylsis (change the `thinnning` variable). Does this change the results? 
 
 
 ```{r hidden_notes, eval=FALSE, echo=FALSE}
