@@ -81,7 +81,7 @@ seq ~ dnPhyloCTMC(tree=phylogeny, siteRates=rates_morpho, Q=Q, type="Standard", 
 Once you have chosen your model you can source the first script.
 
 ```{r S1, eval=FALSE} 
-source("scripts/1_MCMC_Simulation.Rev)
+source("scripts/1_MCMC_Simulation.Rev")
 ``` 
 
 ### Simulating new datasets
