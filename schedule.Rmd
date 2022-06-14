@@ -184,3 +184,25 @@ kbl(dt) %>%
 
 ```
 
+
+
+# Week 8 materials
+
+Today we are joined by special celebrity guest and diversification rate model expert [**Joëlle Barido-Sottani**](https://bjoelle.github.io/).
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/class08-JBS.pdf","https://revbayes.github.io/tutorials/sse/bisse.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 8"),
+                 topics = c("Multi-type birth-death processes", 
+                            "SSE models in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
