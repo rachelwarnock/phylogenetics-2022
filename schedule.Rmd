@@ -206,3 +206,23 @@ kbl(dt) %>%
 
 ```
 
+
+
+# Week 9 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/class09.pdf","projects.html")
+
+dt <- data.frame(schedule = c("Slides", "Projects page"),
+                 topics = c("Phylogenetic comparative methods", 
+                            "Projects"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
