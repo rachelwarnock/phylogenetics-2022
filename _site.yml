@@ -15,5 +15,5 @@ navbar:
       href: schedule.html
     - text: "Projects"
       href: projects.html
-    #- text: "Next exercise"
-    #  href: https://revbayes.github.io/tutorials/sse/bisse.html
+    - text: "Next exercise"
+      href: exercise-06a.html

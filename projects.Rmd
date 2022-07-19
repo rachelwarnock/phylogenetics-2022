@@ -1,12 +1,23 @@
 ---
-title: "Projects"
+title: ""
 output: html_document
 ---
 
 \
 
-# Datasets
+# Assessment
 
-Here we will posts ideas and links to empirical datasets that you can use for your own project. 
+* written report 
+* 5 pages max, inc. references and figures
+* focus mainly on the methods and results 
+* brief intro & discussion (paragraph each)
+* deadline for feedback July 25
+* final deadline July 29
+* don't forget to provide access to the project code!
 
-You're also welcome to use your own data or any other datasets that catch you eye in the literature.
+
+```{r, echo=FALSE, out.width="50%",  out.extra='style="padding:10px"'}
+knitr::include_graphics("bear.jpg")
+```
+
+
