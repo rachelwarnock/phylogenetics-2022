@@ -16,8 +16,24 @@ output: html_document
 * don't forget to provide access to the project code!
 
 
-```{r, echo=FALSE, out.width="50%",  out.extra='style="padding:10px"'}
+```{r, echo=FALSE, out.width="20%",  out.extra='style="padding:10px"'}
 knitr::include_graphics("bear.jpg")
 ```
+
+
+# Some guidelines for your report
+
+* What is the main question / hypothesis that you aim to address in your project? 
+* Describe the data, your model and all your parameter choices
+* Could someone else repeat your analysis based on the info you provide?
+* Did you encounter any issues?
+* If applicable, how did you assess convergence?
+
+
+
+
+
+
+
 
 

@@ -226,3 +226,18 @@ kbl(dt) %>%
 
 ```
 
+# Additional materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/mcmc.pdf")
+
+dt <- data.frame(schedule = c("Slides"),
+                 topics = c("Intro to MCMC"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
