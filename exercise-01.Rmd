@@ -60,6 +60,8 @@ mp = phangorn::optim.parsimony(tree, dat)
 
 > How would you interpret the number output by this function?
 
+*In case of interest, the [unconstrained likelihood](https://link.springer.com/content/pdf/10.1007/978-1-4614-1743-9_5.pdf) in this case is the maximum possible value of the log-likelihood based in the alignment.*
+
 Finally, we'll can specify an outgroup to root the tree. 
 We'll use the fungus *Laccaria* because we know this is more distantly related to all other taxa in our tree than they are to eachother.
 
