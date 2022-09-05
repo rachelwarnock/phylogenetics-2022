@@ -112,8 +112,8 @@ Q <- fnJC(2)
 Q
 # calculate the transition probabilities after 0.1 units of time
 Q.getTransitionProbabilities(0.1)
-# calculate the transition probabilities after 0.1 units of time
-Q.getTransitionProbabilities(100) # 0.1 units
+# calculate the transition probabilities after 100 units of time
+Q.getTransitionProbabilities(100) # 100 units
 ```
 
 ### Further reading
