@@ -115,6 +115,7 @@ ape::write.tree(tree, file = "my-tree.nex")
 ```{r hidden_notes, eval=FALSE, echo=FALSE}
 ## Measuring uncertainty in maximum likelihood and parsimony tree building
 ## https://cran.r-project.org/web/packages/phangorn/vignettes/Trees.html
+# See the phangorn documentation regarding the max possible likelihood, also output by the ML fxn. 
 ```
 
 ## Other resources for buidling trees using maximum likelihood
