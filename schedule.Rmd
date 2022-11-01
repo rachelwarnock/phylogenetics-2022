@@ -158,8 +158,8 @@ urls <- c("slides/class06.pdf","exercise-06a.html","exercise-06.html")
 dt <- data.frame(schedule = c("Slides", "Exercise 6a", "Exercise 6b"),
                  topics = c("The fossilised birth-death process", "Exploring the FBD model assumptions", "Dating under the FBD model in RevBayes"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-dt$schedule[3] <- paste0("[", dt$schedule[2], "](", urls[3], ")")
+#dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
@@ -241,3 +241,9 @@ kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 
 ```
+
+
+## Acknowledgements
+
+This course draws on material and exercises produced by [Paul Lewis](https://www.youtube.com/watch?v=1r4z0YJq580), Tracy Heath, Joëlle Bardio-Sottani, April Wright, Walker Pett, Joshua Justison, Sebastian Höhna, and many other [RevBayesian](https://revbayes.github.io) community contributors.
+
