@@ -13,19 +13,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \
 
-Course material will be uploaded here throughout the semester!
+Course material will be updated throughout the semester!
 
 # Rough Schedule
 
-* Course introduction and Parsimony 28.04
-* Likelihood and substitution models 05.05
-* No Class (Paul Lewis's seminars) 12.05
-* Bayesian tree inference 19.05 
-* Clock models 31.06
-* Tree models 02.06
-* Model selection 09.06
-* Diversification rate estimation with Joëlle Barido-Sottani 14.06
-* Introduction to projects 21.06
+* Course introduction and Parsimony 25.04
+* Introduction to statistical modelling 02.05
+* Likelihood and substitution models 09.05
+* No Class (Paul Lewis's seminars) 16.05
+* Bayesian inference and MCMC 23.05 
+* Clock models 30.05
+* Tree models 06.06
+* Model adequacy 13.06
+* Introduction to projects 20.06
 
 # Week 1 materials
 

@@ -13,7 +13,7 @@
 
 <title>Schedule</title>
 
-<script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
@@ -183,8 +183,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -192,16 +192,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -355,20 +348,19 @@ div.tocify {
 
 <p><br />
 </p>
-<p>Course material will be uploaded here throughout the semester!</p>
+<p>Course material will be updated throughout the semester!</p>
 <div id="rough-schedule" class="section level1">
 <h1>Rough Schedule</h1>
 <ul>
-<li>Course introduction and Parsimony 28.04</li>
-<li>Likelihood and substitution models 05.05</li>
-<li>No Class (Paul Lewis’s seminars) 12.05</li>
-<li>Bayesian tree inference 19.05</li>
-<li>Clock models 31.06</li>
-<li>Tree models 02.06</li>
-<li>Model selection 09.06</li>
-<li>Diversification rate estimation with Joëlle Barido-Sottani
-14.06</li>
-<li>Introduction to projects 21.06</li>
+<li>Course introduction and Parsimony 25.04</li>
+<li>Introduction to statistical modelling 02.05</li>
+<li>Likelihood and substitution models 09.05</li>
+<li>No Class (Paul Lewis’s seminars) 16.05</li>
+<li>Bayesian inference and MCMC 23.05</li>
+<li>Clock models 30.05</li>
+<li>Tree models 06.06</li>
+<li>Model adequacy 13.06</li>
+<li>Introduction to projects 20.06</li>
 </ul>
 </div>
 <div id="week-1-materials" class="section level1">

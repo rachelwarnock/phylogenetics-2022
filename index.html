@@ -13,7 +13,7 @@
 
 <title>Phylogenetics</title>
 
-<script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
@@ -178,8 +178,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,16 +187,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -283,36 +276,38 @@ $(document).ready(function () {
 <p>This hands on course focuses on the use of <strong>Bayesian
 phylogenetics</strong> in paleobiology. You will learn about approaches
 used to infer trees, divergence times and evolutionary rates.</p>
-<p>The course will take place in the summer semester (mostly)
-<strong>Thursdays 16:00-18:00 CET</strong> both in person at Henke Str.
-and online <a href="https://fau.zoom.us/j/67756970533">via Zoom</a>. We
-should finish before 18:00 most weeks.</p>
-<p>The first half of the semester will feature a mix of lectures and
+<p>The course will take place in the summer semester <strong>Tuesdays
+14:00-16:00 CET</strong> in person at Henke Str.</p>
+<p>The first half of the course will feature a mix of lectures and
 tutorial material. Aside from week one, the course will focus on getting
 to grips with the software <a
 href="https://revbayes.github.io">RevBayes</a>. By the end of the course
 students should understand the principles of Bayesian phylogenetic
 inference and be able to apply this knowledge to a research question of
-their choosing. During the second half of the semester each participant
-will work on their own project on a topic of their choice. You will also
-have the opportunity to present your research and any challenges to our
-guest lectures.</p>
-<p>Course organizers: <strong>Rachel Warnock</strong> and <strong>Laura
-Mulvey</strong>.</p>
-<p>Celebrity guests: <strong>Joëlle Barido-Sottani</strong> (June
-16).</p>
-<p>There are no tasks to complete before the course begins!</p>
+their choosing. During the second half of the course each participant
+will work on a project topic of their choice.</p>
+<p>Course instructures: <strong>Rachel Warnock</strong>, <strong>Tim
+Brandler</strong> and <strong>Laura Mulvey</strong>.</p>
+<p>Before the start of the course we recommend reading the following
+posts:</p>
+<ul>
+<li><a href="https://www.science.org/doi/10.1126/science.1117727">Tree
+Thinking Challenge</a></li>
+<li><a
+href="https://blogs.iu.edu/sciu/2017/09/26/why-are-there-still-apes/">If
+we evolved from apes, why are there still apes?</a></li>
+</ul>
 <p><br />
 </p>
 </div>
 <div id="course-evaluation" class="section level1">
 <h1>Course evaluation</h1>
 <p>At the end of the course you should produce a short report based on
-your research findings. We will shortly provide you with a template and
-guidelines. The deadline for the report is <strong>Friday 29th of
+your research findings. We will provide you with a template and
+guidelines. The deadline for the report is <strong>Friday 28th of
 July</strong>.</p>
-<p>Note: the full title of this course is “Models in paleobiology and
-phylogenetics (RL-V3 MPP)”.</p>
+<p>Note: phylogenetics is graded together with “Introduction to
+Statistical Modelling”. Course code: RL-V3 MPP.</p>
 <p><br />
 </p>
 </div>
