@@ -32,10 +32,10 @@ Course material will be updated throughout the semester!
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/class01.pdf","exercise-01.html")
+urls <- c("slides/week_01.pdf","exercise-01.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise"),
-                 topics = c("tree thinking, parsimony, statistical consistency", "tree building using parsimony"))
+                 topics = c("tree thinking, parsimony", "tree building using parsimony"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 
@@ -44,20 +44,23 @@ kbl(dt) %>%
 
 ```
 
+**Homework**
+
+* Install the software [RevBayes](https://revbayes.github.io/download)
+* Reading [How to interpret phylogenetic trees]
+
 # Week 2 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/class02.pdf","exercise-02.html","exercise-03.html")
+urls <- c("slides/week_02.pdf","exercise-02.html")
 
-dt <- data.frame(schedule = c("Slides", "Exercise 1", "Exercise 2"),
-                 topics = c("maximum likelihood, substitution models", 
-                            "tree building using maximum likelihood",
+dt <- data.frame(schedule = c("Slides", "Exercise"),
+                 topics = c("statistical consistency, graphical models", 
                             "Introduction to RevBayes and the Rev language"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
@@ -68,19 +71,39 @@ kbl(dt) %>%
 
 ```
 
-Don't forget next weeks exercises!!
+## Homework
+
+* Reading [Maximum likelihood and Bayesian inference] by Steve Wang
 
 # Week 3 materials
 
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_03.pdf", "exercise-03.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise"),
+                 topics = c("maximum likelihood, substitution models", 
+                            "tree building using maximum likelihood"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+Don't forget next weeks exercises!!
+
+# Week 4 materials
+
 **No class**
 
-This week Laura and Rachel are off on adventure so there will be no class. During this time we'd like you to watch the following 4 video lectures by [**Paul Lewis**](https://plewis.github.io/) and answer a set of questions we have prepared. Paul Lewis has made numerous important contributions to the field of statistical phylogenetics, as well as producing excellent tools and materials for learning about phylogenetic theory.
+During this time we'd like you to watch the following 4 video lectures by [**Paul Lewis**](https://plewis.github.io/) and answer a set of questions we have prepared. Paul Lewis has made numerous important contributions to the field of statistical phylogenetics, as well as producing excellent tools and materials for learning about phylogenetic theory.
 The videos we'll use were developed as part of the [phyloseminar](http://phyloseminar.org) series. 
 
-The videos will take about 3.5 hours to watch. Read the questions before you watch each video and write down your answers -- we'll go over these in week 4. Remember **the goal is not to understand everything**! 
+The videos will take about 3.5 hours to watch. Read the questions before you watch each video and write down your answers in the linked google form -- we'll go over these in week 5. Remember **the goal is not to understand everything**! 
 Also make note of any questions you have after watching these and we'll try to answer them.
-
-**Questions will be uploaded 06.05.22**
 
 ```{r, echo = FALSE}
 library(kableExtra)
@@ -110,35 +133,16 @@ kbl(dt) %>%
 #* [tinystats.github.io/teacups-giraffes-and-statistics](https://tinystats.github.io/teacups-giraffes-and-statistics/)
 ```
 
-# Week 4 materials
-
-```{r, echo = FALSE}
-library(kableExtra)
-
-urls <- c("slides/class04.pdf","exercise-04.html")
-
-dt <- data.frame(schedule = c("Slides", "Exercise 4"),
-                 topics = c("Follow up on Paul Lewis lectures", 
-                            "Bayesian tree inference"))
-dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-
-kbl(dt) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
-
-```
-
-
 # Week 5 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/class05.pdf","exercise-05.html")
+urls <- c("slides/week_05.pdf","exercise-04.html")
 
-dt <- data.frame(schedule = c("Slides", "Exercise 5"),
-                 topics = c("Bayesian timetree inference", 
-                            "Time tree inference in RevBayes"))
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Follow up on Paul Lewis lectures", 
+                            "Bayesian tree inference"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 
@@ -153,7 +157,26 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/class06.pdf","exercise-06a.html","exercise-06.html")
+urls <- c("slides/week_06.pdf","exercise-05.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 5"),
+                 topics = c("Bayesian timetree inference", 
+                            "Time tree inference in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
+# Week 7 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_07.pdf","exercise-06a.html","exercise-06.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 6a", "Exercise 6b"),
                  topics = c("The fossilised birth-death process", "Exploring the FBD model assumptions", "Dating under the FBD model in RevBayes"))
@@ -166,12 +189,12 @@ kbl(dt) %>%
 
 ```
 
-# Week 7 materials
+# Week 8 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/class07.pdf","exercise-07.html")
+urls <- c("slides/week_08.pdf","exercise-07.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 7"),
                  topics = c("Morphological evolution, model testing and model adequacy", 
@@ -184,36 +207,12 @@ kbl(dt) %>%
 
 ```
 
-
-
-# Week 8 materials
-
-Today we are joined by special celebrity guest and diversification rate model expert [**Joëlle Barido-Sottani**](https://bjoelle.github.io/).
-
-```{r, echo = FALSE}
-library(kableExtra)
-
-urls <- c("slides/class08-JBS.pdf","https://revbayes.github.io/tutorials/sse/bisse.html")
-
-dt <- data.frame(schedule = c("Slides", "Exercise 8"),
-                 topics = c("Multi-type birth-death processes", 
-                            "SSE models in RevBayes"))
-dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-
-kbl(dt) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
-
-```
-
-
-
 # Week 9 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/class09.pdf","projects.html")
+urls <- c("slides/week_09.pdf","projects.html")
 
 dt <- data.frame(schedule = c("Slides", "Projects page"),
                  topics = c("Phylogenetic comparative methods", 
