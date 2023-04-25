@@ -57,7 +57,7 @@ library(kableExtra)
 urls <- c("slides/week_02.pdf","exercise-02.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 2"),
-                 topics = c("statistical consistency, graphical models", 
+                 topics = c("Intro to statistical models, graphical models, statistical consistency", 
                             "Introduction to RevBayes and the Rev language"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
@@ -76,6 +76,8 @@ kbl(dt) %>%
 * Reading [Maximum likelihood and Bayesian inference](https://paleo.domains.swarthmore.edu/Publications/quantpaleo2010.pdf) by Steve Wang
 
 # Week 3 materials
+
+**Note this class will take place in the Old Library**
 
 ```{r, echo = FALSE}
 library(kableExtra)
