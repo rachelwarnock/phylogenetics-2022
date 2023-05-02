@@ -276,7 +276,7 @@ class="section level1">
 program that has been developed for Bayesian phylogenetics. It has it’s
 own command line language, similar to the R programming language, that
 can be used to set up a model in a Bayesian framework. We won’t run any
-analyses in this exercise, we’ll just explore the Rev languages and look
+analyses in this exercise, we’ll just explore the Rev language and look
 at the syntax used to set up different types of variables.</p>
 <p>First make sure you can <a
 href="https://revbayes.github.io/download">download</a> and install the
@@ -294,7 +294,7 @@ a + b</code></pre>
 <p>Note that in R the <code>=</code> and <code>&lt;-</code> assignment
 can almost always be used interchangeably. This is not the case in
 RevBayes, where <code>=</code> can be used to define variables in your
-environment but these can’t then be used as part of a model. We’ll see
+environment, but these can’t then be used as part of a model. We’ll see
 some examples of when we might use <code>=</code> in RevBayes in future
 weeks.</p>
 <p>To clear the value of a variable you can use
@@ -304,12 +304,12 @@ weeks.</p>
 <h2>Deterministic variables</h2>
 <p>Deterministic variables are linked to the value of other variables
 and specified using the colon-equal <code>:=</code> assignment.</p>
-<pre class="r"><code># specify constant variable a
+<pre class="r"><code># specify constant variable &quot;a&quot;
 a &lt;- 4
-# specify deterministic variable b
+# specify deterministic variable &quot;b&quot;
 b := a
 b</code></pre>
-<pre class="r"><code># now see what happens if you change the value of a
+<pre class="r"><code># now see what happens if you change the value of &quot;a&quot;
 a &lt;- 5
 b</code></pre>
 <p>Deterministic variables can also be transformed using any given
@@ -330,12 +330,12 @@ variable <code>c</code> is a normally distributed random variable.</p>
 a &lt;- 1
 b &lt;- 0.1
 
-# specify stochastic variable using the normal distribution 
+# specify a stochastic variable using the normal distribution 
 c ~ dnNormal(a, b)
 c</code></pre>
 <p>Any distribution function in Rev always begins with <code>dn</code>.
 You can also bring up help pages using a question mark like we do in R,
-e.g. <code>?dnNormal</code> will bring up help pages for the normal
+e.g., <code>?dnNormal</code> will bring up help pages for the normal
 distribution.</p>
 <p>You can define stochastic variables in RevBayes using any common
 statistical distributions (as well as more complex phylogenetic
@@ -351,7 +351,7 @@ different random value from the normal distribution. Without more
 context, it might not seem obvious why we’d want to define a variable in
 this way. You can think of <code>c</code> as a potential parameter with
 an unknown value that we’re interested in estimating. When we go on to
-set up the full analysis in the next class, you’ll see how we can update
+set up the full analysis in a later class, you’ll see that we can update
 the value of <code>c</code> during our analysis. And because stochastic
 variables like <code>c</code> are linked to an underlying distribution,
 <code>c</code> inherits some of the properties of that distribution. We
@@ -383,7 +383,7 @@ Q</code></pre>
 <p>In this model all the substitution rates are equal. If substitution
 rates vary, we need to estimate this variability from the data and
 <code>Q</code> would become a deterministic variable. We’ll see some
-examples of this next time!</p>
+examples of this later.</p>
 <p>Last thing for today - let’s compare the Q matrix and the transition
 probabilities over different intervals of time. We can start by creating
 a simpler 2-state Q matrix.</p>

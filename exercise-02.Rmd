@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction to RevBayes and the Rev language
 
 [RevBayes](https://revbayes.github.io) is a flexible program that has been developed for Bayesian phylogenetics.
-It has it's own command line language, similar to the R programming language, that can be used to set up a model in a Bayesian framework. We won't run any analyses in this exercise, we'll just explore the Rev languages and look at the syntax used to set up different types of variables. 
+It has it's own command line language, similar to the R programming language, that can be used to set up a model in a Bayesian framework. We won't run any analyses in this exercise, we'll just explore the Rev language and look at the syntax used to set up different types of variables. 
 
 First make sure you can [download](https://revbayes.github.io/download) and install the software.
 Once you have it up and running, see if you can produce any sensible output using the RevBayes terminal. For example, it can be used like a calculator in the same way as R.
@@ -36,7 +36,7 @@ b <- 10
 a + b
 ```
 
-Note that in R the `=` and `<-` assignment can almost always be used interchangeably. This is not the case in RevBayes, where `=` can be used to define variables in your environment but these can't then be used as part of a model. We'll see some examples of when we might use `=` in RevBayes in future weeks.
+Note that in R the `=` and `<-` assignment can almost always be used interchangeably. This is not the case in RevBayes, where `=` can be used to define variables in your environment, but these can't then be used as part of a model. We'll see some examples of when we might use `=` in RevBayes in future weeks.
 
 To clear the value of a variable you can use `clear(a)`.
 
@@ -45,15 +45,15 @@ To clear the value of a variable you can use `clear(a)`.
 Deterministic variables are linked to the value of other variables and specified using the colon-equal `:=` assignment.
 
 ```{r determ1, eval=FALSE}
-# specify constant variable a
+# specify constant variable "a"
 a <- 4
-# specify deterministic variable b
+# specify deterministic variable "b"
 b := a
 b
 ```
 
 ```{r determ2, eval=FALSE}
-# now see what happens if you change the value of a
+# now see what happens if you change the value of "a"
 a <- 5
 b
 ```
@@ -75,18 +75,18 @@ Stochastic variables are described with respect to some underlying probability d
 a <- 1
 b <- 0.1
 
-# specify stochastic variable using the normal distribution 
+# specify a stochastic variable using the normal distribution 
 c ~ dnNormal(a, b)
 c
 ```
 
-Any distribution function in Rev always begins with `dn`. You can also bring up help pages using a question mark like we do in R, e.g. `?dnNormal` will bring up help pages for the normal distribution.
+Any distribution function in Rev always begins with `dn`. You can also bring up help pages using a question mark like we do in R, e.g., `?dnNormal` will bring up help pages for the normal distribution.
 
 You can define stochastic variables in RevBayes using any common statistical distributions (as well as more complex phylogenetic distributions that we'll meet in future weeks). A list of available Rev functions can be found [here](https://revbayes.github.io/documentation/).
 
 >Can you think of any other common distributions and try to set them up in RevBayes?
 
-If you run the above code again, `c` will take on a different random value from the normal distribution. Without more context, it might not seem obvious why we'd want to define a variable in this way. You can think of `c` as a potential parameter with an unknown value that we're interested in estimating. When we go on to set up the full analysis in the next class, you'll see how we can update the value of `c` during our analysis. And because stochastic variables like `c` are linked to an underlying distribution, `c` inherits some of the properties of that distribution. We can call functions related to that distribution by using `.` followed by a function name. For example, `c.probability()` will tell us the probability of observing the current value of `c` given the underlying distribution.
+If you run the above code again, `c` will take on a different random value from the normal distribution. Without more context, it might not seem obvious why we'd want to define a variable in this way. You can think of `c` as a potential parameter with an unknown value that we're interested in estimating. When we go on to set up the full analysis in a later class, you'll see that we can update the value of `c` during our analysis. And because stochastic variables like `c` are linked to an underlying distribution, `c` inherits some of the properties of that distribution. We can call functions related to that distribution by using `.` followed by a function name. For example, `c.probability()` will tell us the probability of observing the current value of `c` given the underlying distribution.
 
 > Redefine your stochastic variable and compare the probability for different values under the same distribution -- do these probabilities make sense to you?
 
@@ -102,7 +102,7 @@ Q <- fnJC(4) # 4 here refers to the number of states (i.e. ATGC)
 Q
 ```
 
-In this model all the substitution rates are equal. If substitution rates vary, we need to estimate this variability from the data and `Q` would become a deterministic variable. We'll see some examples of this next time!
+In this model all the substitution rates are equal. If substitution rates vary, we need to estimate this variability from the data and `Q` would become a deterministic variable. We'll see some examples of this later.
 
 Last thing for today - let's compare the Q matrix and the transition probabilities over different intervals of time. We can start by creating a simpler 2-state Q matrix.
 
