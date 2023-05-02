@@ -73,7 +73,7 @@ kbl(dt) %>%
 
 **Homework**
 
-* Reading [Maximum likelihood and Bayesian inference](https://paleo.domains.swarthmore.edu/Publications/quantpaleo2010.pdf) by Steve Wang
+* Read [Maximum likelihood and Bayesian inference](https://paleo.domains.swarthmore.edu/Publications/quantpaleo2010.pdf) by Steve Wang (up to the end of Section Maximum Likelihood Estimation on pg. 5)
 
 # Week 3 materials
 
