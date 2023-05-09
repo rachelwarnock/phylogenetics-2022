@@ -11,7 +11,7 @@
 
 
 
-<title>exercise-03.knit</title>
+<title>aic.knit</title>
 
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -269,122 +269,42 @@ $(document).ready(function () {
 
 <p><br />
 </p>
-<div id="tree-building-using-maximum-likelihood" class="section level1">
-<h1>Tree building using maximum likelihood</h1>
-<p>In this exercise we’ll estimate trees using maximum likelihood and
-look at the impact of different substitution models.</p>
-<p>For this we’ll use the <code>phangorn</code> package again and a data
-set of primates sequences. The sequences are a short fragment of the
-mitochondrial genome. You can download the data from <a
-href="data/primates-data.nex">here</a>.</p>
-<p>As before start by opening the file and converting the data into the
-right format for <code>phangorn</code>.</p>
-<pre class="r"><code># read in the character matrix in ape 
-dat = ape::read.nexus.data(file = &quot;data/primates-data.nex&quot;)
-
-# &amp; convert to phanghorn object
-dat = phangorn::phyDat(dat, type = &quot;DNA&quot;)</code></pre>
-<p>As before we need to generate a starting tree using neighbour
-joining.</p>
-<pre class="r"><code># create a neighbour joining starting tree
-dm = phangorn::dist.hamming(dat)
-starting_tree = phangorn::NJ(dm)</code></pre>
-<p><em>Side note: for those interested from last time, for two sequences
-the <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming
-distance</a> is simply the proportion of sites at which they differ.
-It’s therefore one of the simplest ways to approximate evolutionary
-distances and generate a starting tree. But remember this approach won’t
-account for convergent evolution or homoplasy.</em></p>
-<p>The <code>phangorn</code> function <code>pml</code> (pml =
-phylogenetic maximum likelihood) calculates the likelihood of a tree
-given the data under a model specified by the user. We’ll start with the
-simplest model of sequence evolution, the Jukes-Cantor (JC) model.</p>
-<pre class="r"><code># calculate the likelihood of the tree given the data
-fitJC = phangorn::pml(starting_tree, data=dat, model = &quot;JC&quot;)
-fitJC</code></pre>
-<blockquote>
-<p>What do you notice about the base frequencies?</p>
-</blockquote>
-<p>Then we’ll use the function <code>optim.pml</code> to find the tree
-with the best likelihood score under the Jukes-Cantor model. This
-function takes the tree and the starting values obtaining using the
-<code>pml</code> function and explores the tree space by switching
-around the branches. The argument <code>optNni = TRUE</code> tells the
-function to optimize the tree topology (i.e. find the tree with the
-highest likelihood), as well as the branch lengths and the model
-parameters. The parameters of the JC model are fixed, so the model
-parameters won’t actually change in this case.</p>
-<pre class="r"><code># estimate the tree using ML
-fitJC_opt = phangorn::optim.pml(fitJC, model = &quot;JC&quot;, optNni = TRUE)
-fitJC_opt</code></pre>
-<p>As the ML algorithm proceeds it outputs information about the
-progress. You can see how the likelihood changes as the tree topology
-and the branch lengths (edge weights) are updated. You should also see
-that the likelihood is improving, i.e. getting larger.</p>
-<p>The function outputs a list with a bunch of values that might be of
-interest, including the tree.</p>
-<pre class="r"><code>fitJC_opt$tree</code></pre>
-<p>Next we’ll do the same with the GTR substitution model.</p>
-<pre class="r"><code>fitGTR = phangorn::pml(starting_tree, data=dat, model = &quot;GTR&quot;)
-fitGTR_opt = phangorn::optim.pml(fitGTR, model = &quot;GTR&quot;, optNni = TRUE)
-fitGTR_opt</code></pre>
-<blockquote>
-<p>What differences do you notice in the output?</p>
-</blockquote>
-<p>Let’s look at the trees. Remember that by default trees generated
-based on a substitution model will be unrooted. First, let’s root the
-tree using the Lemur.</p>
-<pre class="r"><code># identify the outgroup
-outgroup = &quot;Lemur&quot;
-
-# root the tree
-JC_tree_rooted = ape::root(fitJC_opt$tree, outgroup = outgroup, resolve.root = TRUE)
-GTR_tree_rooted = ape::root(fitGTR_opt$tree, outgroup = outgroup, resolve.root = TRUE)
-
-# plot the trees
-plot(JC_tree_rooted)
-plot(GTR_tree_rooted)</code></pre>
-<blockquote>
-<p>Do you notice any differences in the topology or branch lengths?
-Which one is correct?</p>
-</blockquote>
-<p>Since we have the maximum likelihood estimate under both models, we
-can use a straightforward model testing to identify the best fitting
-model.</p>
-<pre class="r"><code>AIC(fitJC_opt, fitGTR_opt)</code></pre>
-<blockquote>
-<p>How would you interpret these results? <a
-href="https://www.scribbr.com/statistics/akaike-information-criterion/">Hint</a></p>
-</blockquote>
-<p>Follow the link to learn more about <a href="aic.html">interpreting
-AIC scores</a>.</p>
-<div id="output-a-tree-from-r" class="section level2">
-<h2>Output a tree from R</h2>
-<p>To output a tree from R and save it we can use the <code>ape</code>
-function <code>write.tree</code>. This outputs the tree in Newick
-format.</p>
-<pre class="r"><code># write to screen
-ape::write.tree(tree)</code></pre>
-<pre class="r"><code># write to file
-ape::write.tree(tree, file = &quot;my-tree.nex&quot;)</code></pre>
-</div>
-<div id="other-resources-for-buidling-trees-using-maximum-likelihood"
-class="section level2">
-<h2>Other resources for buidling trees using maximum likelihood</h2>
-<p><code>phangorn</code> is a very useful package but you won’t often
-see published trees generated using this package. There are other more
-specialized software packages for tree building using maximum
-likelihood. Some of these feature additional substitution models or have
-been optimized for the analysis of large data sets. The analysis in this
-exercise is very fast because our data set has a small number of species
-and characters (only 150) – most DNA data sets are <em>much</em> larger
-than this. Two currently alternative likelihood based programs for tree
-building are <a
-href="https://cme.h-its.org/exelixis/web/software/raxml/">RAxML</a> and
-<a href="http://www.iqtree.org/">IQTREE</a>.</p>
-<p>A complete script for this exercise can be downloaded <a
-href="scripts/ML_example.R">here</a>.</p>
-</div>
+<div id="interpreting-aic-values" class="section level1">
+<h1>Interpreting AIC values</h1>
+<p>Model selection penalises against over-parametrisation, i.e.,
+including too many unnecessary parameters in the model, which can
+sometimes mislead your results. The AIC score is one approach for
+selecting between models. It is calculated separately for each model
+using the following formula,</p>
+<p><span class="math inline">\(AIC = 2K - 2ln(L)\)</span>,</p>
+<p>where <span class="math inline">\(K\)</span> is the number of free
+parameters and <span class="math inline">\(L\)</span> is the likelihood.
+As a rule of thumb, the model with a <strong>lower</strong> AIC score is
+preferred if the difference in AIC values is &gt;2. A model with many
+additional parameters would need to improve the likelihood substantially
+to be preferred over one with fewer parameters.</p>
+<p>R’s <code>AIC</code> function can calculate the AIC scores for you.
+Part of the output includes the <code>df</code> values, which refers to
+“degrees of freedom” or the number of free parameters in each model. <a
+href="exercise-03.html">In our case</a>, the number of parameters
+associated with each substitution model is the total number of branches
+in the unrooted tree (2 * num_taxa - 3 = 31) <em>plus</em> the number of
+parameters in each model.</p>
+<p>The <strong>JC model</strong> assumes transition rates and base
+frequencies are both equal. We can’t actually estimate the substitution
+rate without reference to time, so the substitution rate <span
+class="math inline">\(\mu\)</span> is fixed to 1. Thus, since the JC
+model doesn’t have any free parameters, <code>df</code> = 31.</p>
+<p>The <strong>GTR model</strong> relaxes these assumptions. Each
+possible transition (e.g., A to T or vice versa) has a separate rate.
+One of the transitions is fixed to 1 and the other 5 rates are estimated
+relative to this one, adding 5 parameters to the model. Since the
+proportion of each base (A,T,G,C) must sum to 1, we only need to
+estimate 3 additional parameters for the base frequencies. Thus, the
+total number of free parameters for the GTG is <code>df</code> = 39 (31
++ 5 + 3).</p>
+<p>As you should be able to see, the AIC score for the GTR model is
+substantially lower, despite the addition of 8 parameters.</p>
 </div>
 
 

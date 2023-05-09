@@ -98,6 +98,8 @@ AIC(fitJC_opt, fitGTR_opt)
 
 > How would you interpret these results? [Hint](https://www.scribbr.com/statistics/akaike-information-criterion/)
 
+Follow the link to learn more about [interpreting AIC scores](aic.html).
+
 ## Output a tree from R
 
 To output a tree from R and save it we can use the `ape` function `write.tree`. This outputs the tree in Newick format.
