@@ -5,7 +5,7 @@ output: html_document
 
 ## Questions on Paul Lewis phylogenetics primer part 3a -- Introduction to Bayesian statistics
 
-This is probably the most important of the four parts. The most important points to try and grasp from this one are concept of the **priors in Bayesian inference** and the **principles of MCMC**.
+This is probably the most important of the four parts. The most important points to try and grasp from this one are the **priors in Bayesian inference** and the **principles of MCMC**.
 
 *Note: if you’re feeling overloaded, you could skip the last 10 minutes of this talk, since you don’t need to worry about Metropolis-coupled MCMC (i.e. heat vs. cold chains) or asymmetric proposals.*
 
