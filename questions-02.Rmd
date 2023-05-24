@@ -8,7 +8,6 @@ output: html_document
 **Note: we won’t revisit codon models during this course so (if you want) you can skip the last 15 minutes of this lecture. These models are used rarely in the context of paleobiology. But if you have the time, they are cool!**
 
 
-
 > 1. What are the assumptions of the following substitution models? Consider the rate of change between character states and the state frequencies.
   a. JC
   b. K80

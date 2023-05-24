@@ -118,7 +118,7 @@ urls <- c("https://www.youtube.com/watch?v=1r4z0YJq580", "https://www.youtube.co
           "https://forms.gle/SiA9JESnwcjw2eDm9")
 
 dt <- data.frame(videos = c("Part 1", "Part 2", "Part 3a", "Part 3b"),
-                 topics = c("trees and likelihood", "trees, likelihood and rate heterogeneity", "Intro Bayesian phylogenetics", "Intro Bayesian phylogenetics"),
+                 topics = c("trees and likelihood", "trees, likelihood and rate heterogeneity", "Intro to Bayesian phylogenetics", "Intro to Bayesian phylogenetics"),
                  questions = c("Questions 1", "Questions 2", "Questions 3", "Questions 4"), forms = c("Form 1", "Form 2", "Form 3", "Form 4"))
 
 dt$videos[1] <- paste0("[", dt$videos[1], "](", urls[1], ")")
