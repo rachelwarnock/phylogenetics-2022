@@ -22,10 +22,11 @@ Course material will be updated throughout the semester!
 * Likelihood and substitution models 09.05
 * No Class (Paul Lewis's seminars) 16.05
 * Bayesian inference and MCMC 23.05 
-* Clock models 30.05
-* Tree models 06.06
-* Model adequacy 13.06
-* Introduction to projects 20.06
+* Bayesian inference and MCMC 31.05 
+* Morphological models 06.06
+* Clock models 13.06 
+* Tree models 20.06
+* Introduction to projects 27.06
 
 # Week 1 materials
 
@@ -161,8 +162,25 @@ kbl(dt) %>%
 
 ```
 
-
 # Week 6 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_06.pdf","exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Introduction to MCMC inference", 
+                            "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+  
+```
+
+# Week 7 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
@@ -181,7 +199,7 @@ kbl(dt) %>%
 ```
 
 
-# Week 7 materials
+# Week 8 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
@@ -199,7 +217,7 @@ kbl(dt) %>%
 
 ```
 
-# Week 8 materials
+# Week 9 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
@@ -217,7 +235,7 @@ kbl(dt) %>%
 
 ```
 
-# Week 9 materials
+# Week 10 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
@@ -235,21 +253,6 @@ kbl(dt) %>%
 
 ```
 
-# Additional materials
-
-```{r, echo = FALSE}
-library(kableExtra)
-
-urls <- c("slides/mcmc.pdf")
-
-dt <- data.frame(schedule = c("Slides"),
-                 topics = c("Intro to MCMC"))
-dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-
-kbl(dt) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
-
-```
 
 
 ## Acknowledgements
