@@ -23,8 +23,8 @@ Course material will be updated throughout the semester!
 * No Class (Paul Lewis's seminars) 16.05
 * Bayesian inference and MCMC 23.05 
 * Bayesian inference and MCMC 31.05 
-* Morphological models 06.06
-* Clock models 13.06 
+* Clock models 06.06
+* Morphological models 13.06 
 * Tree models 20.06
 * Introduction to projects 27.06
 
@@ -185,7 +185,7 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/week_06.pdf","exercise-05.html")
+urls <- c("slides/week_07.pdf","exercise-05.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 5"),
                  topics = c("Bayesian timetree inference", 
@@ -204,13 +204,13 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/week_07.pdf","exercise-06a.html","exercise-06.html")
+urls <- c("slides/week_08.pdf","exercise-06.html")
 
-dt <- data.frame(schedule = c("Slides", "Exercise 6a", "Exercise 6b"),
-                 topics = c("The fossilised birth-death process", "Exploring the FBD model assumptions", "Dating under the FBD model in RevBayes"))
+dt <- data.frame(schedule = c("Slides", "Exercise 6"),
+                 topics = c("Morphological evolution, model testing and model adequacy", 
+                            "Model adequacy in RevBayes"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-#dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
-dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
@@ -222,13 +222,13 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/week_08.pdf","exercise-07.html")
+urls <- c("slides/week_09.pdf","exercise-07a.html","exercise-07b.html")
 
-dt <- data.frame(schedule = c("Slides", "Exercise 7"),
-                 topics = c("Morphological evolution, model testing and model adequacy", 
-                            "Model adequacy in RevBayes"))
+dt <- data.frame(schedule = c("Slides", "Exercise 7a", "Exercise 7b"),
+                 topics = c("The fossilised birth-death process", "Exploring the FBD model assumptions", "Dating under the FBD model in RevBayes"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+#dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")

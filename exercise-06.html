@@ -270,264 +270,144 @@ $(document).ready(function () {
 <p><br />
 </p>
 <div
-id="bayesian-tree-inference-using-the-fossilised-birth-death-process-revbayes"
+id="model-adequacy-using-posterior-predictive-simulations-in-revbayes"
 class="section level1">
-<h1>Bayesian tree inference using the fossilised birth-death process
+<h1>Model adequacy using posterior predictive simulations in
 RevBayes</h1>
-<p>In this exercise we’ll estimate of a time tree of bears under the
-fossilised birth-death (FBD) process. This time the data we’ll use is a
-<a href="data/bears_morphology.nex">morphological matrix</a> for 16
-living and fossil bears. We’ll also use <a
-href="data/bears_taxa.tsv">age information</a> associated with all taxa.
-Download these files and check out the contents.</p>
-<p>For this exercise create a folder called <code>exercise 6</code>.
-Then create two sub-directories: <code>data</code> and
-<code>scripts</code>. Recall that for divergence time estimation we need
-three model components, so we’ll create the following scripts:</p>
+<p>In this exercise we will use posterior predictive simulations to
+assess the fit of an evolutionary model to our data. We will test two
+substitution models, Mk and Mkv+G. The code highlighted in this tutorial
+is just to show the more important parts of a script. <strong>You do not
+need to copy and paste them into the terminal</strong>. Instead, edit
+the scripts in your editor and use <code>source(" ")</code>to read them
+into RevBayes.</p>
+<p>There are 6 rev scripts for the analysis:</p>
 <ol style="list-style-type: decimal">
-<li><code>main.Rev</code> for reading the data, setting up the the tree
-model and MCMC settings</li>
-<li><code>FBD_dating.Rev</code> for the time tree model.</li>
-<li><code>Mk.Rev</code> for the substitution model.</li>
-<li><code>clock_strict_morpho.Rev</code> for the clock model. Edit the
-scripts in a text editor of your choice.</li>
+<li><code>MCMC_Simulation.Rev</code> runs an MCMC on your empirical
+dataset and samples parameters from the posterior</li>
+<li><code>PP_Simulation.Rev</code> takes the output from the first MCMC
+to simulated new datasets under the chosen model</li>
+<li><code>PP_MCMC.Rev</code> runs an MCMC for all the new datasets</li>
+<li><code>Tree_Summary.Rev</code> generates test statistics</li>
+<li><code>mk_Model.Rev</code> Mk substitution model script</li>
+<li><code>mk+GV_Model.Rev</code> Mk+GV substitution model script</li>
 </ol>
-<div id="read-in-the-data-and-define-helper-variables"
-class="section level2">
-<h2>Read in the data and define helper variables</h2>
-<p>Start with your <code>main.Rev</code> script. As before, we’ll start
-by reading in the data and defining some helper variables.</p>
-<pre class="r"><code>taxa &lt;- readTaxonData(&quot;data/bears_taxa.tsv&quot;)
-morpho &lt;- readDiscreteCharacterData(&quot;data/bears_morphology.nex&quot;)</code></pre>
-<pre class="r"><code>num_taxa &lt;- morpho.ntaxa() # number of taxa
-num_branches &lt;- 2 * num_taxa - 2 # number of branches in an rooted tree</code></pre>
-<p>Define a set of variables for setting up our MCMC.</p>
-<pre class="r"><code>moves    = VectorMoves()
-monitors = VectorMonitors()</code></pre>
+<p>and 1 R script <code>PPS_Analsis.r</code> to summarise the
+output.</p>
+<p>The data used here is a morphological matrix Brontornis taxa, an
+extinct genus of giant flightless birds from Argentina. There are 12
+taxa and 51 characters.</p>
+<p>You can download everything <a
+href="scripts/exercise07.zip">here</a>. Note unlike previous exercises
+in this course, you don’t need to write any scripts from scratch. Simply
+modify the existing scripts to run the analysis.</p>
+<div id="read-in-the-data-and-define-the-subsitution-model-to-test"
+class="section level3">
+<h3>Read in the data and define the subsitution model to test</h3>
+<p>Start with <code>MCMC_Simulation.rev</code> script. We first need to
+read in our data and define which substitution model we will use for the
+analysis, either Mk or Mkv+G.</p>
+<pre class="r"><code>morpho &lt;- readDiscreteCharacterData(&quot;data/Agnolin_2007a_paleobiodb.nex&quot;)
+analysis_name = &quot;model_adequacy&quot; 
+model_name = &quot;model&quot; # what model are you testing? e.g. &quot;mk&quot;
+model_file_name = &quot;scripts/&quot;+model_name+&quot;_Model.Rev&quot;</code></pre>
+<p><strong>Note</strong>: These variables are at the start of the rev
+scripts 1-4. Make sure you add the model you want to use to each
+script.</p>
+<p>This monitor samples the posterior and saves it to a file that can be
+used to simulate new datasets under the chosen model.</p>
+<pre class="r"><code>monitors.append( mnStochasticVariable(filename=&quot;output/&quot;  + model_name +  &quot;/output/&quot; + analysis_name + &quot;_posterior.var&quot;, printgen=10) )</code></pre>
 </div>
-<div id="time-tree-model" class="section level2">
-<h2>Time tree model</h2>
-<p>We will use FBD model as our tree model, which describes the
-distribution of most likely trees, given the model parameters
-(speciation, extinction, fossil sampling) and fossil ages. Note that
-because the fossil ages are data, the FBD model is not strictly a
-prior.</p>
-<p>Go to your <code>FBD_dating.Rev</code> script to set this up.</p>
-<p>Three of the key parameters of the FBD model are speciation rate
-(<span class="math inline">\(\lambda\)</span>), extinction rate (<span
-class="math inline">\(\mu\)</span>) and fossil sampling rate (<span
-class="math inline">\(\psi\)</span>) We will assume these rates are
-constant over time and place exponential priors on each of these.</p>
-<pre class="r"><code>speciation_rate ~ dnExponential(10)
-extinction_rate ~ dnExponential(10)
-fossil_samp_rate ~ dnExponential(10)</code></pre>
-<p>Each parameter is a stochastic variable drawn from an exponential
-distribution with <span class="math inline">\(\delta\)</span> = 10 and a
-mean of <span class="math inline">\(1/\delta\)</span> = 0.1.</p>
-<p>Next specify the moves of these parameters.</p>
-<pre class="r"><code>moves.append( mvScale(speciation_rate, lambda = 0.5, tune = true, weight = 3.0) )
-moves.append( mvScale(extinction_rate, lambda = 0.5, tune = true, weight = 3.0) )
-moves.append( mvScale(fossil_samp_rate, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
-<p>We might also be interested in diversification and turnover, so let’s
-set up a deterministic variable for each of these.</p>
-<pre class="r"><code>diversification := speciation_rate - extinction_rate
-turnover := extinction_rate/speciation_rate</code></pre>
-<p>Next we’ll define the probability of extant species sampling (<span
-class="math inline">\(\rho\)</span>). Since we sample all extant bears,
-we’ll specify this probability as a constant variable = 1.0.</p>
-<pre class="r"><code>rho &lt;- 1.0</code></pre>
-<p>Now we’ll specify a prior on the origin time parameter. This
-parameter approximates the age of the clade. We’ll use the oldest bear
-fossil as a minimum (35.0) and a recent estimate for the age of
-carnivores as a maximum (55.0).</p>
-<pre class="r"><code># prior and move on the origin
-origin_time ~ dnUnif(37.0, 55.0)
-moves.append( mvSlide(origin_time, weight=1.0) )</code></pre>
-<p>Finally, we’ll specify the FBD model, along with moves on the tree
-topology and branch lengths.</p>
-<pre class="r"><code>tree ~ dnFBDP(lambda = speciation_rate, mu = extinction_rate, psi = fossil_samp_rate, rho = rho, origin = origin_time, taxa = taxa)
+<div id="mk-substitution-model" class="section level3">
+<h3>Mk substitution model</h3>
+<p>Helper variables and branch lengths are set up as in previous
+exercises.</p>
+<p>Specify the Jukes-Cantor substitution model applied uniformly to all
+sites. Remember the Mk model is a generalization of the Jukes-Cantor
+model.</p>
+<pre class="r"><code>Q := fnJC(4) # this matrix has 4 different character states. 
 
-# moves to search tree space
-moves.append( mvFNPR(tree, weight = 15.0) )
-moves.append( mvCollapseExpandFossilBranch(tree, origin_time, weight = 6.0) )
-moves.append( mvNodeTimeSlideUniform(tree, weight = 40.0) )
-moves.append( mvRootTimeSlideUniform(tree, origin_time, weight = 5.0) )</code></pre>
-<p>We can create clade constraints to monitor the age of specific clades
-of interest. Let’s do that for the clade containing living bears.</p>
-<pre class="r"><code>clade_extant = clade(&quot;Ailuropoda_melanoleuca&quot;,&quot;Tremarctos_ornatus&quot;,&quot;Melursus_ursinus&quot;,
-                    &quot;Ursus_arctos&quot;,&quot;Ursus_maritimus&quot;,&quot;Helarctos_malayanus&quot;,
-                    &quot;Ursus_americanus&quot;,&quot;Ursus_thibetanus&quot;)
-age_extant := tmrca(tree, clade_extant)</code></pre>
-<p>We might also be interested in know how many sampled ancestors are in
-our posterior trees, so let’s set up another deterministic variable to
-monitor this.</p>
-<pre class="r"><code>num_samp_anc := tree.numSampledAncestors()</code></pre>
-<div id="accounting-for-fossil-age-uncertainty" class="section level3">
-<h3>Accounting for fossil age uncertainty</h3>
-<p>Since we practically never know the exact age of any fossils, we need
-to account for age uncertainty. The following loop goes through each
-fossil in our dataset and assigns a uniform distribution between the
-minimum and maximum bounds of the known interval of uncertainty.</p>
-<pre class="r"><code>fossils = tree.getFossils()
-
-for(i in 1:fossils.size())
-{
-    t[i] := tmrca(tree, clade(fossils[i]))
-
-    a_i = fossils[i].getMinAge()
-    b_i = fossils[i].getMaxAge()
-
-    F[i] ~ dnUniform(t[i] - b_i, t[i] - a_i)
-    F[i].clamp( 0 )
-}
-
-# moves on fossil ages
-moves.append( mvFossilTimeSlideUniform(tree, origin_time, weight = 5.0) )</code></pre>
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;)</code></pre>
 </div>
+<div id="mkv-gamma-substitution-model" class="section level3">
+<h3>Mkv + Gamma substitution model</h3>
+<p>Set up gamma-distributed rate variation.</p>
+<pre class="r"><code>alpha_morpho ~ dnUniform( 0.0, 1E6 )
+rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+moves.append( mvScale(alpha_morpho, lambda=1, weight=2.0) )</code></pre>
+<p>To account for ascertainment bias. Change the coding to
+<code>variable</code>.</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree=phylogeny, siteRates=rates_morpho, Q=Q, type=&quot;Standard&quot;,  coding=&quot;variable&quot;)</code></pre>
 </div>
-<div id="strict-clock-model" class="section level2">
-<h2>Strict clock model</h2>
-<p>For simplicity we’ll use a strict clock model to describe the rate of
-character change over time, assuming the rate is constant over time and
-across all branches in our tree. <strong>Hint</strong>: you can use your
-clock script from the <a href="exercise-04.html#strict">previous
-exercise</a>.</p>
-<p>Open your <code>clock_strict_morpho.Rev</code> script. We don’t know
-the rate of evolution, so as before we’ll use an exponential prior.</p>
-<pre class="r"><code>branch_rates ~ dnExponential(10.0)
-
-moves.append( mvScale(branch_rates, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>
-<p>This rate will be used for all branches.</p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p>Once you have chosen your model you can source the first script.</p>
+<pre class="r"><code>source(&quot;scripts/1_MCMC_Simulation.Rev&quot;)</code></pre>
 </div>
-<div id="substitution-model" class="section level2">
-<h2>Substitution model</h2>
-<p>Next we’ll specify the Mk substitution model in the
-<code>Mk.Rev</code> file, which describes the probability of
-transitioning from one character state to another. This model is a
-generalisation of the Jukes-Cantor model that we’ve encountered
-previously.</p>
-<p>First we’ll use the <code>fnJC</code> function to define a <strong>Q
-matrix</strong> for 2 states (0, 1) since we only have two character
-states in our morphological character matrix. Remember that under this
-model rates of change between states and state frequencies are
-equal.</p>
-<pre class="r"><code>Q &lt;- fnJC(2)</code></pre>
-<p>Then we’ll define a stochastic node representing a character matrix
-and “clamp” that variable to our morphological data. Note that this time
-we need to use <code>type = "Standard"</code>.</p>
-<pre class="r"><code>seq ~ dnPhyloCTMC(tree = tree, Q = Q, type = &quot;Standard&quot;, branchRates = branch_rates)
-seq.clamp(morpho)</code></pre>
+<div id="simulating-new-datasets" class="section level3">
+<h3>Simulating new datasets</h3>
+<p>We can now simulate new datasets. In this script pay attention to the
+<code>thinning</code> variable. This number controls the number of
+datasets simulated. We set it too 100 here so every 100th tree is used
+in the <code>.var</code> file. In a standard analysis you would set this
+a lot lower (e.g. 2).</p>
+<pre class="r"><code>pps.run(thinning=100)</code></pre>
+<pre class="r"><code>source(&quot;scripts/2_PP_Simulation.Rev&quot;)</code></pre>
 </div>
-<div id="mcmc-settings" class="section level2">
-<h2>MCMC settings</h2>
-<p>Back in <code>main.Rev</code> add the following lines to include the
-tree, clock and substitution models.</p>
-<pre class="r"><code># tree model
-source(&quot;scripts/FBD_dating.Rev&quot;)
-# clock model
-source(&quot;scripts/clock_strict_morpho.Rev&quot;)
-# substitution model
-source(&quot;scripts/Mk.Rev&quot;)</code></pre>
-<p>The MCMC set up is very similar to before. First we create the
-variable <code>mymodel</code>.</p>
-<pre class="r"><code>mymodel = model(tree)</code></pre>
-<p>Then we define a set of monitors to capture the output.</p>
-<pre class="r"><code># parameters printed to file
-monitors.append( mnModel(filename = &quot;output/bears_FBD.log&quot;, printgen = 10, exclude = [&quot;F&quot;]) )
-# trees printed to file
-monitors.append( mnFile(filename = &quot;output/bears_FBD.trees&quot;, printgen = 10, tree) )
-# parameter values printed to screen during the MCMC
-monitors.append( mnScreen(printgen = 10, age_extant, num_samp_anc, origin_time) )</code></pre>
-<p><code>exclude = ["F"]</code> here means fossil ages will be excluded
-from the log file - I’ve done this because the way RevBayes output this
-information is a bit confusing, so we’ll ignore that for the moment.</p>
-<p>Finally, we’ll set up the MCMC run using the <code>mcmc</code>
-function, specifying our model, the vector of monitors and the vector of
-moves and run the chain for 10000 generations.</p>
-<pre class="r"><code>mymcmc = mcmc(mymodel, monitors, moves)
-mymcmc.run(generations = 10000, tuningInterval = 1000)</code></pre>
-<p>Note that this time we’ve adding the argument
-<code>tuningInterval = 1000</code>. This tells the chain how long to
-spend optimising the MCMC moves. Different datasets behave differently
-<span class="math inline">\(-\)</span> the above option partly automates
-the selection of move parameters that maximise efficiency of the
-MCMC.</p>
-<p>This might take a while run pretty quickly. Meanwhile, you could move
-on to the <a href="#next">Next tasks</a>.</p>
+<div id="mcmc-for-simulated-datasets" class="section level3">
+<h3>MCMC for simulated datasets</h3>
+<p>Next we need to run an MCMC for all of our simulated datasets. This
+function runs an MCMC for all datasets in the directory file path.</p>
+<pre class="r"><code>my_pps_mcmc = posteriorPredictiveAnalysis(mymcmc, directory)
+my_pps_mcmc.run(generations=1000)</code></pre>
+<pre class="r"><code>source(&quot;scripts/3_PP_MCMC.Rev&quot;)</code></pre>
 </div>
-<div id="evaluating-the-output" class="section level2">
-<h2>Evaluating the output</h2>
-<p>As before, open your <code>.log</code> file in Tracer.<br />
-It should look something like this.</p>
-<p><img src="trace5.png" width="85%" style="padding:10px" /></p>
-<blockquote>
-<p>Explore the output. Can you identify the different parameters? Has
-the analysis converged?</p>
-</blockquote>
-<blockquote>
-<p>What is the age of the most common recent ancestor of bears?</p>
-</blockquote>
-<p>Next let’s generate a summary tree.</p>
-<pre class="r"><code>trace = readTreeTrace(&quot;output/bears_FBD.trees&quot;)
-mccTree(trace, file = &quot;output/bears_FBD.mcc.tre&quot;, positiveBranchLengths = TRUE)</code></pre>
-<p>Once you have your summary tree open it in FigTree and play around
-with the settings. See if you can get something like this.</p>
-<p><img src="mcc_bears_fbd.png" width="85%" style="padding:10px" /></p>
-<blockquote>
-<p>Which candiates on your tree do you think might be sampled
-ancestors?</p>
-</blockquote>
+<div id="generating-test-statistics" class="section level3">
+<h3>Generating test statistics</h3>
+<p>We can then generate some test statistics to assess how well each
+model fit our data. This script calculates the tree length and the
+Robinson-Foulds (RF) distance for both the empirical dataset and
+simulated datasets. RF distance is one of several ways to measure the
+distance between trees.</p>
+<pre class="r"><code>source(&quot;scripts/4_Tree_Summary.Rev&quot;)</code></pre>
+<p>Now run the whole analysis again (scripts 1-4) using the other
+morphological model. Don’t forget to change the model name in each
+one!</p>
 </div>
-<div id="next" class="section level2">
-<h2>Next tasks</h2>
-<p>Some extra things to try. <strong>Make sure you rename the output
-files so you don’t overwrite the files you generated above!</strong></p>
-<div id="add-molecular-sequence-data" class="section level3">
-<h3>Add molecular sequence data</h3>
-<p>Try adding the molecular sequence alignment from the previous
-exercise.</p>
-<p>There’s just a few extra steps we need to add when we read in the
-data, at the beginning of <code>main.Rev</code>.</p>
-<p>First add the line that reads in the sequence data and create a
-constant variable <code>cytb</code>.</p>
-<pre class="r"><code>taxa &lt;- readTaxonData(&quot;data/bears_taxa.tsv&quot;)
-morpho &lt;- readDiscreteCharacterData(&quot;data/bears_morphology.nex&quot;)
-cytb &lt;- readDiscreteCharacterData(&quot;data/bears_cytb.nex&quot;)</code></pre>
-<p>Next we need to make sure the datasets are cross compatible because
-we don’t have molecular sequence data for all species.</p>
-<pre class="r"><code>cytb.addMissingTaxa( taxa )
-morpho.addMissingTaxa( taxa )</code></pre>
-<p>That’s it! Now you can go ahead and set up the
-[GTR]{exercise-05.html#GTR} model as before.</p>
-<blockquote>
-<p>What differences do you notice in your output?</p>
-</blockquote>
+<div id="producing-figures" class="section level3">
+<h3>Producing figures</h3>
+<p>Use the R script <code>PPS_Analysis.r</code>. If everything has been
+run correctly up to now, you only need to set your working directory and
+run this file.</p>
 </div>
-<div id="running-the-analysis-under-the-fbd" class="section level3">
-<h3>Running the analysis under the FBD</h3>
-<p>Can you try running the analysis <a
-href="exercise-05.html#prior">under the prior</a>? Note that its not
-strictly “under the prior” because the fossil ages are data but RevBayes
-doesn’t consider the FBD as part of the likelihood, so you can still
-choose the regular option for running the analysis under the prior to
-distinguish the signal coming from the FBD/fossil age data vs. the FBD
-combined with the sequence/morpho data.</p>
-<blockquote>
-<p>Compare you results to the posterior obtained using in the previous
-steps. What information do we gain from the morphological / molecular
-data?</p>
-</blockquote>
-<p>A complete set of scripts for this exercise can be downloaded <a
-href="https://fau-paleo.github.io/apw_2022/data/7_phylogenetics/exercise-RB03-scripts.zip">here</a>.</p>
+<div id="analysing-the-output" class="section level3">
+<h3>Analysing the output</h3>
+<p>The R script should produce a <code>Figures</code> directory
+containing 3 files:</p>
+<ol style="list-style-type: decimal">
+<li><code>Boxplots.pdf</code> This figure contains boxplots of the
+effect sizes for the 4 test statistics used here. The closer the plot is
+to zero the more similar the simulated results are to the
+empirical.</li>
+</ol>
+<p><img src="Boxplots.png" width="70%" style="padding:10px" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li><code>Histograms.pdf</code> This figure shows the distribution of
+tree length and Robinson Foulds distance across the simulated datasets.
+The blue line shows the empirical values and the pink broken line shows
+the mean of the simulated data.</li>
+</ol>
+<p><img src="Histrograms.png" width="70%" style="padding:10px" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><code>results.csv</code> Stores the effect sizes for each
+model.</li>
+</ol>
+<p><img src="results.png" width="50%" style="padding:10px" /></p>
 </div>
-<div id="acknowledgements" class="section level3">
-<h3>Acknowledgements</h3>
-<p>This exercise is adapted from the one described <a
-href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">here</a>
-by Tracy Heath, April Wright, Walker Pett and <a
-href="https://hal.inria.fr/PGE/hal-02536394">here</a> by Barido-Sottani
-et al. </p>
-</div>
+<div id="next-tasks" class="section level3">
+<h3>Next Tasks</h3>
+<p>Try simulating more datasets in the anaylsis (change the
+<code>thinnning</code> variable). Does this change the results?</p>
 </div>
 </div>
 
