@@ -11,7 +11,7 @@
 
 
 
-<title>exercise-06.knit</title>
+<title>exercise-06a.knit</title>
 
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -267,149 +267,147 @@ $(document).ready(function () {
 </div>
 
 
-<div id="morphological-substitution-models" class="section level2">
-<h2>Morphological Substitution models</h2>
-<p>In this practical we will first choose our own data and then apply
-two versions of the Mk model to our data.</p>
-<p>First, go to <a href="http://www.graemetlloyd.com/matr.html">this
-website</a> and choose a data set you want to analyse. Take the Nexus
-file. Once you have chosen you data set add it to your data folder for
-this exercise. In the scripts folder should create three files.</p>
+<p><br />
+</p>
+<div
+id="model-adequacy-using-posterior-predictive-simulations-in-revbayes"
+class="section level1">
+<h1>Model adequacy using posterior predictive simulations in
+RevBayes</h1>
+<p>In this exercise we will use posterior predictive simulations to
+assess the fit of an evolutionary model to our data. We will test two
+substitution models, Mk and Mkv+G. The code highlighted in this tutorial
+is just to show the more important parts of a script. <strong>You do not
+need to copy and paste them into the terminal</strong>. Instead, edit
+the scripts in your editor and use <code>source(" ")</code>to read them
+into RevBayes.</p>
+<p>There are 6 rev scripts for the analysis:</p>
 <ol style="list-style-type: decimal">
-<li>Containing MCMC moves</li>
-<li>Version 1 of the Mk model</li>
-<li>Version 2 of the Mk model</li>
+<li><code>MCMC_Simulation.Rev</code> runs an MCMC on your empirical
+dataset and samples parameters from the posterior</li>
+<li><code>PP_Simulation.Rev</code> takes the output from the first MCMC
+to simulated new datasets under the chosen model</li>
+<li><code>PP_MCMC.Rev</code> runs an MCMC for all the new datasets</li>
+<li><code>Tree_Summary.Rev</code> generates test statistics</li>
+<li><code>mk_Model.Rev</code> Mk substitution model script</li>
+<li><code>mk+GV_Model.Rev</code> Mk+GV substitution model script</li>
 </ol>
-<p>You can choose what extensions to add to your model based on what you
-think is important for your data set</p>
-<div id="mcmc-file" class="section level3">
-<h3>MCMC File</h3>
-<p>Read in our data</p>
-<pre><code>morpho &lt;- readDiscreteCharacterData(&quot;data/file-name.nex&quot;)</code></pre>
-<p>Set up helper variables</p>
-<pre><code>taxa &lt;- morpho.names()
-num_taxa &lt;- taxa.size()
-# num of branches for an unrooted tree
-num_branches &lt;- 2 * num_taxa - 3
-# moves
-moves = VectorMoves()
-</code></pre>
-<div id="tree-model" class="section level6">
-<h6>Tree model</h6>
-<pre><code>br_len_lambda &lt;- 10
-# We assume a uniform prior on topology.
- phylogeny ~ dnUniformTopologyBranchLength(taxa, branchLengthDistribution=dnExponential(br_len_lambda)) 
-
-# compute the tree length from the phylogeny
-tree_length := phylogeny.treeLength()
-
-
-moves.append( mvNNI(phylogeny, weight=num_branches/2.0) )
-moves.append( mvSPR(phylogeny, weight=num_branches/10.0) )
-moves.append( mvBranchLengthScale(phylogeny, weight=num_branches) )
-</code></pre>
-<p>Source the Mk file</p>
-<pre><code>source(&quot;scripts/Mk.Rev&quot;)</code></pre>
-<p>Replace <code>Mk.Rev</code> with what ever you have named your
-script</p>
-<p>Define the model</p>
-<pre><code># We define our model.
-# We can use any node of our model as a handle, here we chose to use the tree.
-mymodel = model(phylogeny)</code></pre>
-<p>The object <code>mymodel</code> is a wrapper around the entire model
-graph and allows us to pass the model to various functions that are
-specific to our MCMC analysis.</p>
-<p>Set up our monitors for the analysis Change <code>MK-NAME</code> to
-the version of the model you are running. You can call it anything, just
-make sure you change it between your two versions.</p>
-<pre><code>monitors.append( mnModel(filename=  &quot;output/&quot; + MK-NAME + &quot;_posterior.log&quot;,printgen=10, separator = TAB) )
-monitors.append( mnFile(filename=  &quot;output/&quot; + MK-NAME + &quot;_posterior.trees&quot;,printgen=10, separator = TAB, phylogeny) )
-monitors.append( mnScreen(printgen=1000, tree_length) )
-monitors.append( mnStochasticVariable(filename= &quot;output/&quot; + MK-NAME +&quot;_posterior.var&quot;,printgen=10) )</code></pre>
-<p>Run the anaylsis</p>
-<pre><code>mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine=&quot;mixed&quot;)
-mymcmc.burnin(generations=200,tuningInterval=200)
-mymcmc.run(generations= 10000 ,tuningInterval=200)</code></pre>
+<p>and 1 R script <code>PPS_Analsis.r</code> to summarise the
+output.</p>
+<p>The data used here is a morphological matrix Brontornis taxa, an
+extinct genus of giant flightless birds from Argentina. There are 12
+taxa and 51 characters.</p>
+<p>You can download everything <a
+href="scripts/exercise07.zip">here</a>. Note unlike previous exercises
+in this course, you don’t need to write any scripts from scratch. Simply
+modify the existing scripts to run the analysis.</p>
+<div id="read-in-the-data-and-define-the-subsitution-model-to-test"
+class="section level3">
+<h3>Read in the data and define the subsitution model to test</h3>
+<p>Start with <code>MCMC_Simulation.rev</code> script. We first need to
+read in our data and define which substitution model we will use for the
+analysis, either Mk or Mkv+G.</p>
+<pre class="r"><code>morpho &lt;- readDiscreteCharacterData(&quot;data/Agnolin_2007a_paleobiodb.nex&quot;)
+analysis_name = &quot;model_adequacy&quot; 
+model_name = &quot;model&quot; # what model are you testing? e.g. &quot;mk&quot;
+model_file_name = &quot;scripts/&quot;+model_name+&quot;_Model.Rev&quot;</code></pre>
+<p><strong>Note</strong>: These variables are at the start of the rev
+scripts 1-4. Make sure you add the model you want to use to each
+script.</p>
+<p>This monitor samples the posterior and saves it to a file that can be
+used to simulate new datasets under the chosen model.</p>
+<pre class="r"><code>monitors.append( mnStochasticVariable(filename=&quot;output/&quot;  + model_name +  &quot;/output/&quot; + analysis_name + &quot;_posterior.var&quot;, printgen=10) )</code></pre>
 </div>
-</div>
-<div id="mk-model-scripts" class="section level3">
-<h3>Mk Model Scripts</h3>
-<p>Here you will create two scripts. You can have an unpartitioned or
-partitioned version of the model it is up to you. Decide which
-extensions you think are interesting/important and build your sequence
-evolution model</p>
-<pre><code>#### specify the Jukes-Cantor substitution model applied uniformly to all sites ###
-# change num_state to the maximum number of states in your data set
-Q := fnJC(num_states) </code></pre>
-<div id="extentions-to-the-mk-model" class="section level4">
-<h4>Extentions to the Mk Model</h4>
-<div id="gamma-distribtued-rate-variation" class="section level6">
-<h6>Gamma-distribtued rate variation</h6>
-<pre><code>alpha_inv ~ dnExponential(1)
-alpha_morpho := 1 / alpha_inv
-rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 ) 
+<div id="mk-substitution-model" class="section level3">
+<h3>Mk substitution model</h3>
+<p>Helper variables and branch lengths are set up as in previous
+exercises.</p>
+<p>Specify the Jukes-Cantor substitution model applied uniformly to all
+sites. Remember the Mk model is a generalization of the Jukes-Cantor
+model.</p>
+<pre class="r"><code>Q := fnJC(4) # this matrix has 4 different character states. 
 
-# Moves on the parameters to the Gamma distribution.
-moves.append( mvScale(alpha_inv,lambda=1, weight=2.0) )</code></pre>
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;)</code></pre>
 </div>
-<div id="account-for-ascertainment-bias" class="section level6">
-<h6>Account for Ascertainment Bias</h6>
-<p>To do this, we don’t need to create any new variables. We just add it
-to out PhyloCTMC object by <code>coding="variable"</code></p>
+<div id="mkv-gamma-substitution-model" class="section level3">
+<h3>Mkv + Gamma substitution model</h3>
+<p>Set up gamma-distributed rate variation.</p>
+<pre class="r"><code>alpha_morpho ~ dnUniform( 0.0, 1E6 )
+rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+moves.append( mvScale(alpha_morpho, lambda=1, weight=2.0) )</code></pre>
+<p>To account for ascertainment bias. Change the coding to
+<code>variable</code>.</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree=phylogeny, siteRates=rates_morpho, Q=Q, type=&quot;Standard&quot;,  coding=&quot;variable&quot;)</code></pre>
 </div>
-<div id="build-the-sequence-evolution-model" class="section level6">
-<h6>Build the sequence evolution model</h6>
-<pre><code># the sequence evolution model. 
-# This is for just the Mk model, no extensions
-seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;)
-
-# to add gamma add
-siteRates=rates_morpho
-
-# to account for Ascertainment Bias add
-coding=&quot;variable
-
-# attach the data
-seq.clamp(morpho)</code></pre>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p>Once you have chosen your model you can source the first script.</p>
+<pre class="r"><code>source(&quot;scripts/1_MCMC_Simulation.Rev&quot;)</code></pre>
 </div>
-<div id="partitioning-the-data" class="section level6">
-<h6>Partitioning the data</h6>
-<p>This code will partition the data by the number of character states.
-This code builds a model of sequance evolution for each partition. This
-is for an Mk model. To add G and V add the lines as above.</p>
-<pre><code>n_max_states &lt;- num_states
-idx = 1
-morpho_bystate[1] &lt;- morpho
-for (i in 2:n_max_states) {
-    morpho_bystate[i] &lt;- morpho                                # make local tmp copy of data
-    morpho_bystate[i].setNumStatesPartition(i)                 # only keep character blocks with state space equal to size i
-    nc = morpho_bystate[i].nchar()                             # get number of characters per character size with i-sized states
-
-    if (nc &gt; 0) {                                              # for non-empty character blocks
-        q[idx] &lt;- fnJC(i)                                      # make i-by-i rate matrix
-        m_morph[idx] ~ dnPhyloCTMC( tree=phylogeny,
-                                    Q=q[idx],
-                                    nSites=nc,
-                                    type=&quot;Standard&quot;)           # create model of evolution for the character block
-
-        m_morph[idx].clamp(morpho_bystate[i])                  # attach the data
-
-        idx = idx + 1                                          # increment counter
-        idx
-    }
-}</code></pre>
+<div id="simulating-new-datasets" class="section level3">
+<h3>Simulating new datasets</h3>
+<p>We can now simulate new datasets. In this script pay attention to the
+<code>thinning</code> variable. This number controls the number of
+datasets simulated. We set it too 100 here so every 100th tree is used
+in the <code>.var</code> file. In a standard analysis you would set this
+a lot lower (e.g. 2).</p>
+<pre class="r"><code>pps.run(thinning=100)</code></pre>
+<pre class="r"><code>source(&quot;scripts/2_PP_Simulation.Rev&quot;)</code></pre>
 </div>
+<div id="mcmc-for-simulated-datasets" class="section level3">
+<h3>MCMC for simulated datasets</h3>
+<p>Next we need to run an MCMC for all of our simulated datasets. This
+function runs an MCMC for all datasets in the directory file path.</p>
+<pre class="r"><code>my_pps_mcmc = posteriorPredictiveAnalysis(mymcmc, directory)
+my_pps_mcmc.run(generations=1000)</code></pre>
+<pre class="r"><code>source(&quot;scripts/3_PP_MCMC.Rev&quot;)</code></pre>
 </div>
+<div id="generating-test-statistics" class="section level3">
+<h3>Generating test statistics</h3>
+<p>We can then generate some test statistics to assess how well each
+model fit our data. This script calculates the tree length and the
+Robinson-Foulds (RF) distance for both the empirical dataset and
+simulated datasets. RF distance is one of several ways to measure the
+distance between trees.</p>
+<pre class="r"><code>source(&quot;scripts/4_Tree_Summary.Rev&quot;)</code></pre>
+<p>Now run the whole analysis again (scripts 1-4) using the other
+morphological model. Don’t forget to change the model name in each
+one!</p>
 </div>
-<div id="questions" class="section level3">
-<h3>Questions</h3>
+<div id="producing-figures" class="section level3">
+<h3>Producing figures</h3>
+<p>Use the R script <code>PPS_Analysis.r</code>. If everything has been
+run correctly up to now, you only need to set your working directory and
+run this file.</p>
+</div>
+<div id="analysing-the-output" class="section level3">
+<h3>Analysing the output</h3>
+<p>The R script should produce a <code>Figures</code> directory
+containing 3 files:</p>
 <ol style="list-style-type: decimal">
-<li>Are the results from your two models different?</li>
-<li>Are the tree lengths different?</li>
-<li>Can you explain why?</li>
-<li>Do you understand the different assumptions you made in the
-different models?</li>
+<li><code>Boxplots.pdf</code> This figure contains boxplots of the
+effect sizes for the 4 test statistics used here. The closer the plot is
+to zero the more similar the simulated results are to the
+empirical.</li>
 </ol>
+<p><img src="Boxplots.png" width="70%" style="padding:10px" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li><code>Histograms.pdf</code> This figure shows the distribution of
+tree length and Robinson Foulds distance across the simulated datasets.
+The blue line shows the empirical values and the pink broken line shows
+the mean of the simulated data.</li>
+</ol>
+<p><img src="Histrograms.png" width="70%" style="padding:10px" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><code>results.csv</code> Stores the effect sizes for each
+model.</li>
+</ol>
+<p><img src="results.png" width="50%" style="padding:10px" /></p>
+</div>
+<div id="next-tasks" class="section level3">
+<h3>Next Tasks</h3>
+<p>Try simulating more datasets in the anaylsis (change the
+<code>thinnning</code> variable). Does this change the results?</p>
 </div>
 </div>
 

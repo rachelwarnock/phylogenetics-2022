@@ -18,6 +18,8 @@ output: html_document
 
 ```{r, echo=FALSE, out.width="20%",  out.extra='style="padding:10px"'}
 knitr::include_graphics("bear.jpg")
+# notes
+# https://royalsocietypublishing.org/doi/abs/10.1098/rsbl.2018.0263
 ```
 
 
