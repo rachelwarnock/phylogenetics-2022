@@ -240,13 +240,36 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/week_09.pdf","projects.html")
+urls <- c("slides/week_10.pdf","projects.html")
 
 dt <- data.frame(schedule = c("Slides", "Projects page"),
-                 topics = c("Phylogenetic comparative methods", 
-                            "Projects"))
+                 topics = c("Projects overview", 
+                            ""))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+# Extra material
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/PCMs.pdf","https://dwbapst.github.io/PaleoSoc_phylo_short_course_2019/articles/module_09_worked_PCM_example/module_08.html", "slides/multi-type-JBS.pdf", 
+    "https://revbayes.github.io/tutorials/sse/bisse.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise", "Slides", "Exercise"),
+                 topics = c("Phylogenetic comparative methods", 
+                            "Tutorial by Laura Soul & David Wright",
+                            "More about birth-death process models", 
+                            "RevBayes BiSSE tutorial"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")

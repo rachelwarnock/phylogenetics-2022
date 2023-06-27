@@ -291,11 +291,16 @@ assumptions.</p>
 install.packages(&quot;FossilSim&quot;)</code></pre>
 <div id="model-parameters" class="section level2">
 <h2>Model parameters</h2>
-<p>The model has four parameters: * lineage birth rate (<span
-class="math inline">\(\lambda\)</span>) * lineage death rate (<span
-class="math inline">\(\mu\)</span>) * fossil recovery rate (<span
-class="math inline">\(\psi\)</span>) * probability of extant species
-sampling (<span class="math inline">\(\rho\)</span>)</p>
+<p>The model has four parameters:</p>
+<ul>
+<li>lineage birth rate (<span
+class="math inline">\(\lambda\)</span>)</li>
+<li>lineage death rate (<span class="math inline">\(\mu\)</span>)</li>
+<li>fossil recovery rate (<span
+class="math inline">\(\psi\)</span>)</li>
+<li>probability of extant species sampling (<span
+class="math inline">\(\rho\)</span>)</li>
+</ul>
 <p>The birth and death rate parameters are part of the diversification
 component of the model and describe how the tree grows over time, while
 the fossil recovery and extant species sampling parameters describe how
@@ -320,11 +325,21 @@ set.seed(1234)
 
 # simulate a tree using TreeSim conditioned on tip number
 lambda = 0.1
-mu = 0.5
+mu = 0.05
 tips = 10
 t = TreeSim::sim.bd.taxa(n = tips, numbsim = 1, lambda = lambda, mu = mu)[[1]]
 # t is an object of class phylo
 t</code></pre>
+<pre><code>## 
+## Phylogenetic tree with 10 tips and 9 internal nodes.
+## 
+## Tip labels:
+##   t5, t6, t1, t9, t3, t8, ...
+## 
+## Rooted; includes branch lengths.</code></pre>
+<pre class="r"><code># plot the tree
+plot(t)</code></pre>
+<p><img src="exercise-07a_files/figure-html/tree-1.png" width="672" /></p>
 <p>Note the function simulates the <em>complete tree</em>, that is, the
 tree containing all lineages that were ever part of the tree (observed
 and unobserved).</p>
@@ -345,9 +360,23 @@ What do you notice this time?</p>
 <p>Here we’ll simulate fossils, assumming a constant rate of
 fossilisation.</p>
 <pre class="r"><code># Simulate fossils
-rate = 3 # poisson sampling rate
-f = sim.fossils.poisson(rate = rate, tree = t)
+rate = 0.3 # poisson sampling rate
+f = FossilSim::sim.fossils.poisson(rate = rate, tree = t)
 f</code></pre>
+<pre><code>##    sp edge       hmin       hmax
+## 1   1    1  7.9126891  7.9126891
+## 2   3    3  0.4766375  0.4766375
+## 3   3    3  2.7507976  2.7507976
+## 4   6    6  2.8698887  2.8698887
+## 5   7    7  1.7002141  1.7002141
+## 6   7    7  0.5138199  0.5138199
+## 7   7    7  1.9609156  1.9609156
+## 8   9    9  0.6496230  0.6496230
+## 9  11   11 20.9641465 20.9641465
+## 10 17   17  4.0468324  4.0468324
+## ...
+## Fossil record with 11 occurrences representing 7 species
+## Fossil record not simulated using taxonomy: all speciation events are assumed to be symmetric</code></pre>
 <p>Each entry in the fossils data frame corresponds to a fossil sampling
 time. <code>sp</code> and <code>edge</code> are the species and edge
 labels, respectively. <code>hmin</code> and <code>hmax</code> are the
@@ -357,13 +386,14 @@ hmin and hmax are equal.</p>
 <p><code>FossilSim</code> has a lot of different functions for plotting
 the output.</p>
 <pre class="r"><code># plot fossil occurrences
-plot(f, tree = t)
-
-# plot stratigraphic ranges
-plot(f, tree = t, show.ranges = TRUE)
-
-# plot the output
+plot(f, tree = t)</code></pre>
+<p><img src="exercise-07a_files/figure-html/plot-1.png" width="672" /></p>
+<pre class="r"><code># plot stratigraphic ranges
+plot(f, tree = t, show.ranges = TRUE)</code></pre>
+<p><img src="exercise-07a_files/figure-html/plot-2.png" width="672" /></p>
+<pre class="r"><code># plot the output
 plot(f, tree = t, show.strata = TRUE, strata = 4)</code></pre>
+<p><img src="exercise-07a_files/figure-html/plot-3.png" width="672" /></p>
 <blockquote>
 <p>What happens if you decrease or increase the fossil sampling
 rate?</p>
@@ -371,6 +401,7 @@ rate?</p>
 <p>You can also compare the complete and reconstructed trees.</p>
 <pre class="r"><code># plot the reconstructed tree
 plot(f, tree = t, reconstructed = TRUE)</code></pre>
+<p><img src="exercise-07a_files/figure-html/recon-1.png" width="672" /></p>
 </div>
 <div id="extant-species-sampling" class="section level2">
 <h2>Extant species sampling</h2>
@@ -379,10 +410,11 @@ plot(f, tree = t, reconstructed = TRUE)</code></pre>
 rho = 0.5
 
 # simulate extant species sampling
-f2 = sim.extant.samples(fossils = f, tree = t, rho = rho)
+f2 = FossilSim::sim.extant.samples(fossils = f, tree = t, rho = rho)
 
 # plot the output
 plot(f2, tree = t, extant.col = &quot;red&quot;)</code></pre>
+<p><img src="exercise-07a_files/figure-html/extant-1.png" width="672" /></p>
 <blockquote>
 <p>What happens if you increase or decrease rho?</p>
 </blockquote>

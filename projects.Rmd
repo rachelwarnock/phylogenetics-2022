@@ -11,8 +11,8 @@ output: html_document
 * 5 pages max, inc. references and figures
 * focus mainly on the methods and results 
 * brief intro & discussion (paragraph each)
-* deadline for feedback July 25
-* final deadline July 29
+* deadline for feedback July 21
+* final deadline July 28
 * don't forget to provide access to the project code!
 
 
@@ -23,15 +23,21 @@ knitr::include_graphics("bear.jpg")
 ```
 
 
-# Some guidelines for your report
+# Some guiding questions for your report
 
 * What is the main question / hypothesis that you aim to address in your project? 
 * Describe the data, your model and all your parameter choices
 * Could someone else repeat your analysis based on the info you provide?
-* Did you encounter any issues?
 * If applicable, how did you assess convergence?
+* Did you encounter any issues?
+* How do your results differ to previously published results?
 
+# Data sources
 
+* [Graeme Lloyd’s database](http://www.graemetlloyd.com/matr.html) of character matrices.
+* Age info for many of these matrices can be found in [this paper](https://royalsocietypublishing.org/doi/full/10.1098/rsbl.2018.0263).
+* [Statistical evaluation of character support reveals the instability of higher‐level dinosaur phylogeny](https://www.nature.com/articles/s41598-023-35784-3)
+* [Trilobite evolutionary rates constrain the duration of the Cambrian explosion](https://www.pnas.org/doi/10.1073/pnas.1819366116)
 
 
 

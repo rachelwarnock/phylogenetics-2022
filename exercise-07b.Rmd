@@ -204,9 +204,9 @@ Then we define a set of monitors to capture the output.
 
 ```{r monitors, eval=FALSE}
 # parameters printed to file
-monitors.append( mnModel(filename = "output/bears_FBD.log", printgen = 10, exclude = ["F"]) )
+monitors.append( mnModel(filename = "output/bears_FBD.log", printgen = 100, exclude = ["F"]) )
 # trees printed to file
-monitors.append( mnFile(filename = "output/bears_FBD.trees", printgen = 10, tree) )
+monitors.append( mnFile(filename = "output/bears_FBD.trees", printgen = 100, tree) )
 # parameter values printed to screen during the MCMC
 monitors.append( mnScreen(printgen = 10, age_extant, num_samp_anc, origin_time) )
 ```

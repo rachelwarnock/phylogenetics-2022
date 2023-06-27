@@ -433,9 +433,9 @@ variable <code>mymodel</code>.</p>
 <pre class="r"><code>mymodel = model(tree)</code></pre>
 <p>Then we define a set of monitors to capture the output.</p>
 <pre class="r"><code># parameters printed to file
-monitors.append( mnModel(filename = &quot;output/bears_FBD.log&quot;, printgen = 10, exclude = [&quot;F&quot;]) )
+monitors.append( mnModel(filename = &quot;output/bears_FBD.log&quot;, printgen = 100, exclude = [&quot;F&quot;]) )
 # trees printed to file
-monitors.append( mnFile(filename = &quot;output/bears_FBD.trees&quot;, printgen = 10, tree) )
+monitors.append( mnFile(filename = &quot;output/bears_FBD.trees&quot;, printgen = 100, tree) )
 # parameter values printed to screen during the MCMC
 monitors.append( mnScreen(printgen = 10, age_extant, num_samp_anc, origin_time) )</code></pre>
 <p><code>exclude = ["F"]</code> here means fossil ages will be excluded

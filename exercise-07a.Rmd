@@ -46,6 +46,7 @@ install.packages("FossilSim")
 ## Model parameters
 
 The model has four parameters:
+
  * lineage birth rate ($\lambda$)
  * lineage death rate ($\mu$)
  * fossil recovery rate ($\psi$)
@@ -63,17 +64,19 @@ In the following we will simulate birth-death trees conditioned on the number of
 
 Let's give it a go. 
 
-```{r tree, eval=FALSE}
+```{r tree, eval=TRUE}
 # set the random number generator seed to generate the same results using the same code
 set.seed(1234)
 
 # simulate a tree using TreeSim conditioned on tip number
 lambda = 0.1
-mu = 0.5
+mu = 0.05
 tips = 10
 t = TreeSim::sim.bd.taxa(n = tips, numbsim = 1, lambda = lambda, mu = mu)[[1]]
 # t is an object of class phylo
 t
+# plot the tree
+plot(t)
 ```
 
 Note the function simulates the *complete tree*, that is, the tree containing all lineages that were ever part of the tree (observed and unobserved).
@@ -86,10 +89,10 @@ Run the function a few more times without changing any of the parameters. You sh
 
 Here we'll simulate fossils, assumming a constant rate of fossilisation.
 
-```{r foss, eval=FALSE}
+```{r foss, eval=TRUE}
 # Simulate fossils
-rate = 3 # poisson sampling rate
-f = sim.fossils.poisson(rate = rate, tree = t)
+rate = 0.3 # poisson sampling rate
+f = FossilSim::sim.fossils.poisson(rate = rate, tree = t)
 f
 ```
 
@@ -98,7 +101,7 @@ Each entry in the fossils data frame corresponds to a fossil sampling time. `sp`
 
 `FossilSim` has a lot of different functions for plotting the output. 
 
-```{r plot, eval=FALSE}
+```{r plot, eval=TRUE}
 # plot fossil occurrences
 plot(f, tree = t)
 
@@ -113,7 +116,7 @@ plot(f, tree = t, show.strata = TRUE, strata = 4)
 
 You can also compare the complete and reconstructed trees.
 
-```{r recon, eval=FALSE}
+```{r recon, eval=TRUE}
 # plot the reconstructed tree
 plot(f, tree = t, reconstructed = TRUE)
 ```
@@ -122,13 +125,13 @@ plot(f, tree = t, reconstructed = TRUE)
 
 Next we can add include incomplete extant species sampling. 
 
-```{r extant, eval=FALSE}
+```{r extant, eval=TRUE}
 
 # extant sampling
 rho = 0.5
 
 # simulate extant species sampling
-f2 = sim.extant.samples(fossils = f, tree = t, rho = rho)
+f2 = FossilSim::sim.extant.samples(fossils = f, tree = t, rho = rho)
 
 # plot the output
 plot(f2, tree = t, extant.col = "red")
