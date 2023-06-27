@@ -24,6 +24,15 @@ Edit the scripts in a text editor of your choice.
 ## Read in the data and define helper variables
 
 Start with your `main.Rev` script.
+
+For this exercise, before you add the regular Rev commands and set up your model, add the following command at the top of your script. 
+
+```{r SA, eval=FALSE}
+setOption("collapseSampledAncestors", "false")
+```
+
+This changes the way the program outputs trees with sampled ancestors and makes it easier for us to visualise the output.
+
 As before, we'll start by reading in the data and defining some helper variables.
 
 ```{r data, eval=FALSE}
