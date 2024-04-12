@@ -11,28 +11,25 @@ knitr::include_graphics("tree.jpg")
 # Course description
 
 This hands on course focuses on the use of **Bayesian phylogenetics** in paleobiology. 
-You will learn about approaches used to infer trees, divergence times and evolutionary rates. 
+You will learn about approaches used to infer trees, divergence times, and evolutionary rates.
 
 The course will take place in the summer semester **Tuesdays 14:00-16:00 CET**  in person at Henke Str.
 
-The first half of the course will feature a mix of lectures and tutorial material.
-Aside from week one, the course will focus on getting to grips with the software [RevBayes](https://revbayes.github.io). By the end of the course students should understand the principles of Bayesian phylogenetic inference and be able to apply this knowledge to a research question of their choosing.
-During the second half of the course each participant will work on a project topic of their choice.
+The first part of the course will feature a mix of lectures and tutorials.
+The course will focus on getting to grips with the software [RevBayes](https://revbayes.github.io). By the end of the course you should understand the principles of Bayesian phylogenetic inference and be able to apply this knowledge to a research question of your choosing.
+You will also learn how to apply phylogenetic comparative methods using R.
 
-Course instructures: **Rachel Warnock**, **Tim Brandler** and **Laura Mulvey**.
+During the second part of the course each participant will work on a project of their choice.
 
-Before the start of the course we recommend reading the following posts:
-
-* [Tree Thinking Challenge](https://www.science.org/doi/10.1126/science.1117727)
-* [If we evolved from apes, why are there still apes?](https://blogs.iu.edu/sciu/2017/09/26/why-are-there-still-apes/) 
+Course instructors: **Rachel Warnock**, **Emma Dunne**, and **Laura Mulvey**.
 
 \
 
 # Course evaluation
 
 At the end of the course you should produce a short report based on your research findings. 
-We will provide you with a template and guidelines. 
-The deadline for the report is **Friday 28th of July**.
+You will be provided with clear guidelines. 
+The deadline for the report is **Friday 26th of July**.
 
 Note: "Phylogenetics" is graded together with "Introduction to Statistical Modelling". Course code: RL-V3 MPP.
 
@@ -41,6 +38,12 @@ Note: "Phylogenetics" is graded together with "Introduction to Statistical Model
 # Any questions?
 
 Email rachel.warnock@fau.de
+
+\
+
+### Acknowledgements
+
+This course draws on material and exercises produced by [Paul Lewis](https://www.youtube.com/watch?v=1r4z0YJq580), Tracy Heath, Joëlle Bardio-Sottani, April Wright, Walker Pett, Joshua Justison, Sebastian Höhna, and many other [RevBayesian](https://revbayes.github.io) community contributors. Thanks to Joël Koelewijn for feedback on the course content.
 
 \
 \

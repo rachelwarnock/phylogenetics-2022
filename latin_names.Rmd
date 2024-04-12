@@ -1,0 +1,58 @@
+---
+title: ""
+output: html_document
+---
+
+\
+
+# Latin names decoded
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+names <- c("Ambystoma","Amphimedon","Aurelia","Branchiostoma",
+          "Capsaspora","Charnia","Ciona","Epiperipatus",
+          "Hydra","Mnemiopsis","Monosiga","Nematostella",
+          "Pinctada","Platynereis","Priapulus","Saccoglossus",
+          "Strongylocentrotus","Sycon","Tribolium","Trichoplax")
+
+what <- c("mole salamander", "demosponge", "cnidarian (jellyfish)", #1-3
+          "lancelet (cephalochordate)", #4 
+          "unicellular eukaryote (closely related to animals)", #5
+          "putative Ediacaran animal", "sea squirt (tunicate)", #6-7 
+          "velvet worm", "cnidarian (hydrozoan)", #8-9
+          "comb jelly (ctenophore)", "choanoflagellate", #10-11
+          "cnidarian (sea anemones)", "bivalve mollusc",  "marine annelid" #12-14
+          ,"priapulid worm", "acorn worm", "sea urchin", #15-17 
+          "calcareous sponge","beetle","placozoan") 
+
+url <- c("https://en.wikipedia.org/wiki/Mole_salamander", #1
+         "https://en.wikipedia.org/wiki/Amphimedon_(sponge)", #2
+         "https://en.wikipedia.org/wiki/Aurelia_(cnidarian)", #3
+         "https://en.wikipedia.org/wiki/Branchiostoma", #4
+         "https://en.wikipedia.org/wiki/Capsaspora", #5
+         "https://en.wikipedia.org/wiki/Charnia", #6
+         "https://en.wikipedia.org/wiki/Ciona", #7
+         "https://en.wikipedia.org/wiki/Epiperipatus", #8
+         "https://en.wikipedia.org/wiki/Hydra_(genus)", #9
+         "https://en.wikipedia.org/wiki/Mnemiopsis", #10
+         "https://en.wikipedia.org/wiki/Choanoflagellate", #11
+         "https://en.wikipedia.org/wiki/Nematostella", #12
+         "https://en.wikipedia.org/wiki/Pinctada", #13
+         "https://en.wikipedia.org/wiki/Platynereis", #14
+         "https://en.wikipedia.org/wiki/Priapulus", #15
+         "https://en.wikipedia.org/wiki/Saccoglossus", #16
+         "https://en.wikipedia.org/wiki/Strongylocentrotus", #17
+         "https://en.wikipedia.org/wiki/Sycon", #18
+         "https://en.wikipedia.org/wiki/Tribolium_(beetle)", #19
+         "https://en.wikipedia.org/wiki/Trichoplax" #20
+         )
+
+dt <- data.frame(genus = names, group = what)
+
+dt$genus <- paste0("[", dt$genus, "](", url, ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```

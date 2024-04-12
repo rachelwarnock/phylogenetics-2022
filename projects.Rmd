@@ -7,26 +7,19 @@ output: html_document
 
 # Assessment
 
-* written report 
+* Written report 
 * 5 pages max, inc. references and figures
-* focus mainly on the methods and results 
-* brief intro & discussion (paragraph each)
-* deadline for feedback July 21
-* final deadline July 28
-* don't forget to provide access to the project code!
-
-
-```{r, echo=FALSE, out.width="20%",  out.extra='style="padding:10px"'}
-knitr::include_graphics("bear.jpg")
-# notes
-# https://royalsocietypublishing.org/doi/abs/10.1098/rsbl.2018.0263
-```
+* Focus mainly on the methods and results 
+* Brief intro & discussion (paragraph each)
+* Deadline for feedback July 21
+* Final deadline July 18
+* Don't forget to provide access to the project code!
 
 
 # Some guiding questions for your report
 
-* What is the main question / hypothesis that you aim to address in your project? 
-* Describe the data, your model and all your parameter choices
+* What is the main question / hypothesis that you aim to address in your project?
+* Describe the data, your model, and all your parameter choices
 * Could someone else repeat your analysis based on the info you provide?
 * If applicable, how did you assess MCMC convergence? See [Week 6](schedule.html#week6) materials.
 * Did you encounter any issues?
@@ -34,14 +27,25 @@ knitr::include_graphics("bear.jpg")
 
 # Data sources
 
-* [Graeme Lloyd’s database](http://www.graemetlloyd.com/matr.html) of character matrices.
-* Age info for many of these matrices can be found in [this paper](https://royalsocietypublishing.org/doi/full/10.1098/rsbl.2018.0263).
+* [Graeme Lloyd’s database](http://www.graemetlloyd.com/matr.html) of character matrices
+* Age info for many of these matrices can be found in [this paper](https://royalsocietypublishing.org/doi/full/10.1098/rsbl.2018.0263)
 * [Statistical evaluation of character support reveals the instability of higher‐level dinosaur phylogeny](https://www.nature.com/articles/s41598-023-35784-3)
-* [Trilobite evolutionary rates constrain the duration of the Cambrian explosion](https://www.pnas.org/doi/10.1073/pnas.1819366116)
 
 
+#### Some notes on nexus files
 
+* Brackets
+  * `(01)` would mean a given taxon has been observed with both states 0 and 1
+  * `{01}` would mean a given taxon has been observed with state 0 *or* 1
+  * I *think* RevBayes will ignore any characters in brackets...
+  * For more information follow [this link](http://informatics.nescent.org/w/images/8/8b/NEXUS_Final.pdf)
+  
+\
 
-
+```{r, echo=FALSE, out.width="30%",  out.extra='style="float:left;position:relative;right:-20px"'}
+knitr::include_graphics("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXFpOTVsNWxlZ2k4dXdicDk4cTZqNmdqMGluZm83YnBocml1a3ZtMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ekwEeLxb7G4DW44YaK/giphy.gif")
+# notes
+# * [Trilobite evolutionary rates constrain the duration of the Cambrian explosion](https://www.pnas.org/doi/10.1073/pnas.1819366116)
+```
 
 

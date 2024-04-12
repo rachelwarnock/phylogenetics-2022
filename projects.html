@@ -13,7 +13,7 @@
 
 <title>projects.knit</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
@@ -272,22 +272,21 @@ $(document).ready(function () {
 <div id="assessment" class="section level1">
 <h1>Assessment</h1>
 <ul>
-<li>written report</li>
+<li>Written report</li>
 <li>5 pages max, inc. references and figures</li>
-<li>focus mainly on the methods and results</li>
-<li>brief intro &amp; discussion (paragraph each)</li>
-<li>deadline for feedback July 21</li>
-<li>final deadline July 28</li>
-<li>don’t forget to provide access to the project code!</li>
+<li>Focus mainly on the methods and results</li>
+<li>Brief intro &amp; discussion (paragraph each)</li>
+<li>Deadline for feedback July 21</li>
+<li>Final deadline July 18</li>
+<li>Don’t forget to provide access to the project code!</li>
 </ul>
-<p><img src="bear.jpg" width="20%" style="padding:10px" /></p>
 </div>
 <div id="some-guiding-questions-for-your-report" class="section level1">
 <h1>Some guiding questions for your report</h1>
 <ul>
 <li>What is the main question / hypothesis that you aim to address in
 your project?</li>
-<li>Describe the data, your model and all your parameter choices</li>
+<li>Describe the data, your model, and all your parameter choices</li>
 <li>Could someone else repeat your analysis based on the info you
 provide?</li>
 <li>If applicable, how did you assess MCMC convergence? See <a
@@ -300,18 +299,35 @@ href="schedule.html#week6">Week 6</a> materials.</li>
 <h1>Data sources</h1>
 <ul>
 <li><a href="http://www.graemetlloyd.com/matr.html">Graeme Lloyd’s
-database</a> of character matrices.</li>
+database</a> of character matrices</li>
 <li>Age info for many of these matrices can be found in <a
 href="https://royalsocietypublishing.org/doi/full/10.1098/rsbl.2018.0263">this
-paper</a>.</li>
+paper</a></li>
 <li><a
 href="https://www.nature.com/articles/s41598-023-35784-3">Statistical
 evaluation of character support reveals the instability of higher‐level
 dinosaur phylogeny</a></li>
-<li><a href="https://www.pnas.org/doi/10.1073/pnas.1819366116">Trilobite
-evolutionary rates constrain the duration of the Cambrian
-explosion</a></li>
 </ul>
+<div id="some-notes-on-nexus-files" class="section level4">
+<h4>Some notes on nexus files</h4>
+<ul>
+<li>Brackets
+<ul>
+<li><code>(01)</code> would mean a given taxon has been observed with
+both states 0 and 1</li>
+<li><code>{01}</code> would mean a given taxon has been observed with
+state 0 <em>or</em> 1</li>
+<li>I <em>think</em> RevBayes will ignore any characters in
+brackets…</li>
+<li>For more information follow <a
+href="http://informatics.nescent.org/w/images/8/8b/NEXUS_Final.pdf">this
+link</a></li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<p><img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXFpOTVsNWxlZ2k4dXdicDk4cTZqNmdqMGluZm83YnBocml1a3ZtMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ekwEeLxb7G4DW44YaK/giphy.gif" width="30%" style="float:left;position:relative;right:-20px" /></p>
+</div>
 </div>
 
 

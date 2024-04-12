@@ -13,7 +13,7 @@
 
 <title>exercise-01.knit</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
@@ -280,21 +280,22 @@ The original data set was downloaded from <a
 href="https://research-information.bris.ac.uk/en/studentTheses/growth-and-development-in-the-ediacaran-macrobiota">here</a>
 and you can read the published results in <a
 href="https://www.science.org/doi/epdf/10.1126/sciadv.abe2741">Science
-Advances</a>. The purpose of this tree was to try and establish the
-phylogenetic affinity of the enigmatic <a
+Advances</a>. The purpose of building this tree was to try and establish
+the phylogenetic affinity of the enigmatic <a
 href="https://en.wikipedia.org/wiki/Charnia"><em>Charnia
 masoni</em></a>, which is only known from the Ediacaran.</p>
 <p>First install the necessary R packages.</p>
 <pre class="r"><code>install.packages(&quot;ape&quot;)
 install.packages(&quot;phangorn&quot;)</code></pre>
 <p><code>ape</code> is a very widely used phyologenetics package that
-contains (among many others) functions for reading, writing and plotting
-phylogenetic trees and data. <code>phangorn</code> is a package that
-contains functions for straightforward tree building.</p>
+contains (among many others) functions for reading, writing, and
+plotting phylogenetic trees and data. <code>phangorn</code> is a package
+that contains functions for straightforward tree building.</p>
 <p>Download the character data from <a
 href="data/Frankie-data.nex">here</a>. Nexus is a common format used to
-store phylogenetic character data. Next we’ll read in the data and
-convert it into the format used by <code>phangorn</code>.</p>
+store phylogenetic information. See if you can interpret the contents.
+Next we’ll read in the data and convert it into the format used by
+<code>phangorn</code>.</p>
 <pre class="r"><code># read in the character matrix in ape 
 dat = ape::read.nexus.data(file = &quot;data/Frankie-data.nex&quot;)
 
@@ -305,7 +306,7 @@ chars = unique(unlist(unique(dat)))
 dat = phangorn::phyDat(dat, type = &quot;USER&quot;, levels = chars)</code></pre>
 <p>Next we need to provide <code>phangorn</code> with a starting tree.
 We can do this using an approach called
-<strong>neighbour-joining</strong>. This simply calculates the
+<strong>neighbour-joining</strong>. This simply calculates approximate
 evolutionary distance between the taxa in your matrix (using the
 <code>dist.hamming</code> function) and then groups taxa together based
 on their relative distances (using the <code>NJ</code> function).</p>
@@ -320,14 +321,10 @@ mp = phangorn::optim.parsimony(tree, dat)</code></pre>
 <blockquote>
 <p>How would you interpret the number output by this function?</p>
 </blockquote>
-<p><em>In case of interest, the <a
-href="https://link.springer.com/content/pdf/10.1007/978-1-4614-1743-9_5.pdf">unconstrained
-likelihood</a> in this case is the maximum possible value of the
-log-likelihood based in the alignment.</em></p>
 <p>Finally, we can specify an outgroup to root the tree. We’ll use the
 fungus <a
 href="https://en.wikipedia.org/wiki/Laccaria"><em>Laccaria</em></a>
-because we know this is more distantly related to all other taxa in our
+because we know this taxa is more distantly related to all others in our
 tree than they are to each other.</p>
 <pre class="r"><code># identify the outgroup
 outgroup = &quot;Laccaria&quot;
@@ -339,9 +336,9 @@ plot(mp)</code></pre>
 <p><img src="exercise-01_files/figure-html/plot-1.png" width="672" /></p>
 <blockquote>
 <p>Based on this tree how would you interpret the phylogenetic position
-of <em>Charnia</em>? This is a bit tricky if you don’t know all the
-Latin names, but could you say whether it was a stem or crown group
-animal?</p>
+of <em>Charnia</em>? Could you say whether it was a stem or crown group
+animal? Use this <a href="latin_names.html">guide</a> to decode the
+Latin names.</p>
 </blockquote>
 <div id="other-resources-for-buidling-trees-using-parsimony"
 class="section level2">
@@ -354,8 +351,7 @@ up the tree search. You can also tweek your parsimony analysis based on
 assumptions you want to make about your character data. For example,
 characters can be ordered (e.g., you can allow character state changes
 from 0 to 1 or from 1 to 2 but prevent changes from 0 to 2). You can
-also assign different weights to different characters if you believe
-some morphological characters are more informative about taxonomy.</p>
+also assign different weights to different characters.</p>
 <p>We won’t explore parsimony any further in this course but it remains
 widely used for the anaylsis of morphologcial character data and is
 sometimes much faster than alternative tree-building approaches. It can
