@@ -6,3 +6,5 @@ output: html_document
 * stem / crown group
 * monophyly, paraphyly
 * polytomy
+* parsimony
+* statistical consistency
