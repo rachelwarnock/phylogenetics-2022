@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \
 
-Course material will be updated throughout the semester!
+Course material will be updated here throughout the semester!
 
 # Rough Schedule
 
@@ -46,7 +46,8 @@ kbl(dt) %>%
 
 **Homework**
 
-* Install the software [RevBayes](https://revbayes.github.io/download)
+* Re-familiarise yourself with [how to read a phylogenetic tree](https://artic.network/how-to-read-a-tree.html) and [rooting](https://slides.filogeneti.ca/include/rooting.html)
+* Watch [A Brief History of Computational Phylogenetics](https://www.youtube.com/watch?v=PcD15i7yzJ8)
 
 \
 \
