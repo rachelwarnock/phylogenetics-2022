@@ -75,7 +75,7 @@ plot(mp)
 
 > Based on this tree how would you interpret the phylogenetic position of *Charnia*? Could you say whether it was a stem or crown group animal? Use this [guide](latin_names.html) to decode the Latin names.
 
-## Other resources for buidling trees using parsimony
+## Other resources for building trees using parsimony
 
 Because there are a large number of possible trees even for a small number of taxa, finding the most parsimonous tree is actually really algorithmically challenging. 
 Many people use the open source software [TNT](http://www.lillo.org.ar/phylogeny/tnt/), which can speed up the tree search. 

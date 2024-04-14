@@ -8,3 +8,18 @@ output: html_document
 * polytomy
 * parsimony
 * statistical consistency
+
+
+## Wish list
+
+* Nexus file guide
+* (BLAST (or invertebrates))
+* Alignments
+
+## Resources 
+Interview with Xiang Ji
+https://open.spotify.com/episode/4p1V06H27miRN4lCQSCiy1?si=b09968c9c058482b (advanced but first 20 mins, good explanation about the significance of the pruning algorithm)
+
+
+
+
