@@ -3,9 +3,15 @@ title: ''
 output: html_document
 ---
 
+
+## Trees
 * stem / crown group
 * monophyly, paraphyly
 * polytomy
+
+* homoplasy
+* pleisomorphy etc
+
 * parsimony
 * statistical consistency
 
@@ -15,6 +21,8 @@ output: html_document
 * Nexus file guide
 * (BLAST (or invertebrates))
 * Alignments
+* IQTREE
+* Ancestral state reconstruction
 
 ## Resources 
 Interview with Xiang Ji

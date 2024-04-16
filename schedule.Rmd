@@ -17,22 +17,22 @@ Course material will be updated here throughout the semester!
 
 # Rough Schedule
 
-1. Course introduction and Parsimony 16.04
-2. Introduction to statistical modelling 23.04
-3. Likelihood and substitution models 30.04
-4. Bayesian inference and MCMC 07.04
+1. Course introduction and parsimony 16.04
+2. Likelihood and substitution models 23.04
+3. Bayesian inference and MCMC I 30.04
+4. Bayesian inference and MCMC II 07.04
 5. Clock models 14.05
 6. The fossilised birth-death process 21.05
 7. Morphological models 28.05
 8. Phylogenetic comparative methods 04.06
-9. Introduction to projects 11.06
+9. Diversification rates and intro to projects 11.06
 
 # Week 1 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/week_01.pdf","exercise-01.html")
+urls <- c("slides/01-intro.pdf","exercise-01.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 1"),
                  topics = c("tree thinking, parsimony", "tree building using parsimony"))
