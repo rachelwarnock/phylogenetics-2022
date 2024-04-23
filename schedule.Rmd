@@ -55,7 +55,7 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/02-likelihood.pdf","exercise-02.html")
+urls <- c("slides/02-likelihood.pdf","exercise-03.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 2"),
                  topics = c("maximum likelihood, substitution models", 
