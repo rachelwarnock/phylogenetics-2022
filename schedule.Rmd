@@ -60,7 +60,7 @@ urls <- c("slides/02-likelihood.pdf","exercise-03.html")
 dt <- data.frame(schedule = c("Slides", "Exercise 2"),
                  topics = c("maximum likelihood, substitution models", 
                             "tree building using maximum likelihood"))
-dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+#dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 
 kbl(dt) %>%
@@ -70,6 +70,7 @@ kbl(dt) %>%
 
 
 * Install the software [RevBayes](https://revbayes.github.io/download)
+* Watch [Phyloenetics primer part 1](https://www.youtube.com/watch?v=1r4z0YJq580) by Paul Lewis and answer the [associated questions](questions-01.html)
 
 \
 \
