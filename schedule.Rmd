@@ -92,6 +92,13 @@ kbl(dt) %>%
 
 ```
 
+**Homework**
+
+* Install the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) and [Tracer](https://github.com/beast-dev/tracer/releases/tag/v1.7.2)
+* Watch [Phyloenetics primer part 2](https://www.youtube.com/watch?v=UsLeY0wZr4Y&t=1614s) by Paul Lewis and answer the [associated questions](questions-02.html)
+* Reading [Bayesian Inference of Phylogeny and Its Impact on Evolutionary Biology](https://www.science.org/doi/epdf/10.1126/science.1065889)
+
+
 \
 \
 
