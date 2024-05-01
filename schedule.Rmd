@@ -20,9 +20,9 @@ Course material will be updated here throughout the semester!
 1. Course introduction and parsimony 16.04
 2. Likelihood and substitution models 23.04
 3. Bayesian inference and MCMC I 30.04
-4. Bayesian inference and MCMC II 07.04
-5. Clock models 14.05
-6. The fossilised birth-death process 21.05
+4. Bayesian inference and MCMC II, intro to clock models 07.04
+5. The fossilised birth-death process 14.05
+6. No class! (the Berg) 21.05
 7. Morphological models 28.05
 8. Phylogenetic comparative methods 04.06
 9. Diversification rates and intro to projects 11.06
