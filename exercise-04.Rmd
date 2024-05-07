@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \
 
-# Bayesian tree inferences using RevBayes
+# Bayesian tree inference using RevBayes
 
 In this exercise we'll estimate of a tree of primates using a slightly longer alignment than the one we used before $-$ you can download this from [here](data/primates_and_galeopterus_cytb.nex). 
 

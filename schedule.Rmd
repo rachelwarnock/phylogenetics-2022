@@ -99,6 +99,29 @@ kbl(dt) %>%
 * Reading [Bayesian Inference of Phylogeny and Its Impact on Evolutionary Biology](https://www.science.org/doi/epdf/10.1126/science.1065889)
 
 
+# Week 4 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/04-clocks.pdf", "exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Recap Bayesian inference and molecular dating", 
+                            "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Watch [Phyloenetics primer part 3a](https://www.youtube.com/watch?v=4PWlnNsfz90) by Paul Lewis and answer the [associated questions](questions-03.html)
+
+
 \
 \
 
