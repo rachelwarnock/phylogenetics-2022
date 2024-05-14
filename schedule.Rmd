@@ -20,12 +20,13 @@ Course material will be updated here throughout the semester!
 1. Course introduction and parsimony 16.04
 2. Likelihood and substitution models 23.04
 3. Bayesian inference and MCMC I 30.04
-4. Bayesian inference and MCMC II, intro to clock models 07.04
-5. The fossilised birth-death process 14.05
+4. Bayesian inference and MCMC II 07.04
+5. Molecular dating 14.05
 6. No class! (the Berg) 21.05
-7. Morphological models 28.05
+7. The fossilised birth-death process 28.05
 8. Phylogenetic comparative methods 04.06
-9. Diversification rates and intro to projects 11.06
+9. Morphological models and intro to projects 11.06
+9. Diversification rates 18.06
 
 # Week 1 materials
 
@@ -104,10 +105,10 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/04-clocks.pdf", "exercise-04.html")
+urls <- c("slides/04-Bayesian-II.pdf", "exercise-04.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 4"),
-                 topics = c("Recap Bayesian inference and molecular dating", 
+                 topics = c("Bayesian inference II", 
                             "Bayesian tree inference"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
@@ -120,6 +121,32 @@ kbl(dt) %>%
 **Homework**
 
 * Watch [Phyloenetics primer part 3a](https://www.youtube.com/watch?v=4PWlnNsfz90) by Paul Lewis and answer the [associated questions](questions-03.html)
+
+
+\
+\
+
+# Week 5 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/05-clocks.pdf","exercise-05.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 5"),
+                 topics = c("Bayesian timetree inference", 
+                            "Time tree inference in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Watch [Phyloenetics primer part 3b](https://www.youtube.com/watch?v=TLtOS--YwkU) by Paul Lewis and answer the [associated questions](questions-04.html)
 
 
 \
