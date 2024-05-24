@@ -25,7 +25,7 @@ Course material will be updated here throughout the semester!
 6. No class! (the Berg) 21.05
 7. Molecular dating 28.05
 8. Phylogenetic comparative methods 04.06
-9. Phylodynamics 11.06
+9. Diversification rates 11.06
 10. Morphological models and intro to projects 18.06
 
 # Week 1 materials
