@@ -100,7 +100,7 @@ kbl(dt) %>%
 * Reading [Bayesian Inference of Phylogeny and Its Impact on Evolutionary Biology](https://www.science.org/doi/epdf/10.1126/science.1065889)
 
 
-# Week 4 materials
+# Week 4-5 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
@@ -122,11 +122,9 @@ kbl(dt) %>%
 
 * Watch [Phyloenetics primer part 3a](https://www.youtube.com/watch?v=4PWlnNsfz90) by Paul Lewis and answer the [associated questions](questions-03.html)
 
+**Week 6 - no class!**
 
-\
-\
-
-# Week 5 materials
+# Week 7 materials
 
 ```{r, echo = FALSE}
 library(kableExtra)
