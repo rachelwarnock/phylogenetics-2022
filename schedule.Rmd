@@ -146,6 +146,24 @@ kbl(dt) %>%
 
 * Watch [Phyloenetics primer part 3b](https://www.youtube.com/watch?v=TLtOS--YwkU) by Paul Lewis and answer the [associated questions](questions-04.html)
 
+# Week 8 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/Intro_to_PCMs.pdf","https://github.com/emmadunne/PCMs")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 6"),
+                 topics = c("Intro to PCMs", 
+                            "Time tree inference in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
 
 \
 \
