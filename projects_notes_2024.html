@@ -11,7 +11,7 @@
 
 
 
-<title>projects.knit</title>
+<title>projects_notes_2024.knit</title>
 
 <script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -32,6 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -269,69 +271,202 @@ $(document).ready(function () {
 
 <p><br />
 </p>
-<div id="assessment" class="section level1">
-<h1>Assessment</h1>
-<ul>
-<li>Written report</li>
-<li>5 pages max, inc. references and figures</li>
-<li>Focus mainly on the methods and results</li>
-<li>Brief intro &amp; discussion (paragraph each)</li>
-<li>Deadline for feedback tbd</li>
-<li>Final deadline tbd</li>
-<li>Don’t forget to provide access to the project code!</li>
-</ul>
+<div id="project-notes-2024" class="section level1">
+<h1>Project notes 2024</h1>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+project
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alissa
+</td>
+<td style="text-align:left;">
+Do fossil ages improve trees impacted by taphonomic biases?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Christian
+</td>
+<td style="text-align:left;">
+Constraining the evolution of photosynthetic pathways (CAM)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jordan
+</td>
+<td style="text-align:left;">
+Assessing the impact of taxon sampling on PCMs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Katie
+</td>
+<td style="text-align:left;">
+Redating the origins of horseshoe crabs - implications for habitat
+transitions
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matias
+</td>
+<td style="text-align:left;">
+The impact of model choice on the phylogenetic history of sabre tooth
+tigers
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Max
+</td>
+<td style="text-align:left;">
+The impact of model choice on the phylogenetic history of spinosaurs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Meghan
+</td>
+<td style="text-align:left;">
+A simulation pipeline for assessing the impact of clock model violation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Victoria
+</td>
+<td style="text-align:left;">
+Constraining the evolution of manatees
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="some-guiding-questions-for-your-report" class="section level1">
-<h1>Some guiding questions for your report</h1>
+<div id="status-update" class="section level1">
+<h1>Status update</h1>
+<div id="alissa" class="section level2">
+<h2>Alissa</h2>
 <ul>
-<li>What is the main question / hypothesis that you aim to address in
-your project?</li>
-<li>Describe the data, your model, and all your parameter choices</li>
-<li>Could someone else repeat your analysis based on the info you
-provide?</li>
-<li>If applicable, how did you assess MCMC convergence?</li>
-<li>Did you encounter any issues?</li>
-<li>How do your results differ to previously published results?</li>
-</ul>
-</div>
-<div id="data-sources" class="section level1">
-<h1>Data sources</h1>
+<li>Does fossil age information “prevent” stemward slippage</li>
+<li><a href="https://www.nature.com/articles/nature08745"
+class="uri">https://www.nature.com/articles/nature08745</a> (data not
+available)</li>
+<li>Try getting data from here: <a
+href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2023.0333"
+class="uri">https://royalsocietypublishing.org/doi/full/10.1098/rspb.2023.0333</a>
 <ul>
-<li><a href="http://www.graemetlloyd.com/matr.html">Graeme Lloyd’s
-database</a> of character matrices</li>
-<li>Age info for many of these matrices can be found in <a
-href="https://royalsocietypublishing.org/doi/full/10.1098/rsbl.2018.0263">this
-paper</a></li>
-<li><a
-href="https://www.nature.com/articles/s41598-023-35784-3">Statistical
-evaluation of character support reveals the instability of higher‐level
-dinosaur phylogeny</a></li>
-</ul>
-<div id="some-notes-on-nexus-files" class="section level4">
-<h4>Some notes on nexus files</h4>
-<ul>
-<li>Brackets
-<ul>
-<li><code>(01)</code> would mean a given taxon has been observed with
-both states 0 and 1</li>
-<li><code>{01}</code> would mean a given taxon has been observed with
-state 0 <em>or</em> 1</li>
-<li>I <em>think</em> RevBayes will ignore any characters in
-brackets…</li>
-<li>For more information follow <a
-href="http://informatics.nescent.org/w/images/8/8b/NEXUS_Final.pdf">this
-link</a></li>
+<li>Suggest selecting one representative per extant taxa</li>
 </ul></li>
 </ul>
+</div>
+<div id="christian" class="section level2">
+<h2>Christian</h2>
+<ul>
+<li>Aim: to date the evolution of photosynthetic systems</li>
+<li>Inspiration: <a href="https://www.nature.com/articles/ng.3435"
+class="uri">https://www.nature.com/articles/ng.3435</a> (see Fig.
+3a)</li>
+<li>Unclear whether the data is readily available from this paper</li>
+<li>Note gene trees distinct from the species tree</li>
+<li>Some papers on dating gene / genome duplication:
+<ul>
+<li><a
+href="https://royalsocietypublishing.org/doi/10.1098/rspb.2017.0912"
+class="uri">https://royalsocietypublishing.org/doi/10.1098/rspb.2017.0912</a></li>
+<li><a
+href="https://www.sciencedirect.com/science/article/pii/S1360138518301596"
+class="uri">https://www.sciencedirect.com/science/article/pii/S1360138518301596</a></li>
+</ul></li>
+<li>Try this paper for CAM gene IDs and trees:
+<ul>
+<li><a
+href="https://link.springer.com/article/10.1007/s13258-022-01263-8"
+class="uri">https://link.springer.com/article/10.1007/s13258-022-01263-8</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="jordan" class="section level2">
+<h2>Jordan</h2>
+<ul>
+<li>Ichthyosaurs</li>
+<li>Aim: switching from the impact of branch lengths on PCMs to taxon
+sampling (e.g., taxon from different environments)</li>
+<li>Data: <a href="https://www.science.org/doi/10.1126/science.abf5787"
+class="uri">https://www.science.org/doi/10.1126/science.abf5787</a></li>
+<li>Some other inspiration: <a
+href="https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546"
+class="uri">https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546</a></li>
+</ul>
+</div>
+<div id="katie" class="section level2">
+<h2>Katie</h2>
+<ul>
+<li>Horseshoe crabs</li>
+<li>Aim: Rebuild the trees: what are the implications for habitat
+transitions</li>
+<li>getting age data; later revisit how to incorporate long ranging
+taxa</li>
+</ul>
+</div>
+<div id="matias" class="section level2">
+<h2>Matias</h2>
+<ul>
+<li>Sabre tooth tigers</li>
+<li>Do models change the previously inferred topology?</li>
+<li>Matrix available here: <a
+href="https://onlinelibrary.wiley.com/doi/full/10.1111/cla.12008"
+class="uri">https://onlinelibrary.wiley.com/doi/full/10.1111/cla.12008</a>
+(but only in the PDF)</li>
+<li>Suggest checking papers that have cited this one, to see if anyone
+has used (or extended) the same matrix</li>
+</ul>
+</div>
+<div id="max" class="section level2">
+<h2>Max</h2>
+<ul>
+<li>Spinosaurs (or broader)</li>
+<li>Do models change the previously inferred topology?</li>
+</ul>
+</div>
+<div id="meghan" class="section level2">
+<h2>Meghan</h2>
+<ul>
+<li>Simulations to investigate the impact of clock model
+misspecification</li>
+<li>Option: simulate morphological partitions under different rates</li>
+<li>Check out papers by Simon Ho</li>
+<li>Note: to simulated characters under a clock model you need to
+transform branches = time into branches = rate x time</li>
+<li>Simclock: <a href="https://github.com/dosreislab/simclock"
+class="uri">https://github.com/dosreislab/simclock</a></li>
+</ul>
+</div>
+<div id="victoria" class="section level2">
+<h2>Victoria</h2>
+<ul>
+<li>Reconstructing an evolutionary timeline for Sirenians (manatees /
+dugongs)</li>
+<li><a
+href="https://www.sciencedirect.com/science/article/pii/S0895981121001231"
+class="uri">https://www.sciencedirect.com/science/article/pii/S0895981121001231</a></li>
+<li>In the process of getting age data</li>
+</ul>
 <p><br />
+<br />
 </p>
 </div>
-</div>
-<div id="project-notes-2024" class="section level1">
-<h1><a href="projects_notes_2024.html">Project notes 2024</a></h1>
-<p><br />
-</p>
-<p><img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXFpOTVsNWxlZ2k4dXdicDk4cTZqNmdqMGluZm83YnBocml1a3ZtMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ekwEeLxb7G4DW44YaK/giphy.gif" width="30%" style="float:left;position:relative;right:-20px" /></p>
 </div>
 
 

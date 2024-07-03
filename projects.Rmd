@@ -39,6 +39,10 @@ output: html_document
   * `{01}` would mean a given taxon has been observed with state 0 *or* 1
   * I *think* RevBayes will ignore any characters in brackets...
   * For more information follow [this link](http://informatics.nescent.org/w/images/8/8b/NEXUS_Final.pdf)
+
+\
+
+# [Project notes 2024](projects_notes_2024.html)
   
 \
 

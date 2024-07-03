@@ -1,0 +1,103 @@
+---
+title: ""
+output: html_document
+---
+
+\
+
+# Project notes 2024
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+dt <- data.frame(name = c("Alissa", #1
+                          "Christian", #2
+                          "Jordan", #3
+                          "Katie", #4
+                          "Matias", #5
+                          "Max", #6
+                          "Meghan", #7
+                          "Victoria"), #8
+                 project = c("Do fossil ages improve trees impacted by taphonomic biases?", #1
+                    "Constraining the evolution of photosynthetic pathways (CAM)",#2
+                    "Assessing the impact of taxon sampling on PCMs",#3
+                    "Redating the origins of horseshoe crabs - implications for habitat transitions", #4
+                    "The impact of model choice on the phylogenetic history of sabre tooth tigers", #5
+                    "The impact of model choice on the phylogenetic history of spinosaurs", #6
+                    "A simulation pipeline for assessing the impact of clock model violation", #7
+                    "Constraining the evolution of manatees" #8
+                    ))
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+# Project archive
+# Tim - A simulation pipeline for the multi-species coalescent FBD
+# Caro - The impact of morphological model choice on...
+```
+
+
+# Status update
+
+## Alissa
+
+* Does fossil age information "prevent" stemward slippage
+* https://www.nature.com/articles/nature08745 (data not available)
+* Try getting data from here: https://royalsocietypublishing.org/doi/full/10.1098/rspb.2023.0333
+  * Suggest selecting one representative per extant taxa
+
+## Christian
+
+* Aim: to date the evolution of photosynthetic systems
+* Inspiration: https://www.nature.com/articles/ng.3435 (see Fig. 3a) 
+* Unclear whether the data is readily available from this paper
+* Note gene trees distinct from the species tree
+* Some papers on dating gene / genome duplication:
+  * https://royalsocietypublishing.org/doi/10.1098/rspb.2017.0912
+  * https://www.sciencedirect.com/science/article/pii/S1360138518301596
+* Try this paper for CAM gene IDs and trees: 
+  * https://link.springer.com/article/10.1007/s13258-022-01263-8
+
+## Jordan
+
+* Ichthyosaurs
+* Aim: switching from the impact of branch lengths on PCMs to taxon sampling (e.g., taxon from different environments)
+* Data: https://www.science.org/doi/10.1126/science.abf5787
+* Some other inspiration: https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546
+
+## Katie
+
+* Horseshoe crabs
+*	Aim: Rebuild the trees: what are the implications for habitat transitions
+* getting age data; later revisit how to incorporate long ranging taxa
+
+## Matias
+
+* Sabre tooth tigers
+*	Do models change the previously inferred topology?
+* Matrix available here: https://onlinelibrary.wiley.com/doi/full/10.1111/cla.12008 (but only in the PDF)
+* Suggest checking papers that have cited this one, to see if anyone has used (or extended) the same matrix
+
+## Max
+
+*	Spinosaurs (or broader)
+*	Do models change the previously inferred topology?
+
+## Meghan
+
+* Simulations to investigate the impact of clock model misspecification
+*	Option: simulate morphological partitions under different rates
+* Check out papers by Simon Ho
+* Note: to simulated characters under a clock model you need to transform branches = time into branches = rate x time
+* Simclock: https://github.com/dosreislab/simclock
+
+## Victoria
+
+*	Reconstructing an evolutionary timeline for Sirenians (manatees / dugongs)
+* https://www.sciencedirect.com/science/article/pii/S0895981121001231
+*	In the process of getting age data
+
+
+
+\
+\
