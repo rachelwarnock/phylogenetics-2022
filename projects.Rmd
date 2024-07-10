@@ -11,8 +11,8 @@ output: html_document
 * 5 pages max, inc. references and figures
 * Focus mainly on the methods and results 
 * Brief intro & discussion (paragraph each)
-* Deadline for feedback tbd
-* Final deadline tbd
+* Deadline for feedback 24.07.24
+* Final deadline 31.07.24
 * Don't forget to provide access to the project code!
 
 

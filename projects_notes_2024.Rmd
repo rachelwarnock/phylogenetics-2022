@@ -41,10 +41,12 @@ kbl(dt) %>%
 
 ## Alissa
 
-* Does fossil age information "prevent" stemward slippage
+* Does fossil age information "prevent" stemward slippage?
 * https://www.nature.com/articles/nature08745 (data not available)
 * Try getting data from here: https://royalsocietypublishing.org/doi/full/10.1098/rspb.2023.0333
   * Suggest selecting one representative per extant taxa
+  
+* Status update: investigating the data
 
 ## Christian
 
@@ -56,7 +58,10 @@ kbl(dt) %>%
   * https://royalsocietypublishing.org/doi/10.1098/rspb.2017.0912
   * https://www.sciencedirect.com/science/article/pii/S1360138518301596
 * Try this paper for CAM gene IDs and trees: 
-  * https://link.springer.com/article/10.1007/s13258-022-01263-8
+  * https://link.springer.com/article/10.1007/s13258-022-01263-8 
+  
+* Update: not related to photosynthesis! (the genes are called CaM, but they're not part of the CAM pathway) But we'll move forward with this data anyway!
+  * Note the sequence data isn't provided in the supplement but we'll just pick 15 accession number!
 
 ## Jordan
 
@@ -65,11 +70,17 @@ kbl(dt) %>%
 * Data: https://www.science.org/doi/10.1126/science.abf5787
 * Some other inspiration: https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546
 
+* Status update: trying to reproduce the PCM output / run the scripts from the previous study
+
 ## Katie
 
 * Horseshoe crabs
 *	Aim: Rebuild the trees: what are the implications for habitat transitions
 * getting age data; later revisit how to incorporate long ranging taxa
+* Analysis running!
+
+* Status update: initial analysis looks good but didn't converge, 
+* Going to try FBD skyline, i.e., rate variation through time
 
 ## Matias
 
@@ -78,18 +89,24 @@ kbl(dt) %>%
 * Matrix available here: https://onlinelibrary.wiley.com/doi/full/10.1111/cla.12008 (but only in the PDF)
 * Suggest checking papers that have cited this one, to see if anyone has used (or extended) the same matrix
 
+* Status update: going through the set, using Laura's tutorial as a guide
+
 ## Max
 
 *	Spinosaurs (or broader)
 *	Do models change the previously inferred topology?
 
+* Next step: use model adequacy to compare different models
+
 ## Meghan
 
-* Simulations to investigate the impact of clock model misspecification
+* Simulations to investigate the impact of clock model misspecification (partitions simulated under different rates)
 *	Option: simulate morphological partitions under different rates
 * Check out papers by Simon Ho
 * Note: to simulated characters under a clock model you need to transform branches = time into branches = rate x time
 * Simclock: https://github.com/dosreislab/simclock
+
+* Status update: workflow established
 
 ## Victoria
 
@@ -97,7 +114,7 @@ kbl(dt) %>%
 * https://www.sciencedirect.com/science/article/pii/S0895981121001231
 *	In the process of getting age data
 
-
+* Status update: age data data obtained. FBD set up in progress!
 
 \
 \
