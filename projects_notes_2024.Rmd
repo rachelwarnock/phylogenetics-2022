@@ -78,9 +78,9 @@ kbl(dt) %>%
 *	Aim: Rebuild the trees: what are the implications for habitat transitions
 * getting age data; later revisit how to incorporate long ranging taxa
 * Analysis running!
+* Status update: constant rate analysis looks good but skyline didn't converge
 
-* Status update: initial analysis looks good but didn't converge, 
-* Going to try FBD skyline, i.e., rate variation through time
+* Next: simplify the skyline set up - vary psi only, compare trees
 
 ## Matias
 
@@ -95,8 +95,11 @@ kbl(dt) %>%
 
 *	Spinosaurs (or broader)
 *	Do models change the previously inferred topology?
+* Run the analysis under different models - done!
+* Issue running model adequacy - resolved
 
-* Next step: use model adequacy to compare different models
+* Next steps: compare trees, use model adequacy to select the best model
+
 
 ## Meghan
 
@@ -105,16 +108,19 @@ kbl(dt) %>%
 * Check out papers by Simon Ho
 * Note: to simulated characters under a clock model you need to transform branches = time into branches = rate x time
 * Simclock: https://github.com/dosreislab/simclock
-
 * Status update: workflow established
+
+* Next: inference using multiple replicates
 
 ## Victoria
 
 *	Reconstructing an evolutionary timeline for Sirenians (manatees / dugongs)
 * https://www.sciencedirect.com/science/article/pii/S0895981121001231
 *	In the process of getting age data
-
-* Status update: age data data obtained. FBD set up in progress!
+* Age data data obtained. FBD set up in progress!
+* -> FBD analysis is complete!
+* Next: compare to existing trees, examine distribution of traits
+* ASR?
 
 \
 \

@@ -359,7 +359,7 @@ Constraining the evolution of manatees
 <div id="alissa" class="section level2">
 <h2>Alissa</h2>
 <ul>
-<li>Does fossil age information “prevent” stemward slippage</li>
+<li>Does fossil age information “prevent” stemward slippage?</li>
 <li><a href="https://www.nature.com/articles/nature08745"
 class="uri">https://www.nature.com/articles/nature08745</a> (data not
 available)</li>
@@ -369,6 +369,7 @@ class="uri">https://royalsocietypublishing.org/doi/full/10.1098/rspb.2023.0333</
 <ul>
 <li>Suggest selecting one representative per extant taxa</li>
 </ul></li>
+<li>Status update: investigating the data</li>
 </ul>
 </div>
 <div id="christian" class="section level2">
@@ -395,62 +396,86 @@ class="uri">https://www.sciencedirect.com/science/article/pii/S1360138518301596<
 href="https://link.springer.com/article/10.1007/s13258-022-01263-8"
 class="uri">https://link.springer.com/article/10.1007/s13258-022-01263-8</a></li>
 </ul></li>
+<li>Update: not related to photosynthesis! (the genes are called CaM,
+but they’re not part of the CAM pathway) But we’ll move forward with
+this data anyway!
+<ul>
+<li>Note the sequence data isn’t provided in the supplement but we’ll
+just pick 15 accession number!</li>
+</ul></li>
 </ul>
 </div>
 <div id="jordan" class="section level2">
 <h2>Jordan</h2>
 <ul>
-<li>Ichthyosaurs</li>
-<li>Aim: switching from the impact of branch lengths on PCMs to taxon
-sampling (e.g., taxon from different environments)</li>
-<li>Data: <a href="https://www.science.org/doi/10.1126/science.abf5787"
-class="uri">https://www.science.org/doi/10.1126/science.abf5787</a></li>
-<li>Some other inspiration: <a
+<li><p>Ichthyosaurs</p></li>
+<li><p>Aim: switching from the impact of branch lengths on PCMs to taxon
+sampling (e.g., taxon from different environments)</p></li>
+<li><p>Data: <a
+href="https://www.science.org/doi/10.1126/science.abf5787"
+class="uri">https://www.science.org/doi/10.1126/science.abf5787</a></p></li>
+<li><p>Some other inspiration: <a
 href="https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546"
-class="uri">https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546</a></li>
+class="uri">https://royalsocietypublishing.org/doi/epdf/10.1098/rspb.2017.0546</a></p></li>
+<li><p>Status update: trying to reproduce the PCM output / run the
+scripts from the previous study</p></li>
 </ul>
 </div>
 <div id="katie" class="section level2">
 <h2>Katie</h2>
 <ul>
-<li>Horseshoe crabs</li>
-<li>Aim: Rebuild the trees: what are the implications for habitat
-transitions</li>
-<li>getting age data; later revisit how to incorporate long ranging
-taxa</li>
+<li><p>Horseshoe crabs</p></li>
+<li><p>Aim: Rebuild the trees: what are the implications for habitat
+transitions</p></li>
+<li><p>getting age data; later revisit how to incorporate long ranging
+taxa</p></li>
+<li><p>Analysis running!</p></li>
+<li><p>Status update: constant rate analysis looks good but skyline
+didn’t converge</p></li>
+<li><p>Next: simplify the skyline set up - vary psi only, compare
+trees</p></li>
 </ul>
 </div>
 <div id="matias" class="section level2">
 <h2>Matias</h2>
 <ul>
-<li>Sabre tooth tigers</li>
-<li>Do models change the previously inferred topology?</li>
-<li>Matrix available here: <a
+<li><p>Sabre tooth tigers</p></li>
+<li><p>Do models change the previously inferred topology?</p></li>
+<li><p>Matrix available here: <a
 href="https://onlinelibrary.wiley.com/doi/full/10.1111/cla.12008"
 class="uri">https://onlinelibrary.wiley.com/doi/full/10.1111/cla.12008</a>
-(but only in the PDF)</li>
-<li>Suggest checking papers that have cited this one, to see if anyone
-has used (or extended) the same matrix</li>
+(but only in the PDF)</p></li>
+<li><p>Suggest checking papers that have cited this one, to see if
+anyone has used (or extended) the same matrix</p></li>
+<li><p>Status update: going through the set, using Laura’s tutorial as a
+guide</p></li>
 </ul>
 </div>
 <div id="max" class="section level2">
 <h2>Max</h2>
 <ul>
-<li>Spinosaurs (or broader)</li>
-<li>Do models change the previously inferred topology?</li>
+<li><p>Spinosaurs (or broader)</p></li>
+<li><p>Do models change the previously inferred topology?</p></li>
+<li><p>Run the analysis under different models - done!</p></li>
+<li><p>Issue running model adequacy - resolved</p></li>
+<li><p>Next steps: compare trees, use model adequacy to select the best
+model</p></li>
 </ul>
 </div>
 <div id="meghan" class="section level2">
 <h2>Meghan</h2>
 <ul>
-<li>Simulations to investigate the impact of clock model
-misspecification</li>
-<li>Option: simulate morphological partitions under different rates</li>
-<li>Check out papers by Simon Ho</li>
-<li>Note: to simulated characters under a clock model you need to
-transform branches = time into branches = rate x time</li>
-<li>Simclock: <a href="https://github.com/dosreislab/simclock"
-class="uri">https://github.com/dosreislab/simclock</a></li>
+<li><p>Simulations to investigate the impact of clock model
+misspecification (partitions simulated under different rates)</p></li>
+<li><p>Option: simulate morphological partitions under different
+rates</p></li>
+<li><p>Check out papers by Simon Ho</p></li>
+<li><p>Note: to simulated characters under a clock model you need to
+transform branches = time into branches = rate x time</p></li>
+<li><p>Simclock: <a href="https://github.com/dosreislab/simclock"
+class="uri">https://github.com/dosreislab/simclock</a></p></li>
+<li><p>Status update: workflow established</p></li>
+<li><p>Next: inference using multiple replicates</p></li>
 </ul>
 </div>
 <div id="victoria" class="section level2">
@@ -462,6 +487,10 @@ dugongs)</li>
 href="https://www.sciencedirect.com/science/article/pii/S0895981121001231"
 class="uri">https://www.sciencedirect.com/science/article/pii/S0895981121001231</a></li>
 <li>In the process of getting age data</li>
+<li>Age data data obtained. FBD set up in progress!</li>
+<li>-&gt; FBD analysis is complete!</li>
+<li>Next: compare to existing trees, examine distribution of traits</li>
+<li>ASR?</li>
 </ul>
 <p><br />
 <br />
