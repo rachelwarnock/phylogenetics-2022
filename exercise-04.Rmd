@@ -265,8 +265,13 @@ freq ~ dnDirichlet(alpha2)
 ```
 
 ```{r Q3, eval=FALSE, echo=FALSE}
-er ~ dnDirichlet(alpha1)
-freq ~ dnDirichlet(alpha2)
+# moves on er
+moves.append( mvBetaSimplex(er, weight = 3) )
+moves.append( mvDirichletSimplex(er, weight = 1) )
+
+# moves on freq
+moves.append( mvBetaSimplex(freq, weight = 3) )
+moves.append( mvDirichletSimplex(freq, weight = 1) )
 ```
 
 `alpha1` and `alpha2` are the parameters of the two Dirichlet distributions. These are used to specify  uniform Dirichlet distributions. 
