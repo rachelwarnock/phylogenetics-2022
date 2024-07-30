@@ -507,6 +507,13 @@ is a useful distribution for specifying proportions.</p>
 alpha2 &lt;- v(1,1,1,1) # 4 for state frequencies
 er ~ dnDirichlet(alpha1)
 freq ~ dnDirichlet(alpha2)</code></pre>
+<pre class="r"><code># moves on er
+moves.append( mvBetaSimplex(er, weight = 3) )
+moves.append( mvDirichletSimplex(er, weight = 1) )
+
+# moves on freq
+moves.append( mvBetaSimplex(freq, weight = 3) )
+moves.append( mvDirichletSimplex(freq, weight = 1) )</code></pre>
 <p><code>alpha1</code> and <code>alpha2</code> are the parameters of the
 two Dirichlet distributions. These are used to specify uniform Dirichlet
 distributions. These are stochastic variables because we want to

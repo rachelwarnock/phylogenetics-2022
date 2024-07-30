@@ -264,7 +264,7 @@ er ~ dnDirichlet(alpha1)
 freq ~ dnDirichlet(alpha2)
 ```
 
-```{r Q3, eval=FALSE, echo=FALSE}
+```{r Q3, eval=FALSE}
 # moves on er
 moves.append( mvBetaSimplex(er, weight = 3) )
 moves.append( mvDirichletSimplex(er, weight = 1) )
