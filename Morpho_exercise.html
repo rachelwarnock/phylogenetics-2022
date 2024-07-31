@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Morpho_exercise.knit</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Phylogenetics</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<p><br />
+</p>
+<div id="model-selection-of-morphological-models"
+class="section level1">
+<h1>Model selection of morphological models</h1>
+<p>In this exercise we will carry out model selection of different
+morphological models. The morphological matrix used for this tutorial
+can be downloaded from here. This matrix is from <a
+href="http://revista.macn.gob.ar/ojs/index.php/RevMus/article/view/349/333">Agnolin
+et al 2007</a>. It consists of 51 characters and 12 taxa of Brontornis
+(Terror Birds). The data can be downloaded <a
+href="data/Agnolin.nex">here</a></p>
+<p>Below I provide code for different elements of morphological
+models:</p>
+<ul>
+<li>Acertainment bias correction</li>
+<li>Among-character rate variation (Gamma)</li>
+<li>Loop for partition the character data</li>
+</ul>
+<p>You can decide how you want to build you models and then test to see
+which one fits you data.</p>
+<div id="how-to-organise-your-code" class="section level2">
+<h2>How to organise your code</h2>
+<p>Set up a new directory for this tutorial with a directoy for the data
+and the scripts. In this tutorial you should make (at least) 3 rev
+scripts. One for the stepping stone commands
+<code>steppingstone.rev</code> and two files for your two morphological
+models - you can test more models if you want!</p>
+</div>
+<div id="setting-up-your-stepping-stone-algorithm"
+class="section level2">
+<h2>Setting up your stepping stone algorithm</h2>
+<p>Much of the following code is identical to that use for a standard
+MCMC. We specify that we want to use a sample the marginal likelihood
+but the model set up is the exact same as in the previous tutorials.</p>
+<p>In the <code>steppingstone.rev</code>script we first need to read in
+our morphological data</p>
+<pre class="r"><code>morpho &lt;- readDiscreteCharacterData(&quot;data/Agnolin.nex&quot;)</code></pre>
+<p>Define some helper variables</p>
+<pre class="r"><code>model_name = &quot;Mk&quot; # or whatever model you are testing
+taxa &lt;- morpho.names()
+num_taxa &lt;- taxa.size()
+num_branches &lt;- 2 * num_taxa - 3</code></pre>
+<blockquote>
+<p>When testing different models I find it helpful to create a variable
+named <code>model</code> at the start. This can be used to name the
+output files and means you don’t have to manually change the name
+everytime you want to run a different model and prevents overwriting the
+output of previous models.</p>
+</blockquote>
+<p>Create vectors for our moves and monitors</p>
+<pre class="r"><code>moves = VectorMoves()
+monitors = VectorMonitors()</code></pre>
+<p>Set up the tree model exactly as in previous analysis</p>
+<pre class="r"><code># uniform prior on branch lengths
+phylogeny ~ dnUniformTopology(taxa)
+
+## tree moves
+moves.append( mvNNI(phylogeny, weight = num_taxa) ) # nearest neighbour interchange
+moves.append( mvSPR(phylogeny, weight = num_taxa/10.0) ) # subtree pruning and regrafting</code></pre>
+<p>Set up the prior for the branch lengths</p>
+<pre class="r"><code>## sample branch lengthd
+for (i in 1:num_branches) {
+   br_lens[i] ~ dnExponential(10.0)
+   moves.append( mvScale(br_lens[i]) )
+}
+
+
+## construct tree object
+tree := treeAssembly(phylogeny, br_lens)
+
+# save the tree length
+TL := sum(br_lens)</code></pre>
+</div>
+<div id="setting-up-the-morphological-models" class="section level2">
+<h2>Setting up the morphological models</h2>
+<p>Here you can choose any combination of model you want to test -
+between partitioned, unpartitioned, ACRV, and correcting for
+acertainment bias.</p>
+<p>To set up an Mk model you use the JC function in revbayes as this has
+the same set of assumptions. Our data set has 4 characters so we create
+a Q-matrix size 4. This number will depened on the data used so will
+need to be manually changed if using this script for different data
+sets.</p>
+<p>An <strong>unpartitioned Mk</strong> model can be defined by</p>
+<pre class="r"><code>Q &lt;- fnJC(4)
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;)
+seq.clamp(morpho)</code></pre>
+<p>To account for <strong>accertainment bias</strong> we need to tell
+the model we are conditioning on all sites being variable. To do this we
+add to the phyloCTMC object as follows</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;, coding = &quot;variable&quot;)
+seq.clamp(morpho)</code></pre>
+<p>To estimate <strong>ACRV</strong> we first need to set up a prior on
+our alpha (or shape) parameter</p>
+<pre class="r"><code># Set up Gamma-distributed rate variation.
+alpha_morpho ~ dnUniform( 0.0, 1E5 )
+rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 ) 
+
+# Moves on the parameters to the Gamma distribution.
+moves.append(mvScale(alpha_morpho, lambda=1, weight=2.0))</code></pre>
+<p>We then need to add this to our phyloCTMC object</p>
+<pre class="r"><code>seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;, siteRates=rates_morpho)
+seq.clamp(morpho)</code></pre>
+<p>For a partitioned Mk model we can use a loop to go through the
+alingmnet and create partitions based on the maximum observed state.</p>
+<pre class="r"><code>n_max_states &lt;- 4
+idx = 1
+morpho_bystate[1] &lt;- morpho
+for (i in 2:n_max_states) {
+    morpho_bystate[i] &lt;- morpho                                # make local tmp copy of data
+    morpho_bystate[i].setNumStatesPartition(i)                 # only keep character blocks with state space equal to size i
+    nc = morpho_bystate[i].nchar()                             # get number of characters per character size with i-sized states
+
+    if (nc &gt; 0) {                                              # for non-empty character blocks
+        q[idx] &lt;- fnJC(i)                                      # make i-by-i rate matrix
+        m_morph[idx] ~ dnPhyloCTMC( tree=phylogeny,
+                                    Q=q[idx],
+                                    nSites=nc,
+                                    type=&quot;Standard&quot; )           # create model of evolution for the character block
+
+        m_morph[idx].clamp(morpho_bystate[i])                  # attach the data
+
+        idx = idx + 1                                          # increment counter
+        #idx
+    }
+}</code></pre>
+<blockquote>
+<p>This loop can look a bit confusing but it is just creating a
+phyloCTMC object for each partition. The same way we created one
+phyloCTMC for the unpartitioned data</p>
+</blockquote>
+<p>You can add variable coding and ACRV to the phyloCTMC object the same
+as for the unpartitioned model.</p>
+<div id="back-to-the-stepping-stone-set-up" class="section level4">
+<h4>Back to the stepping stone set up</h4>
+<p>We can now define out model object</p>
+<pre class="r"><code>## define the model
+mymodel = model(phylogeny)</code></pre>
+<p>The algorithm to approximate the value between the prior and the
+posterior posterior is called <code>powerPosterior</code>. Here we
+specify where to save the output and how many “steps” we want to
+take</p>
+<pre class="r"><code>pow_p = powerPosterior(mymodel, moves, monitors, &quot;output/&quot; + model_name  + &quot;/model1.out&quot;, cats=47) 
+pow_p.burnin(generations=1000,tuningInterval=1000)
+pow_p.run(generations=1000)</code></pre>
+<p>We can then get the approximate likelihood using the following</p>
+<pre class="r"><code>ss = steppingStoneSampler(file= &quot;output/&quot; + model_name   + &quot;/model1.out&quot;, powerColumnName=&quot;power&quot;, likelihoodColumnName=&quot;likelihood&quot;)
+ps = pathSampler(file=&quot;output/&quot; + model_name   + &quot;/model1.out&quot;, powerColumnName=&quot;power&quot;, likelihoodColumnName=&quot;likelihood&quot;)</code></pre>
+<blockquote>
+<p>I have mainly talked about the stepping stone algorithm but path
+sampling is another approach. In RevBayes the same function can be used
+to approximate the marginal likeihood using both. It can be useful to
+compare these two approximations, as values that differ by less than ~1
+indicate that you have used enough steps in you analysis.</p>
+</blockquote>
+<p>It can be helpful to save these values to a file</p>
+<pre class="r"><code>### save this variable and run the second
+write(ss.marginal() , filename= &quot;output/&quot; + model_name  + &quot;/marginal_likelihood.csv&quot;, &quot;\n&quot;, append=TRUE)
+write(ps.marginal() , filename=&quot;output/&quot; + model_name  + &quot;/marginal_likelihood.csv&quot;, &quot;\n&quot;, append=TRUE)</code></pre>
+<ol style="list-style-type: decimal">
+<li>Which model did you determine to be the best fit for your data?</li>
+<li>Test other models and see if there is a better fit</li>
+<li>Does the model that was chosen make sense biologically?</li>
+</ol>
+<p>A complete set of scripts for this exercise can be downloaded <a
+href="scripts/steppingstone-scripts.zip">here</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
