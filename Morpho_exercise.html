@@ -371,8 +371,9 @@ moves.append(mvScale(alpha_morpho, lambda=1, weight=2.0))</code></pre>
 <p>We then need to add this to our phyloCTMC object</p>
 <pre class="r"><code>seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type=&quot;Standard&quot;, siteRates=rates_morpho)
 seq.clamp(morpho)</code></pre>
-<p>For a partitioned Mk model we can use a loop to go through the
-alingmnet and create partitions based on the maximum observed state.</p>
+<p>For a <strong>partitioned Mk model</strong> we can use a loop to go
+through the alingmnet and create partitions based on the maximum
+observed state.</p>
 <pre class="r"><code>n_max_states &lt;- 4
 idx = 1
 morpho_bystate[1] &lt;- morpho

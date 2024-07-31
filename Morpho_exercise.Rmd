@@ -124,7 +124,7 @@ seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type="Standard", siteRates=rates_morpho)
 seq.clamp(morpho)
 ```
 
-For a partitioned Mk model we can use a loop to go through the alingmnet and create partitions based on the maximum observed state.
+For a **partitioned Mk model** we can use a loop to go through the alingmnet and create partitions based on the maximum observed state.
 
 
 ```{r packages10, eval=FALSE}
