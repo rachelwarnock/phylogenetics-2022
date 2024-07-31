@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Model selection of morphological models
 
-In this exercise we will carry out model selection of different morphological models. The morphological matrix used for this tutorial can be downloaded from here. This matrix is from [Agnolin et al 2007](http://revista.macn.gob.ar/ojs/index.php/RevMus/article/view/349/333). It consists of 51 characters and 12 taxa of Brontornis (Terror Birds). The data can be downloaded [here](data/Agnolin.nex)
+In this exercise we will carry out model selection of different morphological models. The morphological matrix used for this tutorial can be downloaded from here. This matrix is from [Agnolin et al 2007](http://revista.macn.gob.ar/ojs/index.php/RevMus/article/view/349/333). It consists of 51 characters and 12 taxa of Brontornis (Terror Birds). The data can be downloaded [here](data/Agnolin.nex).
 
 
 Below I provide code for different elements of morphological models:

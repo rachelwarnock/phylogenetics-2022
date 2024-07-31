@@ -170,7 +170,7 @@ kbl(dt) %>%
 ```{r, echo = FALSE}
 library(kableExtra)
 
-urls <- c("slides/Morphological_models.pdf","https://revbayes.github.io/tutorials/pps_morpho/", "scripts/exercise_morpho.zip")
+urls <- c("slides/Morphological_models.pdf","Morpho_exercise.html", "scripts/exercise_morpho.zip")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 7", "Scripts"),
                  topics = c("Morphological models", 
