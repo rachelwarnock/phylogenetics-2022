@@ -13,15 +13,16 @@ knitr::include_graphics("tree.jpg")
 This hands on course focuses on the use of **Bayesian phylogenetics** in paleobiology. 
 You will learn about approaches used to infer trees, divergence times, and evolutionary rates.
 
-The course will take place in the summer semester **Tuesdays 14:00-16:00 CET**  in person at Henke Str.
+The course is taught in two parts. [Part 1](schedule_part_1.html) will take place as a 3 day block course, Mon 14.04.25 - Wed 16.04.25 in the Henke Str seminar room.
+Part 2 will take place in the summer semester **Tuesdays 14:00-16:00 CET** in the same room.
 
-The first part of the course will feature a mix of lectures and tutorials.
+The course will feature a mix of lectures and tutorials, so you will need to bring your laptop.
 The course will focus on getting to grips with the software [RevBayes](https://revbayes.github.io). By the end of the course you should understand the principles of Bayesian phylogenetic inference and be able to apply this knowledge to a research question of your choosing.
 You will also learn how to apply phylogenetic comparative methods using R.
 
-During the second part of the course each participant will work on a project of their choice.
+During the final part of the course each participant will work on a project of their choice.
 
-Course instructors: **Rachel Warnock**, **Emma Dunne**, **Laura Mulvey** and **Tim Brandler**.
+Course instructors: **Rachel Warnock**, **Emma Dunne**, **Laura Mulvey**, **Katie Cryer** and **Meghan Gallaspy**. 
 
 \
 
@@ -43,7 +44,7 @@ Email rachel.warnock@fau.de
 
 ### Acknowledgements
 
-This course draws on material and exercises produced by [Paul Lewis](https://www.youtube.com/watch?v=1r4z0YJq580), Tracy Heath, Joëlle Bardio-Sottani, April Wright, Walker Pett, Joshua Justison, Sebastian Höhna, and many other [RevBayesian](https://revbayes.github.io) community contributors. Thanks to Joël Koelewijn for feedback on the course content.
+This course draws on material and exercises produced by [Paul Lewis](https://www.youtube.com/watch?v=1r4z0YJq580), Tracy Heath, Joëlle Bardio-Sottani, April Wright, Walker Pett, Joshua Justison, Sebastian Höhna, and many other [RevBayesian](https://revbayes.github.io) community contributors. Thanks to Joël Koelewijn and Tim Brandler for feedback on the course content.
 
 \
 \

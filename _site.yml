@@ -11,7 +11,7 @@ navbar:
   left:
     - text: "Phylogenetics"
       href: index.html
-    - text: "Schedule"
-      href: schedule.html
+    - text: "Part 1"
+      href: schedule_part_1.html
     - text: "Projects"
       href: projects.html

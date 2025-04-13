@@ -34,13 +34,13 @@ Next we'll read in the data and convert it into the format used by `phangorn`.
 
 ```{r data, eval=TRUE}
 # read in the character matrix in ape 
-dat = ape::read.nexus.data(file = "data/Frankie-data.nex")
+dat <- ape::read.nexus.data(file = "data/Frankie-data.nex")
 
 # identify character states
-chars = unique(unlist(unique(dat)))
+chars <- unique(unlist(unique(dat)))
 
-# & convert to phanghorn object
-dat = phangorn::phyDat(dat, type = "USER", levels = chars)
+# & convert to a phanghorn object
+dat <- phangorn::phyDat(dat, type = "USER", levels = chars)
 ```
 
 Next we need to provide `phangorn` with a starting tree.
@@ -48,15 +48,15 @@ We can do this using an approach called **neighbour-joining**. This simply calcu
 
 ```{r starting, eval=TRUE}
 # create a neighbour joining starting tree
-dm = phangorn::dist.hamming(dat)
-tree = phangorn::NJ(dm)
+dm <- phangorn::dist.hamming(dat)
+tree <- phangorn::NJ(dm)
 ```
 
 Then we'll use the `phangorn` function `optim.parsimony` to find the most parsimonious tree.
 
 ```{r parsimony, eval=TRUE}
 # estimate the parsimony tree
-mp = phangorn::optim.parsimony(tree, dat)
+mp <- phangorn::optim.parsimony(tree, dat)
 ```
 
 > How would you interpret the number output by this function?
@@ -66,10 +66,10 @@ We'll use the fungus [*Laccaria*](https://en.wikipedia.org/wiki/Laccaria) becaus
 
 ```{r plot, eval=TRUE}
 # identify the outgroup
-outgroup = "Laccaria"
+outgroup <- "Laccaria"
 
 # root the tree
-mp = ape::root(mp, outgroup = outgroup, resolve.root = TRUE)
+mp <- ape::root(mp, outgroup = outgroup, resolve.root = TRUE)
 
 plot(mp)
 ```
@@ -80,13 +80,13 @@ plot(mp)
 
 ## Other resources for building trees using parsimony
 
-Because there are a large number of possible trees even for a small number of taxa, finding the most parsimonous tree is actually algorithmically really challenging. 
+Because there are a large number of possible trees even for a small number of taxa, finding the most parsimonious tree is actually algorithmically really challenging. 
 Many people use the open source software [TNT](http://www.lillo.org.ar/phylogeny/tnt/), which can speed up the tree search. 
-You can also tweek your parsimony analysis based on assumptions you want to make about your character data. 
+You can also tweak your parsimony analysis based on assumptions you want to make about your character data. 
 For example, characters can be ordered (e.g., you can allow character state changes from 0 to 1 or from 1 to 2 but prevent changes from 0 to 2). You can also assign different weights to different characters. 
 
-We won't explore parsimony any further in this course but it remains widely used for the anaylsis of morphologcial character data and is sometimes much faster than alternative tree-building approaches. 
-It can be a good way to have an initial glimpse at your data/tree before or while running more computationally intensive analyses.
+We won't explore parsimony any further in this course but it remains widely used for the analysis of morphological character data and is sometimes much faster than alternative tree-building approaches. 
+It can be a useful way to have an initial glimpse at your data/tree before or while running more computationally intensive analyses.
 
 A complete script for this exercise can be downloaded [here](scripts/parsimony_example.R).
 

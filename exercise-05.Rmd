@@ -103,12 +103,12 @@ moves.append( mvSubtreeScale(tree, weight = num_taxa/5.0) )
 
 ```{r hidden_notes, eval=FALSE, echo=FALSE}
 #TODO: add a ref to dos Reis for the mx bound
+#TODO: add internal calibration
 ```
 
 ## Strict clock model {#strict}
 
 Next we'll specify a strict clock model to describe the rate of character change over time. This model assumes that the rate is constant over time and across all branches in our tree. 
-
 Open your `clock_strict.Rev` script. We don't know the rate of evolution, so we'll use an exponential prior. 
 
 ```{r strict_clock, eval=FALSE}

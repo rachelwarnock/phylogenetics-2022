@@ -4,7 +4,7 @@ dat = ape::read.nexus.data(file = "data/Frankie-data.nex")
 # identify character states
 chars = unique(unlist(unique(dat)))
 
-# & convert to phanghorn object
+# & convert to a phanghorn object
 dat = phangorn::phyDat(dat, type = "USER", levels = chars)
 
 # create a neighbour joining starting tree
