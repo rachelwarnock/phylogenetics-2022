@@ -1,0 +1,74 @@
+---
+title: ""
+output:
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\
+
+# Part 1
+
+The first part of this course is a 3 day block course.
+The aim is to introduce you to the major approaches used to reconstruct trees in paleobiology. By the end of the block course you should be able to reconstruct undated and dated trees using a Bayesian phylogenetic approach.
+
+# Rough Schedule
+
+* Mon 14 - 12:15-18:00 (parsimony, likelihood, and substitution models)
+* Tue 15 - 10:00-17:00 (Bayesian inference, MCMC, clock models, node dating)
+* Wed 16 - 10:00-17:00 (the fossilised birth-death process)
+
+The course will take place in the Henke Str. Pal seminar room. **You will need to bring your own laptop.**
+
+# Materials
+
+Course material will be updated here throughout the week!
+
+## Day 1
+
+```{r, echo = FALSE}
+#1. Course introduction and parsimony 14.04
+#2. Likelihood and substitution models 14.04
+#3. Bayesian inference and MCMC 15.04
+#4. Clock models and node dating 15.04
+#6. Dating using the fossilised birth-death process 16.04
+
+library(kableExtra)
+
+urls <- c("slides/01-intro.pdf","exercise-01.html",
+          "slides/02-likelihood.pdf","exercise-03.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 1", "Slides", "Exercise 2"),
+                 topics = c("tree thinking, parsimony", "tree building using parsimony",
+                            "maximum likelihood, substitution models", 
+                            "tree building using maximum likelihood"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Reading**
+
+* Re-familiarise yourself with [how to read a phylogenetic tree](https://artic.network/how-to-read-a-tree.html) and [rooting](https://slides.filogeneti.ca/include/rooting.html)
+* Watch [A Brief History of Computational Phylogenetics](https://www.youtube.com/watch?v=PcD15i7yzJ8)
+
+**Homework**
+
+* Install the software [RevBayes](https://revbayes.github.io/download)
+* Install the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) and [Tracer](https://github.com/beast-dev/tracer/releases/tag/v1.7.2)
+
+
+\
+\
+
