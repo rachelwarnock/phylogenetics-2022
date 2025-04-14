@@ -42,7 +42,7 @@ Course material will be updated here throughout the week!
 library(kableExtra)
 
 urls <- c("slides/01-intro.pdf","exercise-01.html",
-          "slides/02-likelihood.pdf","exercise-03.html")
+          "slides/02-likelihood.pdf","exercise-02.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 1", "Slides", "Exercise 2"),
                  topics = c("tree thinking, parsimony", "tree building using parsimony",

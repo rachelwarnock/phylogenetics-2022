@@ -1,0 +1,284 @@
+---
+title: "Schedule"
+output:
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\
+
+Course material will be updated throughout the semester!
+
+# Rough Schedule
+
+* Course introduction and Parsimony 25.04
+* Introduction to statistical modelling 02.05
+* Likelihood and substitution models 09.05
+* No Class (Paul Lewis’s seminars) 16.05
+* Bayesian inference and MCMC 23.05
+* Bayesian inference and MCMC continued 31.05
+* Clock models 06.06
+* Morphological models 13.06
+* Tree models 20.06
+* Introduction to projects 27.06
+
+
+# Week 1 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_01.pdf","exercise-01.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 1"),
+                 topics = c("tree thinking, parsimony", "tree building using parsimony"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Install the software [RevBayes](https://revbayes.github.io/download)
+
+# Week 2 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_02.pdf","exercise-02.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 2"),
+                 topics = c("Intro to statistical models, graphical models, statistical consistency", 
+                            "Introduction to RevBayes and the Rev language"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+#Further reading:
+#* RevBayes
+#* Graphical modelling
+
+```
+
+**Homework**
+
+* Read [Maximum likelihood and Bayesian inference](https://paleo.domains.swarthmore.edu/Publications/quantpaleo2010.pdf) by Steve Wang (up to the end of Section Maximum Likelihood Estimation on pg. 5)
+
+# Week 3 materials
+
+**Note this class will take place in the Old Library**
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_03.pdf", "exercise-03.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 3"),
+                 topics = c("maximum likelihood, substitution models", 
+                            "tree building using maximum likelihood"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+Don't forget next weeks exercises!!
+
+# Week 4 materials
+
+**No class**
+
+During this time we'd like you to watch the following 4 video lectures by [**Paul Lewis**](https://plewis.github.io/) and answer a set of questions we have prepared. Paul Lewis has made numerous important contributions to the field of statistical phylogenetics, as well as producing excellent tools and materials for learning about phylogenetic theory.
+The videos we'll use were developed as part of the [phyloseminar](http://phyloseminar.org) series. 
+
+The videos will take about 3.5 hours to watch. Read the questions before you watch each video and write down your answers in the linked google form -- we'll go over these in week 5. Remember **the goal is not to understand everything**! 
+Also make note of any questions you have after watching these and we'll try to answer them.
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("https://www.youtube.com/watch?v=1r4z0YJq580", "https://www.youtube.com/watch?v=UsLeY0wZr4Y", "https://www.youtube.com/watch?v=4PWlnNsfz90&t=45s", "https://www.youtube.com/watch?v=TLtOS--YwkU",
+          "questions-01.html", "questions-02.html", "questions-03.html","questions-04.html", 
+          "https://forms.gle/Y5wuBJwoiDQHp6jt5",
+          "https://forms.gle/ixo73Gy4TTzcVoM96",
+          "https://forms.gle/vrX6E65XhLukxo8W6",
+          "https://forms.gle/SiA9JESnwcjw2eDm9")
+
+dt <- data.frame(videos = c("Part 1", "Part 2", "Part 3a", "Part 3b"),
+                 topics = c("trees and likelihood", "trees, likelihood and rate heterogeneity", "Intro to Bayesian phylogenetics", "Intro to Bayesian phylogenetics"),
+                 questions = c("Questions 1", "Questions 2", "Questions 3", "Questions 4"), forms = c("Form 1", "Form 2", "Form 3", "Form 4"))
+
+dt$videos[1] <- paste0("[", dt$videos[1], "](", urls[1], ")")
+dt$questions[1] <- paste0("[", dt$questions[1], "](", urls[5], ")")
+dt$forms[1] <- paste0("[", dt$forms[1], "](", urls[9], ")")
+dt$videos[2] <- paste0("[", dt$videos[2], "](", urls[2], ")")
+dt$questions[2] <- paste0("[", dt$questions[2], "](", urls[6], ")")
+dt$forms[2] <- paste0("[", dt$forms[2], "](", urls[10], ")")
+dt$videos[3] <- paste0("[", dt$videos[3], "](", urls[3], ")")
+dt$questions[3] <- paste0("[", dt$questions[3], "](", urls[7], ")")
+dt$forms[3] <- paste0("[", dt$forms[3], "](", urls[11], ")")
+dt$videos[4] <- paste0("[", dt$videos[4], "](", urls[4], ")")
+dt$questions[4] <- paste0("[", dt$questions[4], "](", urls[8], ")")
+dt$forms[4] <- paste0("[", dt$forms[4], "](", urls[12], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+#Further reading:
+
+#* [Learning statistics with R: Chapter 1 and Chapter 11](https://learningstatisticswithr.com/book/why-do-we-learn-statistics.html)
+#* [tinystats.github.io/teacups-giraffes-and-statistics](https://tinystats.github.io/teacups-giraffes-and-statistics/)
+```
+
+# Week 5 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_05.pdf","exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Follow up on Paul Lewis lectures", 
+                            "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+# Week 6 materials {#week6}
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_06.pdf","exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Introduction to MCMC inference", 
+                            "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+  
+```
+
+# Week 7 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_07.pdf","exercise-05.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 5"),
+                 topics = c("Bayesian timetree inference", 
+                            "Time tree inference in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
+# Week 8 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_08.pdf","exercise-06.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 6"),
+                 topics = c("Morphological evolution", #, model testing and model adequac
+                            "Morphologoical models in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+# Week 9 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_09.pdf","exercise-07a.html","exercise-07b.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 7a", "Exercise 7b"),
+                 topics = c("The fossilised birth-death process", "Exploring the FBD model assumptions", "Dating under the FBD model in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+# Week 10 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/week_10.pdf","projects.html")
+
+dt <- data.frame(schedule = c("Slides", "Projects page"),
+                 topics = c("Projects overview", 
+                            ""))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+# Extra material
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/PCMs.pdf","https://dwbapst.github.io/PaleoSoc_phylo_short_course_2019/articles/module_09_worked_PCM_example/module_08.html", "slides/multi-type-JBS.pdf", 
+    "https://revbayes.github.io/tutorials/sse/bisse.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise", "Slides", "Exercise"),
+                 topics = c("Phylogenetic comparative methods", 
+                            "Tutorial by Laura Soul & David Wright",
+                            "More about birth-death process models", 
+                            "RevBayes BiSSE tutorial"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
+
+## Acknowledgements
+
+This course draws on material and exercises produced by [Paul Lewis](https://www.youtube.com/watch?v=1r4z0YJq580), Tracy Heath, Joëlle Bardio-Sottani, April Wright, Walker Pett, Joshua Justison, Sebastian Höhna, and many other [RevBayesian](https://revbayes.github.io) community contributors. Thanks to Joël Koelewijn for feedback on the course content.
+

@@ -1,0 +1,208 @@
+---
+title: "Schedule"
+output:
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\
+
+Course material will be updated here throughout the semester!
+
+# Rough Schedule
+
+1. Course introduction and parsimony 16.04
+2. Likelihood and substitution models 23.04
+3. Bayesian inference and MCMC I 30.04
+4. Bayesian inference and MCMC II 07.04
+5. Bayesian inference and MCMC III 14.05
+6. No class! (the Berg) 21.05
+7. Molecular dating 28.05
+8. Phylogenetic comparative methods 04.06
+9. Morphological models and model adequacy 11.06
+10. Diversification rates and intro to projects 18.06
+
+# Week 1 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/01-intro.pdf","exercise-01.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 1"),
+                 topics = c("tree thinking, parsimony", "tree building using parsimony"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Re-familiarise yourself with [how to read a phylogenetic tree](https://artic.network/how-to-read-a-tree.html) and [rooting](https://slides.filogeneti.ca/include/rooting.html)
+* Watch [A Brief History of Computational Phylogenetics](https://www.youtube.com/watch?v=PcD15i7yzJ8)
+
+
+# Week 2 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/02-likelihood.pdf","exercise-03.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 2"),
+                 topics = c("maximum likelihood, substitution models", 
+                            "tree building using maximum likelihood"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Install the software [RevBayes](https://revbayes.github.io/download)
+* Watch [Phyloenetics primer part 1](https://www.youtube.com/watch?v=1r4z0YJq580) by Paul Lewis and answer the [associated questions](questions-01.html)
+
+# Week 3 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/03-Bayesian.pdf","exercise-02.html", "exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 3", "Exercise 4"),
+                 topics = c("Intro to Bayesian inference", 
+                            "Intro to RevBayes and the Rev language", "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Install the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) and [Tracer](https://github.com/beast-dev/tracer/releases/tag/v1.7.2)
+* Watch [Phyloenetics primer part 2](https://www.youtube.com/watch?v=UsLeY0wZr4Y&t=1614s) by Paul Lewis and answer the [associated questions](questions-02.html)
+* Reading [Bayesian Inference of Phylogeny and Its Impact on Evolutionary Biology](https://www.science.org/doi/epdf/10.1126/science.1065889)
+
+
+# Week 4-5 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/04-Bayesian-II.pdf", "exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 4"),
+                 topics = c("Bayesian inference II", 
+                            "Bayesian tree inference"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Watch [Phyloenetics primer part 3a](https://www.youtube.com/watch?v=4PWlnNsfz90) by Paul Lewis and answer the [associated questions](questions-03.html)
+
+**Week 6 - no class!**
+
+# Week 7 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/05-clocks.pdf","exercise-05.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 5"),
+                 topics = c("Bayesian timetree inference", 
+                            "Time tree inference in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Homework**
+
+* Watch [Phyloenetics primer part 3b](https://www.youtube.com/watch?v=TLtOS--YwkU) by Paul Lewis and answer the [associated questions](questions-04.html)
+
+# Week 8 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/Intro_to_PCMs.pdf","https://github.com/emmadunne/PCMs")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 6"),
+                 topics = c("Intro to PCMs", 
+                            "PCMs using R"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
+# Week 9 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/Morphological_models.pdf","Morpho_exercise.html", "https://revbayes.github.io/tutorials/pps_morpho/")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 7a", "Exercise 7b"),
+                 topics = c("Morphological models", 
+                            "Model selection using RevBayes", "Model adequacy using RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
+# Week 10 materials
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+urls <- c("slides/08-FBD.pdf","exercise-07a.html", "exercise-07b.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise", "Exercise"),
+                 topics = c("The fossilised birth-death process", "Exploring the FBD model assumptions", "Dating under the FBD model in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+\
+\
+

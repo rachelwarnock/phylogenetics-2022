@@ -28,8 +28,11 @@ JC_tree_rooted = ape::root(fitJC_opt$tree, outgroup = outgroup, resolve.root = T
 GTR_tree_rooted = ape::root(fitGTR_opt$tree, outgroup = outgroup, resolve.root = TRUE)
 
 # plot the trees
+par(mfrow = c(1, 2))
 plot(JC_tree_rooted)
 plot(GTR_tree_rooted)
+
+par(mfrow = c(1, 1))
 
 # you can also compare the ML trees to the starting tree
 starting_tree_rooted = ape::root(starting_tree, outgroup = outgroup, resolve.root = TRUE)
