@@ -20,11 +20,12 @@ The aim is to introduce you to the major approaches used to reconstruct trees in
 
 # Rough Schedule
 
-* Mon 14 - 12:15-18:00 (parsimony, likelihood, and substitution models)
-* Tue 15 - 10:00-17:00 (Bayesian inference, MCMC, clock models, node dating)
-* Wed 16 - 10:00-17:00 (the fossilised birth-death process)
+* Mon 14 - 12:15-17:00 (parsimony, likelihood, and substitution models)
+* Tue 15 - 11:00-17:00 (Bayesian inference, MCMC, clock models, node dating)
+* Wed 16 - 11:00-17:00 (the fossilised birth-death process)
 
 The course will take place in the Henke Str. Pal seminar room. **You will need to bring your own laptop.**
+Before course begins, make sure you have have [R](https://www.r-project.org) and [RStudio](https://posit.co/download/rstudio-desktop/) installed.
 
 # Materials
 
@@ -67,7 +68,35 @@ kbl(dt) %>%
 
 * Install the software [RevBayes](https://revbayes.github.io/download)
 * Install the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) and [Tracer](https://github.com/beast-dev/tracer/releases/tag/v1.7.2)
+* Windows users should also install [Git Bash](https://gitforwindows.org)
 
+\
+
+## Day 2
+
+```{r, echo = FALSE}
+
+library(kableExtra)
+
+urls <- c("slides/03-Bayesian_intro.pdf","exercise-03.html",
+          "slides/04-clocks.pdf","exercise-04.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 3", "Exercise 4", "Slides", "Exercise 5"),
+                 topics = c("Intro to RevBayes", 
+                            "Intro to RevBayes and the Rev language", 
+                            "Bayesian tree inference", 
+                            "Bayesian timetree inference", 
+                            "Time tree inference in RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+#dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
+#dt$schedule[5] <- paste0("[", dt$schedule[5], "](", urls[5], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
 
 \
 \

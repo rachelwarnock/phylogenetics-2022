@@ -1,0 +1,43 @@
+---
+title: ""
+output: html_document
+---
+
+\
+
+# Projects 2024
+
+```{r, echo = FALSE}
+library(kableExtra)
+
+# Double check these
+
+dt <- data.frame(name = c("Alissa", #1
+                          "Christian", #2
+                          "Jordan", #3
+                          "Katie", #4
+                          "Matias", #5
+                          "Max", #6
+                          "Meghan", #7
+                          "Victoria"), #8
+                 project = c("Do fossil ages improve trees impacted by taphonomic biases?", #1
+                    "Constraining the evolution of photosynthetic pathways (CAM)",#2
+                    "Assessing the impact of taxon sampling on PCMs",#3
+                    "Redating the origins of horseshoe crabs - implications for habitat transitions", #4
+                    "The impact of model choice on the phylogenetic history of sabre tooth tigers", #5
+                    "The impact of model choice on the phylogenetic history of spinosaurs", #6
+                    "A simulation pipeline for assessing the impact of clock model violation", #7
+                    "Constraining the evolution of manatees" #8
+                    ))
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+# Project archive
+# Tim - A simulation pipeline for the multi-species coalescent FBD
+# Caro - The impact of morphological model choice on...
+```
+
+
+\
+\

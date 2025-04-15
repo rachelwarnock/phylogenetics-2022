@@ -2,7 +2,7 @@
 # read the data file  
 dat = ape::read.nexus.data(file = "data/primates-data.nex")
 
-# convert to phanghorn object
+# convert to a phanghorn object
 dat = phangorn::phyDat(dat, type = "DNA")
 
 # create a neighbour joining starting tree
@@ -32,6 +32,7 @@ par(mfrow = c(1, 2))
 plot(JC_tree_rooted)
 plot(GTR_tree_rooted)
 
+# put your plotting window back to normal
 par(mfrow = c(1, 1))
 
 # you can also compare the ML trees to the starting tree

@@ -42,7 +42,7 @@ output: html_document
 
 \
 
-# [Project notes 2024](projects_notes_2024.html)
+# [Previous projects](previous_projects.html)
   
 \
 

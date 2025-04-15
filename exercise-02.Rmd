@@ -23,7 +23,7 @@ As before start by opening the file and converting the data into the right forma
 # read in the character matrix in ape 
 dat = ape::read.nexus.data(file = "data/primates-data.nex")
 
-# & convert to phanghorn object
+# & convert to a phanghorn object
 dat = phangorn::phyDat(dat, type = "DNA")
 ```
 
