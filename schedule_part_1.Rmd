@@ -78,7 +78,7 @@ kbl(dt) %>%
 
 library(kableExtra)
 
-urls <- c("slides/03-Bayesian_intro.pdf","exercise-03.html", "exercise-05.html",
+urls <- c("slides/03-Bayesian.pdf","exercise-03.html", "exercise-05.html",
           "slides/04-clocks.pdf","exercise-05.html")
 
 dt <- data.frame(schedule = c("Slides", "Exercise 3", "Exercise 4", "Slides", "Exercise 5"),
