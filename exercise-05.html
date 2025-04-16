@@ -13,7 +13,7 @@
 
 <title>exercise-05.knit</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
@@ -246,7 +246,7 @@ $(document).ready(function () {
   <a href="index.html">Phylogenetics</a>
 </li>
 <li>
-  <a href="schedule.html">Schedule</a>
+  <a href="schedule_part_1.html">Part 1</a>
 </li>
 <li>
   <a href="projects.html">Projects</a>
@@ -364,9 +364,9 @@ moves.append( mvSubtreeScale(tree, weight = num_taxa/5.0) )</code></pre>
 <h2>Strict clock model</h2>
 <p>Next we’ll specify a strict clock model to describe the rate of
 character change over time. This model assumes that the rate is constant
-over time and across all branches in our tree.</p>
-<p>Open your <code>clock_strict.Rev</code> script. We don’t know the
-rate of evolution, so we’ll use an exponential prior.</p>
+over time and across all branches in our tree. Open your
+<code>clock_strict.Rev</code> script. We don’t know the rate of
+evolution, so we’ll use an exponential prior.</p>
 <pre class="r"><code>branch_rates ~ dnExponential(10.0)
 
 moves.append( mvScale(branch_rates, lambda = 0.5, tune = true, weight = 3.0) )</code></pre>

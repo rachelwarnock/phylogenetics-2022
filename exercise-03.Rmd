@@ -125,6 +125,24 @@ Q.getTransitionProbabilities(0.1)
 Q.getTransitionProbabilities(100) # 100 units
 ```
 
+### Other useful commands {#useful}
+
+```{r useful2, eval=FALSE}
+# Change working directory
+setwd("/Users/warnock/Documents/phylogenetics/exercise_03")
+# To find the current working directory
+getwd()
+# to exit RevBayes
+q()
+```
+
+It's sometimes useful to know how to clear the working memory in RevBayes, e.g., to avoid redefining variables.  
+
+```{r useful, eval=FALSE}
+# clear working memory 
+clear()
+```
+
 ### Further reading
 
 Here's a more [comprehensive intro](https://revbayes.github.io/tutorials/intro/rev) to the Rev language.

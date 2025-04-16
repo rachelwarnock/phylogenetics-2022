@@ -78,20 +78,47 @@ kbl(dt) %>%
 
 library(kableExtra)
 
-urls <- c("slides/03-Bayesian.pdf","exercise-03.html", "exercise-04.html",
-          "slides/04-clocks.pdf","exercise-05.html")
+urls <- c("slides/03-Bayesian.pdf","exercise-03.html", "exercise-04.html")
 
-dt <- data.frame(schedule = c("Slides", "Exercise 3", "Exercise 4", "Slides", "Exercise 5"),
+dt <- data.frame(schedule = c("Slides", "Exercise 3", "Exercise 4"),
                  topics = c("Intro to RevBayes", 
                             "Intro to RevBayes and the Rev language", 
-                            "Bayesian tree inference", 
-                            "Bayesian timetree inference", 
-                            "Time tree inference in RevBayes"))
+                            "Bayesian tree inference"))
 dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
 dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
-#dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
-#dt$schedule[5] <- paste0("[", dt$schedule[5], "](", urls[5], ")")
+
+kbl(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+**Reading**
+
+* Reading [Bayesian Inference of Phylogeny and Its Impact on Evolutionary Biology](https://www.science.org/doi/epdf/10.1126/science.1065889)
+
+\ 
+
+## Day 3
+
+```{r, echo = FALSE}
+
+library(kableExtra)
+
+urls <- c("slides/04-clocks.pdf","exercise-05.html",
+          "slides/05-FBD.pdf","exercise-06.html","exercise-06.html")
+
+dt <- data.frame(schedule = c("Slides", "Exercise 5", "Slides", "Exercise 6", "Exercise 7"),
+                 topics = c("Bayesian timetree inference", 
+                            "Time tree inference in RevBayes (demo only)",
+                            "The fossilized birth-death process",
+                            "Simulations",
+                           "The FBD process using RevBayes"))
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[3] <- paste0("[", dt$schedule[3], "](", urls[3], ")")
+dt$schedule[4] <- paste0("[", dt$schedule[4], "](", urls[4], ")")
+dt$schedule[5] <- paste0("[", dt$schedule[5], "](", urls[5], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")

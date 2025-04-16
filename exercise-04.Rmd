@@ -316,4 +316,6 @@ map_tree = mapTree(treetrace, "output/primates_GTR_MAP.tree")
 
 > Are there any differences between the summary trees?  
 
+> How does your tree compare to a [published phylogeny](https://www.science.org/doi/epdf/10.1126/science.abn6919) of primates?
+
 A complete set of scripts for this exercise can be downloaded [here](scripts/exercise04-scripts.zip).

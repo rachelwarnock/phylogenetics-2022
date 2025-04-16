@@ -1,168 +1,143 @@
-## Morphological Substitution models 
-In this practical we will first choose our own data and then apply two versions of the Mk model to our data. 
+---
+title: ""
+output: html_document
+---
 
-First, go to [this website](http://www.graemetlloyd.com/matr.html) and choose a data set you want to analyse. Take the Nexus file.
-Once you have chosen you data set add it to your data folder for this exercise. 
-In the scripts folder should create three files. 
-
-1. Containing MCMC moves 
-2. Version 1 of the Mk model
-3. Version 2 of the Mk model
-
-You can choose what extensions to add to your model based on what you think is important for your data set
-
-
-### MCMC File
-
-Read in our data 
-
-```
-morpho <- readDiscreteCharacterData("data/file-name.nex")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Set up helper variables 
+\
 
-```
-taxa <- morpho.names()
-num_taxa <- taxa.size()
-# num of branches for an unrooted tree
-num_branches <- 2 * num_taxa - 3
-# moves
-moves = VectorMoves()
+```{r hidden_notes, eval=FALSE, echo=FALSE}
+# **Notes**
+# Hopefully the app will be up and running on our server. Status: have made enquires.
+# I was wondering if should change Speciation and Extinction to birth and death rate, since as you point out, these parameters are not strictly equivalent.
 
-```
-###### Tree model
+#TODO: any mention of the Poisson process?
+#TODO: any discussion of birth, death and expected root age.
+#TODO: how does taxonomy fit into this? these don't currently interact
 
-```
-br_len_lambda <- 10
-# We assume a uniform prior on topology.
- phylogeny ~ dnUniformTopologyBranchLength(taxa, branchLengthDistribution=dnExponential(br_len_lambda)) 
-
-# compute the tree length from the phylogeny
-tree_length := phylogeny.treeLength()
-
-
-moves.append( mvNNI(phylogeny, weight=num_branches/2.0) )
-moves.append( mvSPR(phylogeny, weight=num_branches/10.0) )
-moves.append( mvBranchLengthScale(phylogeny, weight=num_branches) )
+# **To dos**
+#TODO: assign a max tip number, to reduce pressure on the server - 100?**
+#TODO: impose any limits on the user specific tree?
+#TODO: the default psi value is too high, relative to the default birth and death rates**
+#TODO: make the branches thicker**
+#TODO: option to add seed number? so you can reproduce the fig?
+#TODO: what about extant species sample
 
 ```
 
+# Exploring model assumptions and the fossilized birth-death process
 
-Source the Mk file
+This exercise will walk through key assumptions of the fossilized birth-death (FBD) process using the R package FossilSim.
 
-```
-source("scripts/Mk.Rev")
-```
-Replace ```Mk.Rev``` with what ever you have named your script
+The FBD process is a joint model of diversification and sampling, first described in Stadler (2010). It can be used to calculate the probability of observing a phylogeny with fossils, as extinct leaves or sampled ancestors. 
 
+The model is statistically coherent for the analysis of phylogenetic and fossil data because it features explicit assumptions about the underlying data generating processes. This means we can forward simulate, as well as perform inference, under the model, which is a major advantage for understanding the model properties and assumptions.
 
-Define the model 
+If you're not in the mood for coding, you can follow this [alternative tutorial](FossilSimShiny.html), which uses a web-based app. 
 
-```
-# We define our model.
-# We can use any node of our model as a handle, here we chose to use the tree.
-mymodel = model(phylogeny)
-```
-The object ```mymodel``` is a wrapper around the entire model graph and allows us to pass the model to various functions that are specific to our MCMC analysis.
+Install the necessary R packages.
 
-
-Set up our monitors for the analysis 
-Change ```MK-NAME``` to the version of the model you are running. You can call it anything, just make sure you change it between your two versions. 
-
-```
-monitors.append( mnModel(filename=  "output/" + MK-NAME + "_posterior.log",printgen=10, separator = TAB) )
-monitors.append( mnFile(filename=  "output/" + MK-NAME + "_posterior.trees",printgen=10, separator = TAB, phylogeny) )
-monitors.append( mnScreen(printgen=1000, tree_length) )
-monitors.append( mnStochasticVariable(filename= "output/" + MK-NAME +"_posterior.var",printgen=10) )
+```{r packages, eval=FALSE}
+install.packages("TreeSim")
+install.packages("FossilSim")
 ```
 
-Run the anaylsis
+## Model parameters
 
-```
-mymcmc = mcmc(mymodel, monitors, moves, nruns=2, combine="mixed")
-mymcmc.burnin(generations=200,tuningInterval=200)
-mymcmc.run(generations= 10000 ,tuningInterval=200)
-```
+The model has four parameters:
 
+ * lineage birth rate ($\lambda$)
+ * lineage death rate ($\mu$)
+ * fossil recovery rate ($\psi$)
+ * probability of extant species sampling ($\rho$)
+ 
+The birth and death rate parameters are part of the diversification component of the model and describe how the tree grows over time, while the fossil recovery and extant species sampling parameters describe how the tree is *incompletely* sampled over time. 
 
-### Mk Model Scripts
+The diversification and sampling processes can be considered separately, which is convenient for both  simulation and understanding different the two components (diversification and sampling) of the model.
 
-Here you will create two scripts. You can have an unpartitioned or partitioned version of the model it is up to you. Decide which extensions you think are interesting/important and build your sequence evolution model
+## The diversification process
 
-```
-#### specify the Jukes-Cantor substitution model applied uniformly to all sites ###
-# change num_state to the maximum number of states in your data set
-Q := fnJC(num_states) 
-```
+First we'll simulate trees, and explore the role of the birth and death parameters.
 
-#### Extentions to the Mk Model 
-###### Gamma-distribtued rate variation 
+In the following we will simulate birth-death trees conditioned on the number of tips $n$, using the `TreeSim` package function `sim.taxa.bd`. The function simulates birth and death events forward in time until there are $n$ co-existing lineages. 
 
-```
-alpha_inv ~ dnExponential(1)
-alpha_morpho := 1 / alpha_inv
-rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 ) 
+Let's give it a go. 
 
-# Moves on the parameters to the Gamma distribution.
-moves.append( mvScale(alpha_inv,lambda=1, weight=2.0) )
-```
+```{r tree, eval=TRUE}
+# set the random number generator seed to generate the same results using the same code
+set.seed(1234)
 
-###### Account for Ascertainment Bias
-
-To do this, we don't need to create any new variables. We just add it to out PhyloCTMC object by ```coding="variable"```
-
-###### Build the sequence evolution model
-
-```
-# the sequence evolution model. 
-# This is for just the Mk model, no extensions
-seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q, type="Standard")
-
-# to add gamma add
-siteRates=rates_morpho
-
-# to account for Ascertainment Bias add
-coding="variable
-
-# attach the data
-seq.clamp(morpho)
+# simulate a tree using TreeSim conditioned on tip number
+lambda = 0.1
+mu = 0.05
+tips = 10
+t = TreeSim::sim.bd.taxa(n = tips, numbsim = 1, lambda = lambda, mu = mu)[[1]]
+# t is an object of class phylo
+t
+# plot the tree
+plot(t)
 ```
 
+Note the function simulates the *complete tree*, that is, the tree containing all lineages that were ever part of the tree (observed and unobserved).
 
-###### Partitioning the data
+Run the function a few more times without changing any of the parameters. You should notice that each tree looks quite different. This reflects the stochasticity inherent in the birth-death process $-$ the same combination of birth and death parameter will result a wide range of possible outcomes.
 
-This code will partition the data by the number of character states. This code builds a model of sequance evolution for each partition. 
-This is for an Mk model. To add G and V add the lines as above.
+> Next, increase the birth rate to something like 0.3, and simulate some new trees. Do you notice any general differences about the trees? Next, increase the death rate to something like 0.25 and do the same. What do you notice this time?
 
-```
-n_max_states <- num_states
-idx = 1
-morpho_bystate[1] <- morpho
-for (i in 2:n_max_states) {
-    morpho_bystate[i] <- morpho                                # make local tmp copy of data
-    morpho_bystate[i].setNumStatesPartition(i)                 # only keep character blocks with state space equal to size i
-    nc = morpho_bystate[i].nchar()                             # get number of characters per character size with i-sized states
+## The fossil sampling process
 
-    if (nc > 0) {                                              # for non-empty character blocks
-        q[idx] <- fnJC(i)                                      # make i-by-i rate matrix
-        m_morph[idx] ~ dnPhyloCTMC( tree=phylogeny,
-                                    Q=q[idx],
-                                    nSites=nc,
-                                    type="Standard")           # create model of evolution for the character block
+Here we'll simulate fossils, assumming a constant rate of fossilisation.
 
-        m_morph[idx].clamp(morpho_bystate[i])                  # attach the data
-
-        idx = idx + 1                                          # increment counter
-        idx
-    }
-}
+```{r foss, eval=TRUE}
+# Simulate fossils
+rate = 0.3 # poisson sampling rate
+f = FossilSim::sim.fossils.poisson(rate = rate, tree = t)
+f
 ```
 
-### Questions
+Each entry in the fossils data frame corresponds to a fossil sampling time. `sp` and `edge` are the species and edge labels, respectively.
+`hmin` and `hmax` are the youngest and oldest sampling ages associated with each fossil, respectively. Since this function returns exact fossil sampling times hmin and hmax are equal.
 
-1. Are the results from your two models different?
-2. Are the tree lengths different?
-3. Can you explain why?
-4. Do you understand the different assumptions you made in the different models?
+`FossilSim` has a lot of different functions for plotting the output. 
+
+```{r plot, eval=TRUE}
+# plot fossil occurrences
+plot(f, tree = t)
+
+# plot stratigraphic ranges
+plot(f, tree = t, show.ranges = TRUE)
+
+# plot the output
+plot(f, tree = t, show.strata = TRUE, strata = 4)
+```
+
+> What happens if you decrease or increase the fossil sampling rate?
+
+You can also compare the complete and reconstructed trees.
+
+```{r recon, eval=TRUE}
+# plot the reconstructed tree
+plot(f, tree = t, reconstructed = TRUE)
+```
+
+## Extant species sampling
+
+Next we can add include incomplete extant species sampling. 
+
+```{r extant, eval=TRUE}
+
+# extant sampling
+rho = 0.5
+
+# simulate extant species sampling
+f2 = FossilSim::sim.extant.samples(fossils = f, tree = t, rho = rho)
+
+# plot the output
+plot(f2, tree = t, extant.col = "red")
+```
+
+> What happens if you increase or decrease rho?
 
