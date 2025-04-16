@@ -34,8 +34,11 @@ kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 
 # Project archive
+# Lars - 
+# Bastie - 
+# Taeya -
 # Tim - A simulation pipeline for the multi-species coalescent FBD
-# Caro - The impact of morphological model choice on...
+# Caro - The impact of model choice on...
 ```
 
 
