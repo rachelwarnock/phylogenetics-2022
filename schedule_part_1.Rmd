@@ -27,9 +27,13 @@ The aim is to introduce you to the major approaches used to reconstruct trees in
 The course will take place in the Henke Str. Pal seminar room. **You will need to bring your own laptop.**
 Before course begins, make sure you have have [R](https://www.r-project.org) and [RStudio](https://posit.co/download/rstudio-desktop/) installed.
 
+\
+
 # Materials
 
 Course material will be updated here throughout the week!
+
+\
 
 ## Day 1
 
