@@ -55,13 +55,13 @@ Course material will be updated here throughout the semester!
 ```{r, echo = FALSE}
 library(kableExtra)
 
-#urls <- c("slides/01-intro.pdf","https://revbayes.github.io/tutorials/divrate/simple")
+urls <- c("slides/06-phylodynamics.pdf","https://revbayes.github.io/tutorials/divrate/simple")
 
 dt <- data.frame(schedule = c("Slides", "Exercise"),
                  topics = c("Intro to phylodynamics", "Diversification rate estimation using RevBayes"))
 
-#dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
-#dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
+dt$schedule[1] <- paste0("[", dt$schedule[1], "](", urls[1], ")")
+dt$schedule[2] <- paste0("[", dt$schedule[2], "](", urls[2], ")")
 
 kbl(dt) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
